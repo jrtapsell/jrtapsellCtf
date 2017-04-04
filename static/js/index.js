@@ -1,8 +1,4 @@
 (function() {
-  $.get('static/templates/challenges.html', function (data) {
-    var template=Handlebars.compile(data);
-    $("#page-content").html(template({}));
-  }, 'html');
   var provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
