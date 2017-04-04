@@ -16,5 +16,5 @@ function needs_login() {
   firebase.getAuth()
 }
 function close_draw() {
-  $('.mdl-layout').MaterialLayout.toggleDrawer();
+  $('.mdl-layout')[0].MaterialLayout.toggleDrawer();
 }
