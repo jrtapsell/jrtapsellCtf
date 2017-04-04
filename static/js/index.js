@@ -1,4 +1,8 @@
 (function() {
+  $.get('static/templates/challenges.html', function (data) {
+    var template=Handlebars.compile(data);
+    $("#page-content").html(template({}));
+  }, 'html');
   var provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -8,10 +12,6 @@
         "name": user.displayName,
         "last_login": Date()
       });
-      $.get('static/templates/home.html', function (data) {
-        var template=Handlebars.compile(data);
-        $("#page-content").html(template({}));
-      }, 'html');
       /*
       database.ref("/users/").on("value", function (data) {
         var stringify = JSON.stringify(data.val(), null, 4);
