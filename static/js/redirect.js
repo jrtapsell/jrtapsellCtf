@@ -18,3 +18,4 @@ function needs_login() {
 function close_draw() {
   $('.mdl-layout')[0].MaterialLayout.toggleDrawer();
 }
+console.log(window.location);
