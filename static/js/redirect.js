@@ -15,3 +15,6 @@ function redirect_to_login() {
 function needs_login() {
   firebase.getAuth()
 }
+function close_draw() {
+  $('.mdl-layout').MaterialLayout.toggleDrawer();
+}
