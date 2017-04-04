@@ -4,6 +4,8 @@ function redirect(page, contents) {
     $("#page-content").html(template(contents));
   }, 'html');
   history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page)
+  $("title").text(page);
+  $("#title").text(page);
 }
 
 function redirect_to_login() {
