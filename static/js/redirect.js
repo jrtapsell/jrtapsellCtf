@@ -20,9 +20,16 @@ function close_draw() {
 }
 
 function redirect_to_url() {
-  if (window.location.pathname.startsWith("/")) {
-    redirect(window.location.pathname.substring(1));
-  } else {
-    redirect("index");
+  switch (window.location.pathname) {
+    case "":
+    case "/":
+      redirect("index", null);
+      break;
+    case "/users":
+      redirect("users", null);
+      break;
+    case "/challenges":
+      redirect("challenges", null);
+      break;
   }
 }
