@@ -1,5 +1,12 @@
-function redirect(page, contents) {
+function showProgress() {
   $("#statusBar").show();
+}
+function hideProgress() {
+  $("#statusBar").hide();
+}
+
+function redirect(page, contents) {
+  showProgress();
   $.get('static/templates/' + page + '.html', function (data) {
     var template = Handlebars.compile(data);
     $("#page-content").html(template(contents));
@@ -7,7 +14,7 @@ function redirect(page, contents) {
   history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page)
   $("title").text(page);
   $("#title").text(page);
-  $("#statusBar").hide();
+  hideProgress();
 }
 
 function redirect_to_login() {
