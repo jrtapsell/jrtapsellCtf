@@ -6,9 +6,11 @@ function hideProgress() {
 }
 
 function redirect(page, contents) {
-  showProgress();
   $.get('static/templates/' + page + '.html', function (data) {
     var template = Handlebars.compile(data);
+    if (contents != null) {
+      contents = contents();
+    }
     $("#page-content").html(template(contents));
     hideProgress();
   }, 'html');
@@ -17,7 +19,8 @@ function redirect(page, contents) {
   $("#title").text(page);
 }
 
-function redirect_to_login() {
+function load_login() {
+  showProgress();
   redirect("login");
 }
 
@@ -25,17 +28,35 @@ function close_draw() {
   $('.mdl-layout')[0].MaterialLayout.toggleDrawer();
 }
 
+function load_index() {
+  showProgress();
+  redirect("index", null);
+}
+
+function load_users() {
+  showProgress();
+  var starCountRef = firebase.database().ref('/users');
+  starCountRef.on('value', function(snapshot) {
+    redirect("users", {"users":JSON.stringify(snapshot)});
+  });
+}
+
+function load_challenges() {
+  showProgress();
+  redirect("challenges", null);
+}
+
 function redirect_to_url() {
   switch (window.location.pathname) {
     case "":
     case "/":
-      redirect("index", null);
+      load_index();
       break;
     case "/users":
-      redirect("users", null);
+      load_users();
       break;
     case "/challenges":
-      redirect("challenges", null);
+      load_challenges();
       break;
   }
 }
