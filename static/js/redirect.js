@@ -8,9 +8,6 @@ function hideProgress() {
 function redirect(page, contents) {
   $.get('static/templates/' + page + '.html', function (data) {
     var template = Handlebars.compile(data);
-    if (contents != null) {
-      contents = contents();
-    }
     $("#page-content").html(template(contents));
     hideProgress();
   }, 'html');
