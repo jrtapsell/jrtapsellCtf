@@ -21,9 +21,6 @@ function redirect_to_login() {
   redirect("login");
 }
 
-function needs_login() {
-  firebase.getAuth()
-}
 function close_draw() {
   $('.mdl-layout')[0].MaterialLayout.toggleDrawer();
 }
