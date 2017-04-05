@@ -1,4 +1,5 @@
 function redirect(page, contents) {
+  $("#statusBar").show();
   $.get('static/templates/' + page + '.html', function (data) {
     var template = Handlebars.compile(data);
     $("#page-content").html(template(contents));
@@ -6,6 +7,7 @@ function redirect(page, contents) {
   history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page)
   $("title").text(page);
   $("#title").text(page);
+  $("#statusBar").hide();
 }
 
 function redirect_to_login() {
