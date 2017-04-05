@@ -1,6 +1,11 @@
+<table>
+<tr>
+    <th></th><th>Name</th>
+</tr>
 {{#each users}}
-<div>
-    <h1>{{name}}</h1>
-    <img src="{{image}}">
-</div>
+<tr>
+    <td><img src="{{image}}" style="height: 1em; width: 1em"></td>
+    <td>{{name}}</td>
+</tr>
 {{/each}}
+</table>
