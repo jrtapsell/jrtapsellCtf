@@ -46,6 +46,12 @@ function load_challenges() {
   redirect("challenges", null);
 }
 
+
+function load_logout() {
+  showProgress();
+  redirect("logout", null);
+}
+
 function redirect_to_url() {
   switch (window.location.pathname) {
     case "":

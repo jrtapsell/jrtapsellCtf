@@ -28,8 +28,9 @@
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Loading</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" onclick="redirect('users');close_draw()">Users</a>
-            <a class="mdl-navigation__link" onclick="redirect('challenges');close_draw()">Challenges</a>
+            <a class="mdl-navigation__link" onclick="load_users();close_draw()">Users</a>
+            <a class="mdl-navigation__link" onclick="load_challenges();close_draw()">Challenges</a>
+            <a class="mdl-navigation__link" onclick="load_logout();close_draw()">Logout</a>
         </nav>
     </div>
     <!-- MDL Progress Bar with Indeterminate Progress -->
