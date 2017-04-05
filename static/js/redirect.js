@@ -18,4 +18,11 @@ function needs_login() {
 function close_draw() {
   $('.mdl-layout')[0].MaterialLayout.toggleDrawer();
 }
-console.log(window.location);
+
+function redirect_to_url() {
+  if (window.location.pathname.startsWith("/")) {
+    redirect(window.location.pathname.substring(1));
+  } else {
+    redirect("index");
+  }
+}
