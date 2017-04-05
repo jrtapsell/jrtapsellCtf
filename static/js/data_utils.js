@@ -6,6 +6,7 @@ function update_user(user) {
   currentUser.set({
     "uid": user.uid,
     "name": user.displayName,
-    "last_login": Date()
+    "last_login": Date(),
+    "image": user.photoURL
   });
 }
