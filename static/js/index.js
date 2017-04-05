@@ -1,18 +1,14 @@
 (function() {
   var provider = new firebase.auth.GoogleAuthProvider();
+  var first = true;
   firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      var currentUser = firebase.database().ref("/users/" + user.uid);
-      console.log(user);
-      currentUser.set({
-        "uid": user.uid,
-        "name": user.displayName,
-        "last_login": Date(),
-        "image": user.photoURL
-      });
-      redirect_to_url();
-    } else {
-      load_login();
+    if (first) {
+      first = false;
+      if (user) {
+        redirect_to_url();
+      } else {
+        load_login();
+      }
     }
   });
 })();

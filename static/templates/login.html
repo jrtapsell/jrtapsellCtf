@@ -1,4 +1,24 @@
 <h1>Please login</h1>
+<button onclick="firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())"></button>
 <script>
     $(".mdl-layout__drawer-button").hide();
+    var first = true;
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (first) {
+            first = false;
+            if (user) {
+                $(".mdl-layout__drawer-button").show();
+                var currentUser = firebase.database().ref("/users/" + user.uid);
+                console.log(user);
+                currentUser.set({
+                    "uid": user.uid,
+                    "name": user.displayName,
+                    "last_login": Date(),
+                    "image": user.photoURL
+                });
+                load_index();
+            }
+        }
+    });
+    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
 </script>
