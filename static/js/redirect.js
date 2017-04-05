@@ -10,11 +10,11 @@ function redirect(page, contents) {
   $.get('static/templates/' + page + '.html', function (data) {
     var template = Handlebars.compile(data);
     $("#page-content").html(template(contents));
+    hideProgress();
   }, 'html');
   history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page)
   $("title").text(page);
   $("#title").text(page);
-  hideProgress();
 }
 
 function redirect_to_login() {
