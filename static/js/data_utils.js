@@ -1,7 +1,6 @@
-var database = firebase.database();
-var currentUser = database.ref("/users/" + user.uid);
-
 function update_user(user) {
+  var database = firebase.database();
+  var currentUser = database.ref("/users/" + user.uid);
   console.log(user);
   currentUser.set({
     "uid": user.uid,
