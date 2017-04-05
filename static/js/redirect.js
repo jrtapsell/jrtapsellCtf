@@ -34,7 +34,7 @@ function load_users() {
   showProgress();
   var starCountRef = firebase.database().ref('/users');
   starCountRef.on('value', function(snapshot) {
-    redirect("users", {"users":JSON.stringify(snapshot)});
+    redirect("users", {"users":Object.values(snapshot)});
   });
 }
 
