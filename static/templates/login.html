@@ -5,8 +5,8 @@
     var first = true;
     firebase.auth().onAuthStateChanged(function (user) {
         if (first) {
-            first = false;
             if (user) {
+                first = false;
                 $(".mdl-layout__drawer-button").show();
                 var currentUser = firebase.database().ref("/users/" + user.uid);
                 console.log(user);
