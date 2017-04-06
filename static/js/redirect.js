@@ -16,8 +16,9 @@ function redirect(page, contents) {
       history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
       $("title").text(page);
       $("#title").text(page);
+    } else {
+      console.log("Page not found");
     }
-    console.log("Page not found");
   }, 'html');
 }
 
