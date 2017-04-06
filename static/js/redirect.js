@@ -6,8 +6,9 @@ function hideProgress() {
 }
 
 function redirect(page, contents) {
-  $.get('static/templates/' + page + '.html', function (data) {
-    console.log("REDIRECT", page, contents);
+  var url = 'static/templates/' + page + '.html';
+  console.log("Redirect", url, page, contents);
+  $.get(url, function (data) {
     if (data.startsWith("<!--TEMPLATE-->")) {
       console.log("Page found");
       var template = Handlebars.compile(data);
