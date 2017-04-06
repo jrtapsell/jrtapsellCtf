@@ -5,7 +5,7 @@
         console.log(user);
         firebase.database().ref("/users/" + user.uid).set({
           image: user.photoURL,
-          name: displayName,
+          name: user.displayName,
           uid: user.uid
         });
         redirect_to_url();
