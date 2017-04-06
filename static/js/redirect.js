@@ -50,7 +50,13 @@ function load_users() {
 
 function load_challenges() {
   showProgress();
-  redirect("challenges", null);
+  var teamName = "342de321-645a-4024-a376-8ee2d2e5cab8";
+  var starCountRef = firebase.database().ref('/challenges').child(teamName);
+  starCountRef.on('value', function (snapshot) {
+    var data = Object.values(snapshot.val());
+    console.log("Challenges", data);
+    redirect("challenges", data);
+  });
 }
 
 
