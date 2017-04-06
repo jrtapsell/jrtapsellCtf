@@ -7,14 +7,18 @@ function hideProgress() {
 
 function redirect(page, contents) {
   $.get('static/templates/' + page + '.html', function (data) {
-    console.log(data); //<!--TEMPLATE-->
-    var template = Handlebars.compile(data);
-    $("#page-content").html(template(contents));
-    hideProgress();
+    console.log("REDIRECT", page, contents);
+    if (data.startsWith("<!--TEMPLATE-->")) {
+      console.log("Page found");
+      var template = Handlebars.compile(data);
+      $("#page-content").html(template(contents));
+      hideProgress();
+      history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
+      $("title").text(page);
+      $("#title").text(page);
+    }
+    console.log("Page not found");
   }, 'html');
-  history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page)
-  $("title").text(page);
-  $("#title").text(page);
 }
 
 function load_login() {
