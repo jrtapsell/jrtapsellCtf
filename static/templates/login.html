@@ -1,12 +1,14 @@
 <!--TEMPLATE-->
 <h1>Please login</h1><br>
 <button onclick="firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())">Google</button>
-<button onclick="firebase.auth().signInWithPopup(new firebase.auth.GitHubProvider())">GitHub</button>
+<button onclick="firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())">GitHub</button>
 <script>
     var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             unsubscribe();
             load_index();
+        } else {
+            alert("Login failed :(")
         }
     });
 </script>
