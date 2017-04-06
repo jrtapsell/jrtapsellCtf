@@ -55,7 +55,7 @@ function load_challenges() {
   starCountRef.on('value', function (snapshot) {
     var data = Object.values(snapshot.val());
     console.log("Challenges", data);
-    redirect("challenges", data);
+    redirect("challenges", {"challenges":data});
   });
 }
 

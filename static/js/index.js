@@ -5,7 +5,7 @@
     if (first) {
       first = false;
       if (user) {
-
+        /*
         $(".mdl-layout__drawer-button").show();
         firebase.database().ref("/users/" + user.uid).set({
           "uid": user.uid,
@@ -25,7 +25,7 @@
             lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
           }
         });
-        
+        */
         redirect_to_url();
       } else {
         $(".mdl-layout__drawer-button").hide();
