@@ -1,6 +1,14 @@
-<div class="entry">
-    <h1>Challenges</h1>
-    <div class="body">
-        {{body}}
-    </div>
-</div>
+<table>
+    <tr>
+        <th>Challenge</th>
+        <th>Type</th>
+        <th>Users</th>
+    </tr>
+    {{#each challenges}}
+    <tr>
+        <th>{{name}}</th>
+        <th>{{type}}</th>
+        <th>{{users}}</th>
+    </tr>
+    {{/each}}
+</table>
