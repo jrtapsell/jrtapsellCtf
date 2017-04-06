@@ -3,11 +3,11 @@
     unsubscribe();
       if (user) {
         console.log(user);
-        /*
-        firebase.database().ref("/users/").set({
-
+        firebase.database().ref("/users/" + user.uid).set({
+          image: user.photoURL,
+          name: displayName,
+          uid: user.uid
         });
-        */
         redirect_to_url();
       } else {
         load_login();
