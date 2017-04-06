@@ -13,13 +13,14 @@ function redirect(page, contents) {
       console.log("Page found");
       var template = Handlebars.compile(data);
       $("#page-content").html(template(contents));
-      hideProgress();
-      history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
-      $("title").text(page);
-      $("#title").text(page);
     } else {
       console.log("Page not found");
+      $("#page-content").html("<h1>404 Page Not Found</h1>");
     }
+    hideProgress();
+    history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
+    $("title").text(page);
+    $("#title").text(page);
   }, 'html');
 }
 
