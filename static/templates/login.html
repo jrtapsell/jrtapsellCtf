@@ -3,9 +3,11 @@
 <button class="mdl-cell--6-col" onclick="firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())">Google</button>
 <button class="mdl-cell--6-col" onclick="firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())">GitHub</button>
 <script>
+    $(".mdl-layout__drawer-button").hide();
     var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             unsubscribe();
+            $(".mdl-layout__drawer-button").show();
             load_index();
         }
     });

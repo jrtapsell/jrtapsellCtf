@@ -4,7 +4,6 @@
       if (user) {
         redirect_to_url();
       } else {
-        $(".mdl-layout__drawer-button").hide();
         load_login();
       }
   });
