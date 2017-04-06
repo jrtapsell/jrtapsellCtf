@@ -7,6 +7,7 @@ function hideProgress() {
 
 function redirect(page, contents) {
   $.get('static/templates/' + page + '.html', function (data) {
+    console.log(data); //<!--TEMPLATE-->
     var template = Handlebars.compile(data);
     $("#page-content").html(template(contents));
     hideProgress();
