@@ -1,6 +1,7 @@
 <!--TEMPLATE-->
-<h1>Please login</h1>
-<button onclick="firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())"></button>
+<h1>Please login</h1><br>
+<button onclick="firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())">Google</button>
+<button onclick="firebase.auth().signInWithPopup(new firebase.auth.GitHubProvider())">GitHub</button>
 <script>
     var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
