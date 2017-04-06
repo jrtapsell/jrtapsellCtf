@@ -1,3 +1,12 @@
 <!--TEMPLATE-->
 <h1>Please login</h1>
 <button onclick="firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())"></button>
+<script>
+    var first = true;
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (first) {
+            first = false;
+            load_index();
+        }
+    });
+</script>
