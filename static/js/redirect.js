@@ -55,23 +55,29 @@ function load_users() {
   console.log("Users navigation started");
   showProgress();
   var usersNode = firebase.database().ref('/users');
-  var after = usersNode.on('value', function(snapshot) {
+  var listener = function(snapshot) {
     var users = Object.values(snapshot.val());
     console.log("USERS", users);
     redirect("users", {"users": users});
-    previousUpdater = after;
-  });
+    previousUpdater = function() {
+      usersNode.off(listener);
+    };
+  };
+  var after = usersNode.on('value', listener);
 }
 
 function load_challenges() {
   console.log("Challenges navigation started");
   showProgress();
   var challengesNode = firebase.database().ref('/challenges');
-  var after = challengesNode.on('value', function (snapshot) {
+  var listener = function (snapshot) {
     var data = Object.values(snapshot.val());
     redirect("challenges", {"challenges":data});
-    previousUpdater =  after;
-  });
+    previousUpdater =  function() {
+      challengesNode.off(listener);
+    };
+  };
+  var after = challengesNode.on('value', listener);
 }
 
 
