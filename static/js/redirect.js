@@ -9,8 +9,11 @@ function hideProgress() {
 
 function redirect(page, contents) {
   if (previousUpdater) {
+    console.log("Removing old register");
     previousUpdater();
     previousUpdater = undefined;
+  } else {
+    console.log("No old register");
   }
   var url = 'static/templates/' + page + '.html';
   console.log("Starting render", url, page, contents);
@@ -63,7 +66,6 @@ function load_users() {
 function load_challenges() {
   console.log("Challenges navigation started");
   showProgress();
-  var teamName = "342de321-645a-4024-a376-8ee2d2e5cab8";
   var challengesNode = firebase.database().ref('/challenges');
   var after = challengesNode.on('value', function (snapshot) {
     var data = Object.values(snapshot.val());
