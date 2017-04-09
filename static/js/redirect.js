@@ -60,7 +60,7 @@ function load_users() {
     console.log("USERS", users);
     redirect("users", {"users": users});
     previousUpdater = function() {
-      usersNode.off(listener);
+      usersNode.off("value", listener);
     };
   };
   var after = usersNode.on('value', listener);
@@ -74,7 +74,7 @@ function load_challenges() {
     var data = Object.values(snapshot.val());
     redirect("challenges", {"challenges":data});
     previousUpdater =  function() {
-      challengesNode.off(listener);
+      challengesNode.off("value", listener);
     };
   };
   var after = challengesNode.on('value', listener);
