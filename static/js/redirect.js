@@ -1,3 +1,5 @@
+var previousUpdater = undefined;
+
 function showProgress() {
   $("#statusBar").show();
 }
@@ -6,6 +8,10 @@ function hideProgress() {
 }
 
 function redirect(page, contents) {
+  if (previousUpdater) {
+    previousUpdater();
+    previousUpdater = undefined;
+  }
   var url = 'static/templates/' + page + '.html';
   console.log("Redirect", url, page, contents);
   $.get(url, function (data) {
@@ -26,6 +32,7 @@ function redirect(page, contents) {
 }
 
 function load_login() {
+  console.log("Login navigation started");
   showProgress();
   redirect("login");
 }
@@ -35,33 +42,39 @@ function close_draw() {
 }
 
 function load_index() {
+  console.log("Index navigation started");
   showProgress();
   redirect("index", null);
 }
 
 function load_users() {
+  console.log("Users navigation started");
   showProgress();
-  var starCountRef = firebase.database().ref('/users');
-  starCountRef.on('value', function(snapshot) {
+  var usersNode = firebase.database().ref('/users');
+  var after = usersNode.on('value', function(snapshot) {
     var users = Object.values(snapshot.val());
     console.log("USERS", users);
     redirect("users", {"users": users});
+    previousUpdater = after;
   });
 }
 
 function load_challenges() {
+  console.log("Challenges navigation started");
   showProgress();
   var teamName = "342de321-645a-4024-a376-8ee2d2e5cab8";
-  var starCountRef = firebase.database().ref('/challenges').child(teamName);
-  starCountRef.on('value', function (snapshot) {
+  var challengesNode = firebase.database().ref('/challenges').child(teamName);
+  var after = challengesNode.on('value', function (snapshot) {
     var data = Object.values(snapshot.val());
     console.log("Challenges", data);
     redirect("challenges", {"challenges":data});
+    previousUpdater =  after;
   });
 }
 
 
 function load_logout() {
+  console.log("Logout navigation started");
   showProgress();
   redirect("logout", null);
 }
