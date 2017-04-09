@@ -7,15 +7,9 @@
     </tr>
     {{#each challenges}}
     <tr>
-        <th>{{name}}</th>
-        <th>{{type}}</th>
-        <th>
-            {{#each members}}
-                <pre>
-                    {{@key}}
-                </pre>
-            {{/each}}
-        </th>
+        <td>{{name}}</td>
+        <td>{{type}}</td>
+        <td>Members</td>
     </tr>
     {{/each}}
 </table>
