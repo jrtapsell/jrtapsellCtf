@@ -64,7 +64,7 @@ function load_challenges() {
   console.log("Challenges navigation started");
   showProgress();
   var teamName = "342de321-645a-4024-a376-8ee2d2e5cab8";
-  var challengesNode = firebase.database().ref('/challenges').child(teamName);
+  var challengesNode = firebase.database().ref('/challenges');
   var after = challengesNode.on('value', function (snapshot) {
     var data = Object.values(snapshot.val());
     redirect("challenges", {"challenges":data});
