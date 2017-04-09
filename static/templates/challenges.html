@@ -9,7 +9,13 @@
     <tr>
         <td>{{name}}</td>
         <td>{{type}}</td>
-        <td>Members</td>
+        <td>
+            {{#each members}}
+                <pre>
+                    {{@key}}
+                </pre>
+            {{/each}}
+        </td>
     </tr>
     {{/each}}
 </table>

@@ -13,14 +13,15 @@ function redirect(page, contents) {
     previousUpdater = undefined;
   }
   var url = 'static/templates/' + page + '.html';
-  console.log("Redirect", url, page, contents);
+  console.log("Starting render", url, page, contents);
   $.get(url, function (data) {
     if (data.startsWith("<!--TEMPLATE-->")) {
       console.log("Page found");
       var template = Handlebars.compile(data);
+      console.log("Compilation complete");
       $("#page-content").html(template(contents));
     } else {
-      console.log("Page not found");
+      console.log("Page not template");
       $("#page-content").html("<h1>404 Page Not Found</h1>");
     }
     hideProgress();
@@ -66,7 +67,6 @@ function load_challenges() {
   var challengesNode = firebase.database().ref('/challenges').child(teamName);
   var after = challengesNode.on('value', function (snapshot) {
     var data = Object.values(snapshot.val());
-    console.log("Challenges", data);
     redirect("challenges", {"challenges":data});
     previousUpdater =  after;
   });
