@@ -1,4 +1,12 @@
 <!--TEMPLATE-->
+<style>
+    .row-unsolved {
+        background-color: indianred;
+    }
+    .row-solved {
+        background-color: lightgreen;
+    }
+</style>
 <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col">
     <tr>
         <th>Challenge</th>
@@ -7,7 +15,7 @@
         <th>Users</th>
     </tr>
     {{#each challenges}}
-    <tr>
+    <tr class="row-{{status}}">
         <td>{{name}}</td>
         <td>{{type}}</td>
         <td>{{status}}</td>
