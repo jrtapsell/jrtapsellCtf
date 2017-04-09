@@ -88,16 +88,17 @@ function load_logout() {
 }
 
 function redirect_to_url() {
-  switch (window.location.pathname) {
+  var pathname = window.location.pathname;
+  switch (pathname) {
     case "":
     case "/":
       load_index();
-      break;
+      return;
     case "/users":
       load_users();
-      break;
+      return;
     case "/challenges":
       load_challenges();
-      break;
+      return;
   }
 }
