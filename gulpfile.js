@@ -21,7 +21,7 @@ gulp.task('js', function(){
 
 gulp.task('sw', function(){
   return gulp.src('sw.js')
-    .pipe(gulp.dest('deploy/sw.js'))
+    .pipe(gulp.dest('deploy/'))
 });
 
 gulp.task('settings', function(){
