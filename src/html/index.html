@@ -32,7 +32,7 @@
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation. We hide it in small screens. -->
-            <div class="info">Hello, Nobody</div>
+            <div class="mdl-layout-title" id="login-status"></div>
         </div>
     </header>
     <div class="mdl-layout__drawer">
@@ -52,4 +52,13 @@
     </main>
 </div>
 </body>
+<script>
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            $("#login-status").text("Hello, " + user.displayName);
+        } else {
+            $("#login-status").text("I don't know you");
+        }
+    });
+</script>
 </html>
