@@ -21,7 +21,7 @@ gulp.task('js', function(){
 
 gulp.task('settings', function(){
   return gulp.src('_redirects')
-    .pipe(gulp.dest('deploy/_redirects'))
+    .pipe(gulp.dest('deploy/'))
 });
 
 gulp.task('default', [ 'html', 'js', 'template', 'settings']);
