@@ -10,14 +10,14 @@
     }
 </style>
 <table class="mdl-data-table mdl-js-data-table mdl-cell--12-col">
-    <tr onclick="load_challenge({{@key}})">
+    <tr>
         <th>Challenge</th>
         <th>Type</th>
         <th>Status</th>
         <th>Users</th>
     </tr>
     {{#each challenges}}
-    <tr class="row-{{status}}">
+    <tr class="row-{{status}}" onclick="load_challenge({{@key}})">
         <td>{{name}}</td>
         <td>{{type}}</td>
         <td>{{status}}</td>
