@@ -15,7 +15,7 @@ function redirect(page, contents) {
   } else {
     console.log("No old register");
   }
-  var url = 'src/templates/' + page + '.html';
+  var url = '/static/templates/' + page + '.html';
   console.log("Starting render", url, page, contents);
   $.get(url, function (data) {
     if (data.startsWith("<!--TEMPLATE-->")) {
