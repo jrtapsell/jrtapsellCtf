@@ -1,3 +1,14 @@
-<div>Name: {{name}}</div>
-<div>Status: {{status}}</div>
-<div>Type: {{type}}</div>
+<h1 class="mdl-cell--12-col">{{name}}</h1>
+<style>
+    .row-unstarted {
+        background-color: lightblue;
+    }
+    .row-unsolved {
+        background-color: indianred;
+    }
+    .row-solved {
+        background-color: lightgreen;
+    }
+</style>
+<div class="row-{{status}} mdl-cell--12-col">Status: {{status}}</div>
+<div class="mdl-cell--12-col">Type: {{type}}</div>
