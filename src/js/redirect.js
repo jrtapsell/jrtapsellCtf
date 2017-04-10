@@ -87,6 +87,20 @@ function load_logout() {
   redirect("logout", null);
 }
 
+function load_challenge(challenge_id) {
+  console.log("Loading challenge");
+  showProgress();
+  var challengeNode = firebase.database().ref('/challenges').child(challenge_id);
+  var listener = function (snapshot) {
+    var data = Object.values(snapshot.val());
+    redirect("challenge", data);
+    previousUpdater =  function() {
+      challengeNode.off("value", listener);
+    };
+  };
+
+}
+
 function redirect_to_url() {
   var pathname = window.location.pathname;
   switch (pathname) {
