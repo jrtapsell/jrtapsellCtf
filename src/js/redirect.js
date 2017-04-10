@@ -98,7 +98,7 @@ function load_challenge(challenge_id) {
       challengeNode.off("value", listener);
     };
   };
-
+  var after = challengeNode.on('value', listener);
 }
 
 function redirect_to_url() {
