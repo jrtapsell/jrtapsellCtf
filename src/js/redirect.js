@@ -92,7 +92,7 @@ function load_challenge(challenge_id) {
   showProgress();
   var challengeNode = firebase.database().ref('/challenges').child(challenge_id);
   var listener = function (snapshot) {
-    var data = Object.values(snapshot.val());
+    var data = snapshot.val();
     redirect("challenge", data);
     previousUpdater =  function() {
       challengeNode.off("value", listener);
