@@ -13,6 +13,11 @@
 <pre class="mdl-cell mdl-cell--12-col">{{description}}</pre>
 <div class="mdl-cell row-{{status}} mdl-cell--12-col">Status: {{status}}</div>
 <div class="mdl-cell mdl-cell--12-col">Type: {{type}}</div>
+<div class="mdl-cell mdl-cell--12-col">Users:
+    {{#each users}}
+        <div>{{@key}}</div>
+    {{/each}}
+</div>
 <style>
     .demo-card-wide > .mdl-card__title {
         color: #fff;
