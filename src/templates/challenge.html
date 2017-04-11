@@ -1,4 +1,4 @@
-<h1 class="mdl-cell--12-col">{{name}}</h1>
+<h1 class="mdl-cell mdl-cell--12-col">{{name}}</h1>
 <style>
     .row-unstarted {
         background-color: lightblue;
@@ -10,13 +10,10 @@
         background-color: lightgreen;
     }
 </style>
-<pre class="mdl-cell--12-col">{{description}}</pre>
-<div class="row-{{status}} mdl-cell--12-col">Status: {{status}}</div>
-<div class="mdl-cell--12-col">Type: {{type}}</div>
+<pre class="mdl-cell mdl-cell--12-col">{{description}}</pre>
+<div class="mdl-cell row-{{status}} mdl-cell--12-col">Status: {{status}}</div>
+<div class="mdl-cell mdl-cell--12-col">Type: {{type}}</div>
 <style>
-    .demo-card-wide.mdl-card {
-        width: 512px;
-    }
     .demo-card-wide > .mdl-card__title {
         color: #fff;
         height: 176px;
@@ -26,13 +23,14 @@
         color: #fff;
     }
 </style>
+<h2 class="mdl-cell mdl-cell--12-col">Files</h2>
 {{#each files}}
-<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+<div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col">
     <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">{{name}}</h2>
     </div>
     <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{link}}">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{url}}">
             Download
         </a>
     </div>
