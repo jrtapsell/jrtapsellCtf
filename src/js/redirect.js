@@ -7,6 +7,30 @@ function hideProgress() {
   $("#statusBar").hide();
 }
 
+function load_failure(_, message) {
+  $("#page-content").html("<h1>Page not found</h1>");
+}
+
+function setTitle(page) {
+  $("title").text(page);
+  $("#title").text(page);
+  $(".title").text(page);
+}
+function render_closure(contents, page) {
+  function render(data) {
+    if (data.startsWith("<!--TEMPLATE-->")) {
+      var template = Handlebars.compile(data);
+      $("#page-content").html(template(contents));
+    } else {
+      load_failure(_, "Page is not a known page");
+    }
+    hideProgress();
+    history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
+    setTitle(page);
+  }
+  return render;
+}
+
 function redirect(page, contents) {
   if (previousUpdater) {
     console.log("Removing old register");
@@ -17,22 +41,12 @@ function redirect(page, contents) {
   }
   var url = '/static/templates/' + page + '.html';
   console.log("Starting render", url, page, contents);
-  $.get(url, function (data) {
-    if (data.startsWith("<!--TEMPLATE-->")) {
-      console.log("Page found");
-      var template = Handlebars.compile(data);
-      console.log("Compilation complete");
-      $("#page-content").html(template(contents));
-    } else {
-      console.log("Page not template");
-      $("#page-content").html("<h1>404 Page Not Found</h1>");
-    }
-    hideProgress();
-    history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
-    $("title").text(page);
-    $("#title").text(page);
-    $(".title").text(page);
-  }, 'html');
+  $.ajax({
+      "url":url,
+      "success": render_closure(contents, page),
+      "error": load_failure,
+      "dataType": 'html'
+  });
 }
 
 function load_login() {
