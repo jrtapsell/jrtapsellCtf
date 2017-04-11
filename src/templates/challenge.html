@@ -11,11 +11,11 @@
     }
 </style>
 <pre class="mdl-cell mdl-cell--12-col">{{description}}</pre>
-<div class="mdl-cell row-{{status}} mdl-cell--12-col">Status: {{status}}</div>
-<div class="mdl-cell mdl-cell--12-col">Type: {{type}}</div>
-<div class="mdl-cell mdl-cell--12-col">Users:
+<div class="mdl-cell row-{{status}} mdl-cell--12-col"><h3>Status:</h3>{{status}}</div>
+<div class="mdl-cell mdl-cell--12-col"><h3>Type:</h3>{{type}}</div>
+<div class="mdl-cell mdl-cell--12-col"><h3>Users:</h3>
     {{#each users}}
-        <div>{{@key}}</div>
+        <span>{{@key}}</span>
     {{/each}}
 </div>
 <style>
