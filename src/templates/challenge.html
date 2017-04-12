@@ -11,9 +11,10 @@
     }
 </style>
 <pre class="mdl-cell mdl-cell--12-col">{{description}}</pre>
-<div class="mdl-cell row-{{status}} mdl-cell--12-col"><h3>Status:</h3>{{status}}</div>
-<div class="mdl-cell mdl-cell--12-col"><h3>Type:</h3>{{type}}</div>
-<div class="mdl-cell mdl-cell--12-col"><h3>Users:</h3>
+<div class="mdl-grid mdl-cell mdl-cell--6-col">
+<div class="mdl-cell row-{{status}} mdl-cell--12-col"><h2>Status:</h2>{{status}}</div>
+<div class="mdl-cell mdl-cell--12-col"><h2>Type:</h2>{{type}}</div>
+<div class="mdl-cell mdl-cell--12-col"><h2>Users:</h2>
     {{#each members}}
         <span>{{@key}}</span>
     {{/each}}
@@ -41,3 +42,10 @@
     </div>
 </div>
 {{/each}}
+</div>
+<div class="mdl-grid mdl-cell mdl-cell--6-col">
+    <h2 class="mdl-cell mdl-cell--12-col">Messages</h2>
+    {{#each messages}}
+        <div>{{user}} says {{message}}</div>
+    {{/each}}
+</div>
