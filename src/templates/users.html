@@ -1,11 +1,19 @@
-<table class="mdl-data-table mdl-js-data-table mdl-cell--12-col">
-<tr>
-    <th></th><th>Name</th>
-</tr>
+<!-- Wide card with share menu button -->
+<style>
+    .demo-card-wide > .mdl-card__title {
+        color: #fff;
+        height: 176px;
+    }
+    .demo-card-wide > .mdl-card__menu {
+        color: #fff;
+    }
+</style>
 {{#each users}}
-<tr>
-    <td><img src="{{image}}" style="height: 1em; width: 1em"></td>
-    <td>{{name}}</td>
-</tr>
+<div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+    <div class="mdl-card__title" style="background: url('{{image}}') center / cover;"></div>
+    <div class="mdl-card__supporting-text">
+        {{name}}
+    </div>
+</div>
 {{/each}}
 </table>
