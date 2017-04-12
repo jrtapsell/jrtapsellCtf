@@ -11,11 +11,6 @@ function load_failure(_, message) {
   $("#page-content").html("<h1>Page not found</h1>");
 }
 
-function setTitle(page) {
-  $("title").text(page);
-  $("#title").text(page);
-  $(".title").text(page);
-}
 function render_closure(contents, page) {
   function render(data) {
     if (data.startsWith("<!--TEMPLATE-->")) {
@@ -26,7 +21,6 @@ function render_closure(contents, page) {
     }
     hideProgress();
     history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
-    setTitle(page);
   }
   return render;
 }
