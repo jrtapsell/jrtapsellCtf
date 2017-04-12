@@ -24,9 +24,14 @@ gulp.task('sw', function(){
     .pipe(gulp.dest('deploy/'))
 });
 
+gulp.task('sw-installer', function(){
+  return gulp.src('src/sw-installer.js')
+    .pipe(gulp.dest('deploy/'))
+});
+
 gulp.task('settings', function(){
   return gulp.src('_redirects')
     .pipe(gulp.dest('deploy/'))
 });
 
-gulp.task('default', [ 'html', 'js', 'template', 'settings', 'sw']);
+gulp.task('default', [ 'html', 'js', 'template', 'settings', 'sw', 'sw-installer']);
