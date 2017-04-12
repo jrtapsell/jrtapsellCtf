@@ -1,3 +1,4 @@
+'use strict';
 (function() {
   var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
     unsubscribe();

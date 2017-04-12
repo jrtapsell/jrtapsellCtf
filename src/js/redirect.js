@@ -1,3 +1,4 @@
+'use strict';
 var previousUpdater = undefined;
 
 function showProgress() {
