@@ -128,5 +128,7 @@ function redirect_to_url() {
     case "/challenges":
       load_challenges();
       return;
+    default:
+      load_failure(undefined, "404, Page not found");
   }
 }
