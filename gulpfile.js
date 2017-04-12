@@ -20,7 +20,7 @@ gulp.task('js', function(){
 });
 
 gulp.task('sw', function(){
-  return gulp.src('sw.js')
+  return gulp.src('src/sw.js')
     .pipe(gulp.dest('deploy/'))
 });
 
