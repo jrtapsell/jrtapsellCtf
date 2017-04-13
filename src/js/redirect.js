@@ -12,7 +12,7 @@ function load_failure(_, message) {
   $("#page-content").html("<h1>Page not found</h1>");
 }
 
-function redirect(page, contents) {
+function redirect(page, contents, id) {
   if (previousUpdater) {
     console.log("Removing old register");
     previousUpdater();
@@ -22,9 +22,10 @@ function redirect(page, contents) {
   }
   console.log("Render started");
   $("#page-content").html(CTF.pages[page](contents));
-  console.log("Render completed");
+  console.log("Render completed ");
   hideProgress();
-  history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
+  var tail = id ? page + "/" : page;
+  history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + tail);
 }
 
 function load_login() {
@@ -98,8 +99,8 @@ function load_challenge(challenge_id) {
   showProgress();
   var challengeNode = firebase.database().ref('/challenges').child(challenge_id);
   var listener = function (snapshot) {
-    var data = snapshot.val();;
-    redirect("challenge", data);
+    var data = snapshot.val();
+    redirect("challenge", data, challenge_id);
     previousUpdater =  function() {
       challengeNode.off("value", listener);
     };
@@ -123,7 +124,16 @@ function redirect_to_url() {
     case "/logout":
       load_logout();
       return;
-    default:
-      load_failure(undefined, "404, Page not found");
   }
+  const match = pathname.match("\/([^/]*)\/([^/]+)/?");
+  if (match) {
+    var pageName = match[1];
+    var id = match[2];
+    switch (pageName) {
+      case "challenge":
+        load_challenge(id);
+        return;
+    }
+  }
+  load_failure(undefined, "404, Page not found");
 }
