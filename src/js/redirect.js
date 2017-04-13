@@ -137,3 +137,5 @@ function redirect_to_url() {
   }
   load_failure(undefined, "404, Page not found");
 }
+
+window.onpopstate = redirect_to_url
