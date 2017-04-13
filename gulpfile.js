@@ -30,6 +30,11 @@ gulp.task('js', function(){
     .pipe(gulp.dest(deploy + 'js'))
 });
 
+gulp.task('css', function(){
+  return gulp.src('src/css/*.css')
+    .pipe(gulp.dest(deploy + 'css'))
+});
+
 gulp.task('sw', function(){
   return gulp.src('src/sw.js')
     .pipe(gulp.dest('deploy/'))
@@ -45,4 +50,4 @@ gulp.task('settings', function(){
     .pipe(gulp.dest('deploy/'))
 });
 
-gulp.task('default', [ 'html', 'js', 'template', 'settings', 'sw', 'sw-installer']);
+gulp.task('default', [ 'html', 'js', 'template', 'settings', 'sw', 'sw-installer', 'css']);
