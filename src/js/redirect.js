@@ -109,7 +109,7 @@ function load_challenge(challenge_id) {
 }
 
 function redirect_to_url(pathname) {
-  pathname = !!pathname ? pageName : window.location.pathname;
+  pathname = !!pathname ? pagename : window.location.pathname;
   switch (pathname) {
     case "":
     case "/":
