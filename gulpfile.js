@@ -36,13 +36,8 @@ gulp.task('css', function(){
 });
 
 gulp.task('sw', function(){
-  return gulp.src('src/sw.js')
-    .pipe(gulp.dest('deploy/'))
-});
-
-gulp.task('sw-installer', function(){
-  return gulp.src('src/sw-installer.js')
-    .pipe(gulp.dest('deploy/'))
+  return gulp.src('src/sw/*.js')
+    .pipe(gulp.dest(deploy + "sw"))
 });
 
 gulp.task('settings', function(){
@@ -50,4 +45,4 @@ gulp.task('settings', function(){
     .pipe(gulp.dest('deploy/'))
 });
 
-gulp.task('default', [ 'html', 'js', 'template', 'settings', 'sw', 'sw-installer', 'css']);
+gulp.task('default', [ 'html', 'js', 'template', 'settings', 'sw', 'css']);
