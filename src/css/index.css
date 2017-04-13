@@ -19,3 +19,9 @@
 .card-title {
     height: 176px;
 }
+
+.plain-card-title {
+    color: #fff;
+    height: 176px;
+    background-color: #CCC !important;
+}
