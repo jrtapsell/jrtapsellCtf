@@ -1,12 +1,21 @@
 var gulp = require('gulp');
-var header = require('gulp-header');
+var handlebars = require('gulp-handlebars');
+var wrap = require('gulp-wrap');
+var declare = require('gulp-declare');
+var concat = require('gulp-concat');
 
 const deploy = "deploy/static/";
 
-gulp.task('template', function() {
-  return gulp.src('src/templates/*.html')
-    .pipe(header('<!--TEMPLATE-->\n'))
-    .pipe(gulp.dest(deploy + 'templates'))
+gulp.task('template', function(){
+  gulp.src('src/templates/*.hbs')
+    .pipe(handlebars())
+    .pipe(wrap('Handlebars.template(<%= contents %>)'))
+    .pipe(declare({
+      namespace: 'CTF.pages',
+      noRedeclare: true // Avoid duplicate declarations
+    }))
+    .pipe(concat('templates.js'))
+    .pipe(gulp.dest(deploy + 'js'));
 });
 
 gulp.task('html', function(){
