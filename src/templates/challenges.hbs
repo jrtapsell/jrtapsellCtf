@@ -11,7 +11,7 @@
         <th>Users</th>
     </tr>
     {{#each challenges}}
-    <tr class="back-{{status}}" onclick="load_challenge('{{uid}}')">
+    <tr class="back-{{status}} challenge-row" data-id="{{uid}}" onclick="load_challenge('{{uid}}')">
         <td>{{name}}</td>
         <td>{{type}}</td>
         <td>{{status}}</td>

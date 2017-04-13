@@ -70,6 +70,9 @@ function load_challenges() {
     previousUpdater =  function() {
       challengesNode.off("value", listener);
     };
+    $(".challenge-row").click(function(event, type, target, currentTarget) {
+      load_challenge(currentTarget.dataset["id"]);
+    })
   };
   var after = challengesNode.on('value', listener);
 }
