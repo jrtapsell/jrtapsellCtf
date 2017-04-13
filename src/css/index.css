@@ -18,4 +18,5 @@
 
 .card-title {
     height: 176px;
+    background: url(attr(data-background)) center / cover
 }
