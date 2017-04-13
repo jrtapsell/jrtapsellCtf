@@ -15,27 +15,22 @@
     <script src="/static/js/redirect.js"></script>
 </head>
 <body>
-<!-- Always shows a header, even in smaller screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-            <!-- Title -->
             <span class="mdl-layout-title title" id="title">Title</span>
-            <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
             <div class="mdl-layout-title" id="login-status"></div>
         </div>
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title title">Loading</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" onclick="load_users();close_draw()">Users</a>
-            <a class="mdl-navigation__link" onclick="load_challenges();close_draw()">Challenges</a>
-            <a class="mdl-navigation__link" onclick="load_logout();close_draw()">Logout</a>
+            <a class="mdl-navigation__link" id="nav-users">Users</a>
+            <a class="mdl-navigation__link" id="nav-challenges">Challenges</a>
+            <a class="mdl-navigation__link" id="nav-logout">Logout</a>
         </nav>
     </div>
-    <!-- MDL Progress Bar with Indeterminate Progress -->
     <div id="statusBar" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width: 100%; display: none"></div>
     <main class="mdl-layout__content">
         <div class="mdl-layout-spacer"></div>
