@@ -1,14 +1,16 @@
 var gulp = require('gulp');
-var handlebars = require('gulp-handlebars');
+var gulp_handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
+
+var handlebars = require('./src/js/handlebars.js');
 
 const deploy = "deploy/static/";
 
 gulp.task('template', function(){
   gulp.src('src/templates/*.hbs')
-    .pipe(handlebars())
+    .pipe(gulp_handlebars({handlebars: handlebars})) // override library here
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(declare({
       namespace: 'CTF.pages',
