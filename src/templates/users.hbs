@@ -1,17 +1,7 @@
 {{setTitle "Users"}}
-<!-- Wide card with share menu button -->
-<style>
-    .demo-card-wide > .mdl-card__title {
-        color: #fff;
-        height: 176px;
-    }
-    .demo-card-wide > .mdl-card__menu {
-        color: #fff;
-    }
-</style>
 {{#each users}}
 <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col">
-    <div class="mdl-card__title" style="background: url('{{image}}') center / cover;"></div>
+    <div class="mdl-card__title card-title" style="background: url('{{image}}') center / cover;"></div>
     <div class="mdl-card__supporting-text">
         {{name}}
     </div>
