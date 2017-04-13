@@ -78,7 +78,14 @@ function load_challenges() {
 function load_logout() {
   console.log("Logout navigation started");
   showProgress();
-  redirect("logout", null);
+  firebase.auth().signOut();
+  var temp = firebase.auth().onAuthStateChanged(function (user) {
+    if (!user) {
+      temp();
+      redirect("login");
+    }
+  });
+  redirect('login');
 }
 
 function load_challenge(challenge_id) {
