@@ -139,5 +139,5 @@ function redirect_to_url(pathname) {
 }
 
 window.onpopstate = function (event) {
-  redirect_to_url(event.currentTarget.location);
+  redirect_to_url(event.currentTarget.location.pathname);
 };
