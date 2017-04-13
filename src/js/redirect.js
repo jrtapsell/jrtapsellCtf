@@ -20,7 +20,9 @@ function redirect(page, contents) {
   } else {
     console.log("No old register");
   }
+  console.log("Render started");
   $("#page-content").html(CTF.pages[page](contents));
+  console.log("Render completed");
   hideProgress();
   history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
 }
