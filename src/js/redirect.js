@@ -52,6 +52,10 @@ function load_users() {
     previousUpdater = function() {
       usersNode.off("value", listener);
     };
+    $(".card-title").each(function(_,item) {
+      var current = $(item);
+      current.css("background", "url(" + current.attr("data-background") + ") center / cover")
+    })
   };
   var after = usersNode.on('value', listener);
 }
