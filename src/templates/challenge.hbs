@@ -1,19 +1,8 @@
 {{setTitle name}}
 <h1 class="mdl-cell mdl-cell--12-col">{{name}}</h1>
-<style>
-    .row-unstarted {
-        background-color: lightblue;
-    }
-    .row-unsolved {
-        background-color: indianred;
-    }
-    .row-solved {
-        background-color: lightgreen;
-    }
-</style>
 <pre class="mdl-cell mdl-cell--12-col">{{description}}</pre>
 <div class="mdl-grid mdl-cell mdl-cell--6-col">
-<div class="mdl-cell row-{{status}} mdl-cell--12-col"><h2>Status:</h2>{{status}}</div>
+<div class="mdl-cell back-{{status}} mdl-cell--12-col"><h2>Status:</h2>{{status}}</div>
 <div class="mdl-cell mdl-cell--12-col"><h2>Type:</h2>{{type}}</div>
 <div class="mdl-cell mdl-cell--12-col"><h2>Users:</h2>
     {{#each members}}
