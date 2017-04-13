@@ -116,12 +116,15 @@ function redirect_to_url(pathname) {
       load_index();
       return;
     case "/users":
+    case "/users/":
       load_users();
       return;
     case "/challenges":
+    case "/challenges/":
       load_challenges();
       return;
     case "/logout":
+    case "/logout/":
       load_logout();
       return;
   }
