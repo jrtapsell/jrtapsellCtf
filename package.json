@@ -13,7 +13,8 @@
     "gulp-declare": "^0.3.0",
     "gulp-handlebars": "^4.0.0",
     "gulp-header": "^1.8.8",
-    "gulp-wrap": "^0.13.0"
+    "gulp-wrap": "^0.13.0",
+    "handlebars": "^4.0.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
