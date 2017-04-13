@@ -12,7 +12,7 @@ firebase.initializeApp(config);
 
 //firebase.database().ref("/users").child("GHHAcG4nLFVeO30J1GwYhRPqaek2").child("image").once("value",function(data){console.log(data.val())})
 
-(function() {
+$(function() {
   var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
     unsubscribe();
     if (user) {
@@ -34,4 +34,4 @@ firebase.initializeApp(config);
       $("#login-status").text("I don't know you");
     }
   });
-})();
+});
