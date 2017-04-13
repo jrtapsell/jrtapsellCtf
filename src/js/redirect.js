@@ -22,6 +22,7 @@ function redirect(page, contents) {
   }
   $("#page-content").html(CTF.pages[page](contents));
   hideProgress();
+  history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
 }
 
 function load_login() {
