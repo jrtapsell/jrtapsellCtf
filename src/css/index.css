@@ -2,3 +2,16 @@
     width: 100%;
     display: none
 }
+
+.back-unstarted {
+    background-color: lightblue;
+}
+.back-unsolved {
+    background-color: indianred;
+}
+.back-solved {
+    background-color: lightgreen;
+}
+.tall-button {
+    height:3em;
+}
