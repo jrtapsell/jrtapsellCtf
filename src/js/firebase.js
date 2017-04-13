@@ -7,8 +7,11 @@ var config = {
   storageBucket: "jrtapsell-ctf.appspot.com",
   messagingSenderId: "706159874560"
 };
+
 firebase.initializeApp(config);
+
 //firebase.database().ref("/users").child("GHHAcG4nLFVeO30J1GwYhRPqaek2").child("image").once("value",function(data){console.log(data.val())})
+
 (function() {
   var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
     unsubscribe();
