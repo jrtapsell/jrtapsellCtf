@@ -108,8 +108,8 @@ function load_challenge(challenge_id) {
   var after = challengeNode.on('value', listener);
 }
 
-function redirect_to_url() {
-  var pathname = window.location.pathname;
+function redirect_to_url(pathname) {
+  pathname = !!pathname ? pageName : window.location.pathname;
   switch (pathname) {
     case "":
     case "/":
@@ -139,5 +139,5 @@ function redirect_to_url() {
 }
 
 window.onpopstate = function (event) {
-  console.log("POPSTATE", event);
+  redirect_to_url(event.window.location);
 };
