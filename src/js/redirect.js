@@ -12,20 +12,6 @@ function load_failure(_, message) {
   $("#page-content").html("<h1>Page not found</h1>");
 }
 
-function render_closure(contents, page) {
-  function render(data) {
-    if (data.startsWith("<!--TEMPLATE-->")) {
-      var template = Handlebars.compile(data);
-      $("#page-content").html(template(contents));
-    } else {
-      load_failure(_, "Page is not a known page");
-    }
-    hideProgress();
-    history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + page);
-  }
-  return render;
-}
-
 function redirect(page, contents) {
   if (previousUpdater) {
     console.log("Removing old register");
@@ -34,14 +20,7 @@ function redirect(page, contents) {
   } else {
     console.log("No old register");
   }
-  var url = '/static/templates/' + page + '.html';
-  console.log("Starting render", url, page, contents);
-  $.ajax({
-      "url":url,
-      "success": render_closure(contents, page),
-      "error": load_failure,
-      "dataType": 'html'
-  });
+  $("#page-content").html(CTF.pages[page](contents));
 }
 
 function load_login() {
