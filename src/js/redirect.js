@@ -24,7 +24,7 @@ function redirect(page, contents, id) {
   $("#page-content").html(CTF.pages[page](contents));
   console.log("Render completed ");
   hideProgress();
-  var tail = id ? page + "/" : page;
+  var tail = !!id ? page + "/" : page;
   history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + tail);
 }
 
