@@ -21,6 +21,7 @@ function redirect(page, contents) {
     console.log("No old register");
   }
   $("#page-content").html(CTF.pages[page](contents));
+  hideProgress();
 }
 
 function load_login() {
