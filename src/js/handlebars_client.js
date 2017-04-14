@@ -13,7 +13,7 @@ Handlebars.registerHelper("reverseEach", function (context) {
   var options = arguments[arguments.length - 1];
   var ret = '';
   $.each(context, function (_, value) {
-    ret += options.fn(value);
+    ret = options.fn(value) + ret;
   });
   return ret;
 });
