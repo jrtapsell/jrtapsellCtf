@@ -21,5 +21,5 @@ Handlebars.registerHelper("reverseEach", function (context) {
 
 Handlebars.registerHelper("timeOf", function (time) {
   var date = new Date(time);
-  return date.getDay() + "/"  + date.getMonth() + " " + date.getHours() + ":" + date.getMinutes();
+  return date.getDate() + "/"  + date.getMonth() + " " + date.getHours() + ":" + date.getMinutes();
 });
