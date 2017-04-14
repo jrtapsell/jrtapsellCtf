@@ -59,8 +59,10 @@ type File {
 }
 
 type Message {
+    validate() {this.created == now}
     message: String,
-    user: String
+    user: String,
+    created: Number
 }
 
 isUser() { auth != null && root.users[auth.uid] != null }

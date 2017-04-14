@@ -72,12 +72,15 @@
       "$chall_id": {
         ".read": "auth != null && root.child('users').child(auth.uid).val() != null",
         "$message_id": {
-          ".validate": "newData.hasChildren(['message', 'user'])",
+          ".validate": "newData.hasChildren(['message', 'user', 'created']) && newData.child('created').val() == now",
           "message": {
             ".validate": "newData.isString()"
           },
           "user": {
             ".validate": "newData.isString()"
+          },
+          "created": {
+            ".validate": "newData.isNumber()"
           },
           "$other": {
             ".validate": "false"
