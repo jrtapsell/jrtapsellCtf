@@ -8,6 +8,11 @@ function hideProgress() {
   $("#statusBar").hide();
 }
 
+function render_icons() {
+  $(".user-icon").each(function(_, item) {
+    $(item).css("background-image", item.dataset["id"]);
+  })
+}
 function load_failure(_, message) {
   $("#page-content").html("<h1>Page not found</h1>");
 }
@@ -75,7 +80,8 @@ function load_challenges() {
     };
     $(".challenge-row").click(function(event) {
       load_challenge(event.currentTarget.dataset["id"]);
-    })
+    });
+    render_icons;
   };
   var after = challengesNode.on('value', listener);
 }
@@ -104,6 +110,7 @@ function load_challenge(challenge_id) {
     previousUpdater =  function() {
       challengeNode.off("value", listener);
     };
+    render_icons();
   };
   var after = challengeNode.on('value', listener);
 }

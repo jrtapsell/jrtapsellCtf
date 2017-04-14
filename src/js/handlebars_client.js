@@ -5,5 +5,6 @@ Handlebars.registerHelper( "setTitle", function ( title ){
 });
 
 Handlebars.registerHelper("userIcon", function (userId) {
-  return new Handlebars.SafeString("<div>" + Handlebars.Utils.escapeExpression(userId) + "</div>");
+  const escaped_id = Handlebars.Utils.escapeExpression(userId);
+  return new Handlebars.SafeString("<div class='user-icon' data-id='" + userId + "'></div>");
 });
