@@ -166,6 +166,15 @@ function load_challenge(challenge_id) {
     if (challengeData && membersData && filesData && messagesData) {
       redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData, "messages": messagesData}, challenge_id);
       render_icons();
+      var mi = $("#messageInput");
+      mi.keypress(function (event) {
+        if (event.which != 13) {
+          return;
+        }
+        var text = mi.val();
+        messagesNode.push({"user": firebase.currentUser.uid, "message": text});
+        mi.val("");
+      });
     }
   }
 
