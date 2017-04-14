@@ -154,8 +154,8 @@ function load_challenge(challenge_id) {
   const db = firebase.database();
   var challengeNode = db.ref('/challenges').child(challenge_id);
   var membersNode = db.ref('/memberships').child(challenge_id);
-  var filesNode = db.ref('/memberships').child(challenge_id);
-  var messagesNode = db.ref('/memberships').child(challenge_id);
+  var filesNode = db.ref('/files').child(challenge_id);
+  var messagesNode = db.ref('/messages').child(challenge_id);
 
   var challengeData = undefined;
   var membersData = undefined;
@@ -164,7 +164,6 @@ function load_challenge(challenge_id) {
 
   function renderUI() {
     if (challengeData && membersData && filesData && messagesData) {
-      var temp = {};
       redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData, "messages": messagesData}, challenge_id);
       render_icons();
     }
