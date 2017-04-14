@@ -35,4 +35,5 @@
     width: 2em;
     background-size: 100%;
     border-radius: 0.5em;
+    display: inline-block;
 }
