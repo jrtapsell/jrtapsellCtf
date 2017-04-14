@@ -163,7 +163,7 @@ function load_challenge(challenge_id) {
   var messagesData = undefined;
 
   function renderUI() {
-    if (challengeData && membersData && filesData) {
+    if (challengeData && membersData && filesData && messagesData) {
       var temp = {};
       redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData}, challenge_id);
       render_icons();
@@ -192,8 +192,8 @@ function load_challenge(challenge_id) {
   };
 
   challengeNode.on('value', challengeListener);
-  membersNode.on('value', challengeListener);
-  filesNode.on('value', challengeListener);
+  membersNode.on('value', membersListener);
+  filesNode.on('value', filesListener);
   messagesNode.on('value', messagesListener);
 
   previousUpdater = function () {
