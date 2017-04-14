@@ -164,6 +164,7 @@ function load_challenge(challenge_id) {
   var messagesData = undefined;
 
   function renderUI() {
+    const currentUserId = firebase.auth().currentUser.uid;
     if (all_defined(challengeData, membersData, filesData, messagesData)) {
       redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData, "messages": messagesData}, challenge_id);
       render_icons();
@@ -177,8 +178,14 @@ function load_challenge(challenge_id) {
         mi.val("");
       });
       $("#join").click(function () {
-        membersNode.child(firebase.auth().currentUser.uid).set(true);
+        membersNode.child(currentUserId).set(true);
       })
+      if (currentUserId in membersData) {
+        $("#join").attr("disabled", true);
+      }
+      if (challengeData["status"] === "solved") {
+        $("#solve").attr("disabled", true);
+      }
     }
   }
 
