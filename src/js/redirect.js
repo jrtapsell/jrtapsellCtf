@@ -92,7 +92,8 @@ function load_challenges() {
   console.log("Challenges navigation started");
   showProgress();
 
-  var challengesNode = firebase.database().ref('/challenges');
+  const database = firebase.database();
+  var challengesNode = database.ref('/challenges');
   var listener = function (snapshot) {
     const val = snapshot.val();
     if (val) {

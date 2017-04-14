@@ -16,7 +16,7 @@ $(function() {
   const auth = firebase.auth();
   auth.onAuthStateChanged(function (user) {
     if (user) {
-      $("#login-status").text("Hello, " + user.displayName);
+      $("#login-status").html("Hello, " + user.displayName + ", <a href='/logout/'>Logout</a>");
       $(".mdl-layout__drawer-button").show();
       console.log(user);
       firebase.database().ref("/users/" + user.uid).set({
