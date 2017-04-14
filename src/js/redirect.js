@@ -10,7 +10,7 @@ function hideProgress() {
 
 function render_icons() {
   $(".user-icon").each(function(_, item) {
-    firebase.database().ref("/users").child(item.dataset["id"]).child("image").once(function (data) {
+    firebase.database().ref("/users").child(item.dataset["id"]).child("image").once("value", function (data) {
       $(item).css("background-image", "url(" + data.val() + ")");
     });
   })
