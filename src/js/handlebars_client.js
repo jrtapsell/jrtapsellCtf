@@ -17,3 +17,9 @@ Handlebars.registerHelper("reverseEach", function (context) {
   });
   return ret;
 });
+
+
+Handlebars.registerHelper("timeOf", function (time) {
+  var date = new Date(time);
+  return date.getDay() + "/"  + date.getMonth() + " " + date.getHours() + ":" + date.getMinutes();
+});
