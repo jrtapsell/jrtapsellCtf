@@ -1,0 +1,96 @@
+{
+  "rules": {
+    "users": {
+      ".read": "true",
+      "$id": {
+        ".validate": "newData.hasChildren(['image', 'name', 'uid', 'email', 'provider']) && newData.child('uid').val() == auth.uid",
+        "image": {
+          ".validate": "newData.isString()"
+        },
+        "name": {
+          ".validate": "newData.isString()"
+        },
+        "uid": {
+          ".validate": "newData.isString()"
+        },
+        "email": {
+          ".validate": "newData.isString()"
+        },
+        "provider": {
+          ".validate": "newData.isString()"
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".write": "$id == auth.uid"
+      }
+    },
+    "challenges": {
+      ".read": "auth != null && root.child('users').child(auth.uid).val() != null",
+      "$chall_id": {
+        ".validate": "newData.hasChildren(['description', 'name', 'status', 'type', 'uid'])",
+        "description": {
+          ".validate": "newData.isString()"
+        },
+        "name": {
+          ".validate": "newData.isString()"
+        },
+        "status": {
+          ".validate": "newData.isString()"
+        },
+        "type": {
+          ".validate": "newData.isString()"
+        },
+        "uid": {
+          ".validate": "newData.isString()"
+        },
+        "$other": {
+          ".validate": "false"
+        },
+        ".write": "auth != null && newData.parent().parent().child('users').child(auth.uid).val() != null"
+      }
+    },
+    "files": {
+      "$chall_id": {
+        "$file_id": {
+          ".validate": "newData.hasChildren(['name', 'url'])",
+          "name": {
+            ".validate": "newData.isString()"
+          },
+          "url": {
+            ".validate": "newData.isString()"
+          },
+          "$other": {
+            ".validate": "false"
+          },
+          ".write": "auth != null && newData.parent().parent().parent().child('users').child(auth.uid).val() != null"
+        }
+      }
+    },
+    "messages": {
+      "$chall_id": {
+        "$message_id": {
+          ".validate": "newData.hasChildren(['message', 'user'])",
+          "message": {
+            ".validate": "newData.isString()"
+          },
+          "user": {
+            ".validate": "newData.isString()"
+          },
+          "$other": {
+            ".validate": "false"
+          },
+          ".write": "auth != null && newData.parent().parent().parent().child('users').child(auth.uid).val() != null && auth.uid == newData.child('user').val()"
+        }
+      }
+    },
+    "memberships": {
+      "$chall_id": {
+        "$member_id": {
+          ".validate": "newData.isBoolean()",
+          ".write": "auth != null && newData.parent().parent().parent().child('users').child(auth.uid).val() != null && auth.uid == $member_id"
+        }
+      }
+    }
+  }
+}

@@ -20,7 +20,9 @@ $(function() {
       firebase.database().ref("/users/" + user.uid).set({
         image: user.photoURL,
         name: user.displayName,
-        uid: user.uid
+        uid: user.uid,
+        email: user.email,
+        provider: user.providerData[0].providerId
       });
       redirect_to_url();
     } else {

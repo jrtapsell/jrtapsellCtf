@@ -1,0 +1,29 @@
+{
+  "rules":{
+    "users":{
+      ".read":"auth != null",
+      "$uid":{
+        ".write":"$uid === auth.uid",
+        "image":{
+          ".validate":"newData.val().matches(/^https?:\\/\\/.*/)"
+        },
+        "name":{
+          ".validate":"newData.val().matches(/^[A-z ]*/)"
+        },
+        "uid":{
+          ".validate":"newData.val() === auth.uid"
+        }
+      }
+    },
+    "challenges":{
+      ".read": "auth != null",
+      "$challenge": {
+        "members": {
+          "$uid": {
+            ".write": "$uid === auth.uid"
+          }
+        }
+      }
+    }
+  }
+}

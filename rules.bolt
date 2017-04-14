@@ -1,0 +1,56 @@
+path /users {
+    read() {true}
+}
+path /users/{id} is User {
+    write() { id == auth.uid }
+}
+
+path /challenges {
+    read() { isUser() }
+}
+
+path /challenges/{chall_id} is Challenge {
+    write() { isUser() }
+}
+
+path /files/{chall_id}/{file_id} is File {
+    write() { isUser() }
+}
+
+path /messages/{chall_id}/{message_id} is Message {
+    write() { isThisUser(this.user) }
+}
+
+path /memberships/{chall_id}/{member_id} is Boolean {
+  write() { isThisUser(member_id) }
+}
+
+type User {
+    validate() { this.uid == auth.uid }
+    image: String,
+    name: String,
+    uid: String
+    email: String,
+    provider: String
+}
+
+type Challenge {
+   description: String,
+   name: String,
+   status: String,
+   type: String,
+   uid: String
+}
+
+type File {
+    name: String,
+    url: String
+}
+
+type Message {
+    message: String,
+    user: String
+}
+
+isUser() { auth != null && root.users[auth.uid] != null }
+isThisUser(user_uid) { isUser() && auth.uid == user_uid }
