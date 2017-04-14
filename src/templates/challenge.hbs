@@ -1,7 +1,7 @@
 {{setTitle name}}
 <h1 class="mdl-cell mdl-cell--12-col">{{challenge.name}}</h1>
 <pre class="mdl-cell mdl-cell--12-col">{{challenge.description}}</pre>
-<div class="mdl-grid mdl-cell mdl-cell--6-col">
+<div class="mdl-grid mdl-cell mdl-cell--6-col mdl-cell--top">
 <div class="mdl-cell back-{{challenge.status}} mdl-cell--12-col mdl-cell--top"><h2>Status:</h2>{{challenge.status}}</div>
 <div class="mdl-cell mdl-cell--12-col mdl-cell--top"><h2>Type:</h2>{{challenge.type}}</div>
 <div class="mdl-cell mdl-cell--12-col mdl-cell--top"><h2>Users:</h2>
@@ -10,7 +10,7 @@
     {{/each}}
 </div>
 <h2 class="mdl-cell mdl-cell--12-col  mdl-cell--top">Files</h2>
-<div class="files-container mdl-cell mdl-cell--12-col  mdl-cell--top">
+<div class="files-container mdl-cell mdl-cell--12-col  mdl-cell--top mdl-grid">
 {{#each files}}
 <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col">
     <div class="mdl-card__title plain-card-title">
