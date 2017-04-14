@@ -83,7 +83,7 @@ function load_challenges() {
     $(".challenge-row").click(function(event) {
       load_challenge(event.currentTarget.dataset["id"]);
     });
-    render_icons;
+    render_icons();
   };
   var after = challengesNode.on('value', listener);
 }
