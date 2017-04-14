@@ -95,7 +95,7 @@ function load_challenges() {
   const database = firebase.database();
 
   function renderUI() {
-    if (challengesData && usersData) {
+    if (all_defined(challengesData, usersData)) {
       var temp = {};
       $.each(challengesData, function(key, value) {
         temp[key] = value;
@@ -163,7 +163,7 @@ function load_challenge(challenge_id) {
   var messagesData = undefined;
 
   function renderUI() {
-    if (challengeData && membersData && filesData && messagesData) {
+    if (all_defined(challengeData, membersData, filesData, messagesData)) {
       redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData, "messages": messagesData}, challenge_id);
       render_icons();
       var mi = $("#messageInput");
