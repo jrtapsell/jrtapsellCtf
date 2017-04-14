@@ -131,6 +131,7 @@ function load_challenges() {
     usersNode.off("value", usersListener);
   };
   challengesNode.on('value', challengesListener);
+  usersNode.on('value', usersListener);
 }
 
 
