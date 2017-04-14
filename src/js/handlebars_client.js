@@ -12,10 +12,8 @@ Handlebars.registerHelper("userIcon", function (userId) {
 Handlebars.registerHelper("reverseEach", function (context) {
   var options = arguments[arguments.length - 1];
   var ret = '';
-  if (context && context.length > 0) {
-    $.each(context, function (_, value) {
-      ret += options.fn(value);
-    });
-  }
+  $.each(context, function (_, value) {
+    ret += options.fn(value);
+  });
   return ret;
 });
