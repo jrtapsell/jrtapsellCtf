@@ -176,6 +176,9 @@ function load_challenge(challenge_id) {
         messagesNode.push({"user": firebase.auth().currentUser.uid, "message": text, "created": firebase.database.ServerValue.TIMESTAMP});
         mi.val("");
       });
+      $("#join").click(function () {
+        membersNode.child(firebase.auth().currentUser.uid).set(true);
+      })
     }
   }
 
