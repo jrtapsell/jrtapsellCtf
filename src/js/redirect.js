@@ -93,12 +93,15 @@ function load_challenges() {
   showProgress();
 
   const database = firebase.database();
-  var challengesNode = database.ref('/challenges');
-  var listener = function (snapshot) {
-    const val = snapshot.val();
-    if (val) {
-      var data = Object.values(val);
-      redirect("challenges", {"challenges": data});
+
+  function renderUI() {
+    if (challengesData && usersData) {
+      var temp = {};
+      $.each(challengesData, function(key, value) {
+        temp[key] = value;
+        temp[key]["users"] = usersData[key];
+      });
+      redirect("challenges", {"challenges": temp});
       $(".challenge-row").click(function (event) {
         load_challenge(event.currentTarget.dataset["id"]);
       });
@@ -106,11 +109,28 @@ function load_challenges() {
     } else {
       $("#page-content").html("<h2>No challenges</h2>");
     }
+  }
+
+  var challengesData = undefined;
+  var usersData = undefined;
+
+  var challengesNode = database.ref('/challenges');
+  var challengesListener = function (snapshot) {
+    challengesData = snapshot.val();
+    renderUI();
   };
+
+  var usersNode = database.ref("/memberships");
+  var usersListener = function (snapshot) {
+    usersData = snapshot.val();
+    renderUI();
+  };
+
   previousUpdater = function () {
-    challengesNode.off("value", listener);
+    challengesNode.off("value", challengesListener);
+    usersNode.off("value", usersListener);
   };
-  challengesNode.on('value', listener);
+  challengesNode.on('value', challengesListener);
 }
 
 
