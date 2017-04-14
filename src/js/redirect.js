@@ -33,6 +33,7 @@ function redirect(page, contents, id) {
   hideProgress();
   var tail = !!id ? page + "/" + id : page;
   history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + tail + "/");
+  componentHandler.upgradeDom();
 }
 
 function load_login() {
@@ -165,7 +166,6 @@ function load_challenge(challenge_id) {
   function renderUI() {
     if (all_defined(challengeData, membersData, filesData, messagesData)) {
       redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData, "messages": messagesData}, challenge_id);
-      componentHandler.upgradeElement($(".mdl-textfield")[0]);
       render_icons();
       var mi = $("#messageInput");
       mi.keypress(function (event) {
