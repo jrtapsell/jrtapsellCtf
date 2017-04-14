@@ -27,7 +27,7 @@ function redirect(page, contents, id) {
   } else {
     console.log("No old register");
   }
-  console.log("Render started");
+  console.log("Render started", page, contents);
   $("#page-content").html(CTF.pages[page](contents));
   console.log("Render completed ");
   hideProgress();

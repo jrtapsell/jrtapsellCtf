@@ -65,7 +65,8 @@
           },
           ".write": "auth != null && newData.parent().parent().parent().child('users').child(auth.uid).val() != null"
         }
-      }
+      },
+      ".read": "auth != null && root.child('users').child(auth.uid).val() != null"
     },
     "messages": {
       "$chall_id": {
@@ -85,6 +86,7 @@
       }
     },
     "memberships": {
+      ".read": "auth != null && root.child('users').child(auth.uid).val() != null",
       "$chall_id": {
         "$member_id": {
           ".validate": "newData.isBoolean()",
