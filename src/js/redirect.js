@@ -39,11 +39,9 @@ function load_login() {
   console.log("Login navigation started");
   showProgress();
   redirect("login");
-  $(".mdl-layout__drawer-button").hide();
   var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       unsubscribe();
-      $(".mdl-layout__drawer-button").show();
       load_index();
     }
   });
