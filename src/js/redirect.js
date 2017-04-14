@@ -150,16 +150,58 @@ function load_logout() {
 function load_challenge(challenge_id) {
   console.log("Loading challenge");
   showProgress();
-  var challengeNode = firebase.database().ref('/challenges').child(challenge_id);
-  var listener = function (snapshot) {
-    var data = snapshot.val();
-    redirect("challenge", data, challenge_id);
-    previousUpdater =  function() {
-      challengeNode.off("value", listener);
-    };
-    render_icons();
+
+  const db = firebase.database();
+  var challengeNode = db.ref('/challenges').child(challenge_id);
+  var membersNode = db.ref('/memberships').child(challenge_id);
+  var filesNode = db.ref('/memberships').child(challenge_id);
+  var messagesNode = db.ref('/memberships').child(challenge_id);
+
+  var challengeData = undefined;
+  var membersData = undefined;
+  var filesData = undefined;
+  var messagesData = undefined;
+
+  function renderUI() {
+    if (challengeData && membersData && filesData) {
+      var temp = {};
+      redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData}, challenge_id);
+      render_icons();
+    }
+  }
+
+  var challengeListener = function (snapshot) {
+    challengeData = snapshot.val();
+    renderUI();
   };
-  var after = challengeNode.on('value', listener);
+
+  var membersListener = function (snapshot) {
+    membersData = snapshot.val();
+    renderUI();
+  };
+
+  var filesListener = function (snapshot) {
+    filesData = snapshot.val();
+    renderUI();
+  };
+
+
+  var messagesListener = function (snapshot) {
+    messagesData = snapshot.val();
+    renderUI();
+  };
+
+  challengeNode.on('value', challengeListener);
+  membersNode.on('value', challengeListener);
+  filesNode.on('value', challengeListener);
+  messagesNode.on('value', messagesListener);
+
+  previousUpdater = function () {
+    challengeNode.off('value', challengeListener);
+    membersNode.off('value', membersListener);
+    filesNode.off('value', filesListener);
+    messagesNode.off('value', messagesListener);
+  }
 }
 
 function redirect_to_url(pathname) {

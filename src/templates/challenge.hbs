@@ -1,11 +1,11 @@
 {{setTitle name}}
-<h1 class="mdl-cell mdl-cell--12-col">{{name}}</h1>
-<pre class="mdl-cell mdl-cell--12-col">{{description}}</pre>
+<h1 class="mdl-cell mdl-cell--12-col">{{challenge.name}}</h1>
+<pre class="mdl-cell mdl-cell--12-col">{{challenge.description}}</pre>
 <div class="mdl-grid mdl-cell mdl-cell--6-col">
-<div class="mdl-cell back-{{status}} mdl-cell--12-col"><h2>Status:</h2>{{status}}</div>
-<div class="mdl-cell mdl-cell--12-col"><h2>Type:</h2>{{type}}</div>
+<div class="mdl-cell back-{{challenge.status}} mdl-cell--12-col"><h2>Status:</h2>{{challenge.status}}</div>
+<div class="mdl-cell mdl-cell--12-col"><h2>Type:</h2>{{challenge.type}}</div>
 <div class="mdl-cell mdl-cell--12-col"><h2>Users:</h2>
-    {{#each members}}
+    {{#each users}}
         <span>{{userIcon @key}}</span>
     {{/each}}
 </div>
@@ -26,7 +26,7 @@
     <div class="mdl-card__title plain-card-title upload-card">
     </div>
     <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="upload?id={{uid}}">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="upload?id={{challenge.uid}}">
             Upload new file
         </a>
     </div>
