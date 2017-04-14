@@ -47,6 +47,13 @@ function load_login() {
       load_index();
     }
   });
+  $("#google-login").click(function () {
+    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  });
+
+  $("#github-login").click(function () {
+    firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
+  });
 }
 
 function close_draw() {
