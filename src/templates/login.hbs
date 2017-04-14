@@ -2,13 +2,3 @@
 <h1 class="mdl-cell--12-col">Please login</h1><br>
 <button class="mdl-cell--6-col mdl-cell mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="google-login">Google</button>
 <button class="mdl-cell--6-col mdl-cell mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="github-login">GitHub</button>
-<script src="/static/js/login.js">
-    $(".mdl-layout__drawer-button").hide();
-    var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            unsubscribe();
-            $(".mdl-layout__drawer-button").show();
-            load_index();
-        }
-    });
-</script>
