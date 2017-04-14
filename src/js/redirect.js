@@ -172,7 +172,7 @@ function load_challenge(challenge_id) {
           return;
         }
         var text = mi.val();
-        messagesNode.push({"user": firebase.auth().currentUser.uid, "message": text, "created": firebase.ServerValue.TIMESTAMP});
+        messagesNode.push({"user": firebase.auth().currentUser.uid, "message": text, "created": firebase.database.ServerValue.TIMESTAMP});
         mi.val("");
       });
     }
