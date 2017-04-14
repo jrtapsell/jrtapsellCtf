@@ -71,16 +71,21 @@ function load_users() {
   showProgress();
   var usersNode = firebase.database().ref('/users');
   var listener = function(snapshot) {
-    var users = Object.values(snapshot.val());
-    console.log("USERS", users);
-    redirect("users", {"users": users});
-    previousUpdater = function() {
-      usersNode.off("value", listener);
-    };
-    $(".card-title").each(function(_,item) {
-      var current = $(item);
-      current.css("background", "url(" + current.attr("data-background") + ") center / cover")
-    })
+    const value = snapshot.val();
+    if (value) {
+      var users = Object.values(value);
+      console.log("USERS", users);
+      redirect("users", {"users": users});
+      previousUpdater = function () {
+        usersNode.off("value", listener);
+      };
+      $(".card-title").each(function (_, item) {
+        var current = $(item);
+        current.css("background", "url(" + current.attr("data-background") + ") center / cover")
+      })
+    } else {
+      $("#page-content").html("<h2>No users</h2>");
+    }
   };
   var after = usersNode.on('value', listener);
 }
@@ -90,15 +95,20 @@ function load_challenges() {
   showProgress();
   var challengesNode = firebase.database().ref('/challenges');
   var listener = function (snapshot) {
-    var data = Object.values(snapshot.val());
-    redirect("challenges", {"challenges":data});
-    previousUpdater =  function() {
-      challengesNode.off("value", listener);
-    };
-    $(".challenge-row").click(function(event) {
-      load_challenge(event.currentTarget.dataset["id"]);
-    });
-    render_icons();
+    const val = snapshot.val();
+    if (val) {
+      var data = Object.values(val);
+      redirect("challenges", {"challenges": data});
+      previousUpdater = function () {
+        challengesNode.off("value", listener);
+      };
+      $(".challenge-row").click(function (event) {
+        load_challenge(event.currentTarget.dataset["id"]);
+      });
+      render_icons();
+    } else {
+      $("#page-content").html("<h2>No challenges</h2>");
+    }
   };
   var after = challengesNode.on('value', listener);
 }
