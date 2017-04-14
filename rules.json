@@ -70,6 +70,7 @@
     },
     "messages": {
       "$chall_id": {
+        ".read": "auth != null && root.child('users').child(auth.uid).val() != null",
         "$message_id": {
           ".validate": "newData.hasChildren(['message', 'user'])",
           "message": {

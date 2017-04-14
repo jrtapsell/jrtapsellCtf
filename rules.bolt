@@ -17,6 +17,9 @@ path /files/{chall_id}/{file_id} is File {
     write() { isUser() }
 }
 
+path /messages/{chall_id} {
+    read() { isUser() }
+}
 path /messages/{chall_id}/{message_id} is Message {
     write() { isThisUser(this.user) }
 }
