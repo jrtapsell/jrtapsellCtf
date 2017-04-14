@@ -91,15 +91,13 @@ function load_users() {
 function load_challenges() {
   console.log("Challenges navigation started");
   showProgress();
+
   var challengesNode = firebase.database().ref('/challenges');
   var listener = function (snapshot) {
     const val = snapshot.val();
     if (val) {
       var data = Object.values(val);
       redirect("challenges", {"challenges": data});
-      previousUpdater = function () {
-        challengesNode.off("value", listener);
-      };
       $(".challenge-row").click(function (event) {
         load_challenge(event.currentTarget.dataset["id"]);
       });
@@ -108,7 +106,10 @@ function load_challenges() {
       $("#page-content").html("<h2>No challenges</h2>");
     }
   };
-  var after = challengesNode.on('value', listener);
+  previousUpdater = function () {
+    challengesNode.off("value", listener);
+  };
+  challengesNode.on('value', listener);
 }
 
 
