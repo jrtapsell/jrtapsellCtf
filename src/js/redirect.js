@@ -165,7 +165,7 @@ function load_challenge(challenge_id) {
   function renderUI() {
     if (challengeData && membersData && filesData && messagesData) {
       var temp = {};
-      redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData}, challenge_id);
+      redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData, "messages": messagesData}, challenge_id);
       render_icons();
     }
   }
