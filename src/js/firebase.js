@@ -55,7 +55,7 @@ var fb;
         "set": function (data) {
           log("#00F", "Setting data on " + text);
           console.log("Data", data);
-          log("#0F", "DATA END");
+          log("#00F", "DATA END");
           return ret.set(data);
         }
       };
