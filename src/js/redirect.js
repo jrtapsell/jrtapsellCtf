@@ -186,7 +186,7 @@ function load_challenge(challenge_id) {
         solved.attr("disabled", true);
       }
       solved.click(function () {
-        challengeData.child("status").set("solved");
+        challengeNode.child("status").set("solved");
       })
     }
   }
