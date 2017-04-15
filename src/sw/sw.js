@@ -38,24 +38,24 @@ function getResponse(request) {
   if (shouldCache(url)) {
     return caches.open("CACHE").then(function (cache) {
       if (isPage(url)) {
-        log('#0FF', "Cached page request for: " + url, event);
+        log('#0FF', "Cached page request for: " + url, request);
         return cache.match('/');
       } else {
         if (cache.match(url)) {
-          log('#FF0', "Cached request for: " + url, event);
+          log('#FF0', "Cached request for: " + url, request);
           return cache.match(url);
         } else {
-          log('#00F', "Caching request for: " + url, event);
-          return fetch(event.request).then(function (response) {
-            cache.put(event.request, response.clone());
+          log('#00F', "Caching request for: " + url, request);
+          return fetch(request).then(function (response) {
+            cache.put(request, response.clone());
             return response;
           })
         }
       }
     })
   } else {
-    log('#F0F', "Uncacheable request for: " + url, event);
-    return fetch(event.request);
+    log('#F0F', "Uncacheable request for: " + url, request);
+    return fetch(request);
   }
 }
 
