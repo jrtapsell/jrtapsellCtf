@@ -47,9 +47,7 @@ var fb;
           return ret.once(type, callback);
         },
         "push": function (data) {
-          log("#FFF", "Pushing data on " + text);
-          console.log("Data", data);
-          log("#F00", "DATA END");
+          log("#FFF", "Pushing data on " + text, data);
           return ret.push(data);
         },
         "set": function (data) {
@@ -84,7 +82,6 @@ var fb;
       if (user) {
         $("#login-status").html("Hello, " + user.displayName + ", <a href='/logout/'>Logout</a>");
         $(".mdl-layout__drawer-button").show();
-        console.log(user);
         fb.path("users", user.uid).set({
           image: user.photoURL,
           name: user.displayName,
