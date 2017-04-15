@@ -6,7 +6,7 @@ console.colourLog = function (background, colour, text, data) {
 };
 
 function log(color, messageContents, data) {
-  console.colourLog("#336", color, messageContents, data);
+  console.colourLog("#0F0", color, messageContents, data);
 }
 
 this.addEventListener('fetch', function(event) {

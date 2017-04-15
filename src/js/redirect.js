@@ -2,7 +2,7 @@
 
 
 function redirect_log(color, messageContents, data) {
-  console.colourLog("#363", color, messageContents, data);
+  console.colourLog("#00F", color, messageContents, data);
 }
 
 var deregister = undefined;
