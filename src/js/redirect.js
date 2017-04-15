@@ -259,11 +259,13 @@ window.onpopstate = function (event) {
   redirect_to_url(event.currentTarget.location.pathname);
 };
 
-var unsubscribe = fb.authUpdate(function (user) {
-  unsubscribe();
-  if (user) {
-    redirect_to_url();
-  } else {
-    load_login();
-  }
+$(function () {
+  var unsubscribe = fb.authUpdate(function (user) {
+    unsubscribe();
+    if (user) {
+      redirect_to_url();
+    } else {
+      load_login();
+    }
+  });
 });
