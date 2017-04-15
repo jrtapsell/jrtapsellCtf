@@ -8,7 +8,7 @@ function all_defined() {
   return true;
 }
 
-console.colourLog = function (background, colour text, data) {
+console.colourLog = function (background, colour, text, data) {
   console.groupCollapsed("%c" + text, "color:" + colour + ";background:" + background);
   console.log("DATA", data);
   console.trace();
