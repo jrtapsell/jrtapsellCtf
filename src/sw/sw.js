@@ -30,7 +30,7 @@ this.addEventListener('install', function (event) {
 });
 
 function isPage(url) {
-  return url.startsWith("https://ctf.jrtapsell.co.uk") && url.indexOf("static") == -1;
+  return url.startsWith("https://ctf.jrtapsell.co.uk") && url.indexOf("static") == -1 && !url.endsWith("sw.js") && !url.endsWith("sw-installer.js");
 }
 
 function uncacheable(event) {
