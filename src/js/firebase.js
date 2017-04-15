@@ -3,8 +3,8 @@ var fb;
 
 (function (firebase) {
 
-  function log(color, messageContents) {
-    console.colourLog("#633", color, messageContents);
+  function log(color, messageContents, data) {
+    console.colourLog("#633", color, messageContents, data);
   }
 
   var config = {
@@ -53,9 +53,7 @@ var fb;
           return ret.push(data);
         },
         "set": function (data) {
-          log("#00F", "Setting data on " + text);
-          console.log("Data", data);
-          log("#00F", "DATA END");
+          log("#00F", "Setting data on " + text, data);
           return ret.set(data);
         }
       };

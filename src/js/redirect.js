@@ -1,5 +1,10 @@
 'use strict';
 
+
+function redirect_log(color, messageContents, data) {
+  console.colourLog("#363", color, messageContents, data);
+}
+
 var deregister = undefined;
 function showProgress() {
   if (deregister) {
@@ -37,16 +42,16 @@ function load_error(_, message) {
 }
 
 function redirect(page, contents, id) {
-  console.log("Render started", page, contents);
+  redirect_log("#F00","Render started", [page, contents]);
   $("#page-content").html(CTF.pages[page](contents));
-  console.log("Render completed ");
+  redirect_log("#F00","Render completed ");
   var tail = !!id ? page + "/" + id : page;
   history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + tail + "/");
   componentHandler.upgradeDom();
 }
 
 function load_login() {
-  console.log("Login navigation started");
+  redirect_log("#0F0","Login navigation started");
   showProgress();
   redirect("login");
   var unsubscribe = fb.authUpdate(function (user) {
@@ -65,21 +70,20 @@ function close_draw() {
 }
 
 function load_index() {
-  console.log("Index navigation started");
+  redirect_log("#0F0","Index navigation started");
   showProgress();
   redirect("index", null);
   hideProgress();
 }
 
 function load_users() {
-  console.log("Users navigation started");
+  redirect_log("#0F0","Users navigation started");
   showProgress();
   var usersNode = fb.path('users');
   var listener = function(snapshot) {
     const value = snapshot.val();
     if (value) {
       var users = Object.values(value);
-      console.log("USERS", users);
       redirect("users", {"users": users});
       $(".card-title").each(function (_, item) {
         var current = $(item);
@@ -103,7 +107,7 @@ function load_users() {
 }
 
 function load_user(user_id) {
-  console.log("User navigation started");
+  redirect_log("#0F0","User navigation started");
   showProgress();
   var usersNode = fb.path('users', user_id);
   var listener = function(snapshot) {
@@ -121,7 +125,7 @@ function load_user(user_id) {
 }
 
 function load_challenges() {
-  console.log("Challenges navigation started");
+  redirect_log("#0F0","Challenges navigation started");
   showProgress();
 
   function renderUI() {
@@ -166,7 +170,7 @@ function load_challenges() {
 
 
 function load_logout() {
-  console.log("Logout navigation started");
+  redirect_log("#0F0","Logout navigation started");
   showProgress();
   var temp = fb.authUpdate(function (user) {
     if (!user) {
@@ -179,7 +183,7 @@ function load_logout() {
 }
 
 function load_challenge(challenge_id) {
-  console.log("Loading challenge");
+  redirect_log("#0F0","Loading challenge");
   showProgress();
 
   var challengeNode = fb.path('challenges', challenge_id);
