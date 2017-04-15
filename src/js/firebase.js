@@ -4,7 +4,7 @@ var fb;
 (function (firebase) {
 
   function log(color, messageContents) {
-    console.colourLog("#C33", color, messageContents);
+    console.colourLog("#633", color, messageContents);
   }
 
   var config = {
