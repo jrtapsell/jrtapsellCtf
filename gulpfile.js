@@ -37,7 +37,7 @@ gulp.task('css', function(){
 
 gulp.task('sw', function(){
   return gulp.src('src/sw/*.js')
-    .pipe(gulp.dest(deploy + "sw"))
+    .pipe(gulp.dest("deploy"))
 });
 
 gulp.task('settings', function(){
