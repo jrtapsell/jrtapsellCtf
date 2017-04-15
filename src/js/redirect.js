@@ -9,11 +9,13 @@ function hideProgress() {
 }
 
 function render_icons() {
-  $(".user-icon").each(function(_, item) {
-    fb.path("users", item.dataset["id"], "image").once("value", function (data) {
-      $(item).css("background-image", "url(" + data.val() + ")");
+  fb.path("users").once("value", function (data) {
+    var users = data.val();
+    $(".user-icon").each(function(_, item) {
+      var id = item.dataset["id"];
+      $(item).css("background-image", "url(" + users[id]["image"] + ")");
     });
-  })
+  });
 }
 function load_error(_, message) {
   $("#page-content").html("<h1>" + message + "</h1>");
