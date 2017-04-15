@@ -228,6 +228,10 @@ function load_challenge(challenge_id) {
       $("#upload_close").click(function () {
         dialogue.close()
       });
+      $("#upload_upload").click(function () {
+        var file = $("#file-input")[0].files[0];
+        debugger;
+      })
     }
   }
 
