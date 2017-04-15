@@ -39,7 +39,7 @@ var fb;
     /** GitHub popup login. */
     "githubLogin": function() {firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())},
     /** Logout the current user. */
-    "logout": firebase.auth().signOut(),
+    "logout": firebase.auth().signOut,
     /** The current user. */
     "user": undefined
   };
