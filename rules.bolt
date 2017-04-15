@@ -46,6 +46,7 @@ type User {
 }
 
 type Challenge {
+   validate() { this.status === "unstarted" || this.status === "unsolved" || this.status === "solved" }
    description: String,
    name: String,
    status: String,

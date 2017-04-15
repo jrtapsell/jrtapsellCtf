@@ -28,7 +28,7 @@
     "challenges": {
       ".read": "auth != null && root.child('users').child(auth.uid).val() != null",
       "$chall_id": {
-        ".validate": "newData.hasChildren(['description', 'name', 'status', 'type', 'uid'])",
+        ".validate": "newData.hasChildren(['description', 'name', 'status', 'type', 'uid']) && (newData.child('status').val() == 'unstarted' || newData.child('status').val() == 'unsolved' || newData.child('status').val() == 'solved')",
         "description": {
           ".validate": "newData.isString()"
         },
