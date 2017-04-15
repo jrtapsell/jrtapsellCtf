@@ -23,6 +23,12 @@ function render_icons() {
       jq_item.css("background-image", "url(" + user_data["image"] + ")");
       jq_item.attr("title", user_data["name"])
     });
+    $(".username-auto").each(function (_, item) {
+      var id = item.dataset["id"];
+      const jq_item = $(item);
+      const user_data = users[id];
+      jq_item.text(user_data["name"]);
+    })
   });
 }
 function load_error(_, message) {
