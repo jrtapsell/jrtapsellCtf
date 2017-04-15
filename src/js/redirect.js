@@ -220,6 +220,9 @@ function load_challenge(challenge_id) {
       }
       solved.click(function () {
         challengeNode.child("status").set("solved");
+      });
+      $("#upload").click(function () {
+        $("#dialog")[0].showModal();
       })
     }
   }

@@ -31,7 +31,7 @@
     <div class="mdl-card__title plain-card-title upload-card">
     </div>
     <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="upload?id={{challenge.uid}}">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="upload">
             Upload new file
         </a>
     </div>
@@ -59,3 +59,17 @@
     {{/reverseEach}}
     </ul>
 </div>
+
+<dialog id="dialog" class="mdl-dialog">
+    <h3 class="mdl-dialog__title">MDL Dialog</h3>
+    <div class="mdl-dialog__content">
+        <p>
+            This is an example of the Material Design Lite dialog component.
+            Please use responsibly.
+        </p>
+    </div>
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button">Close</button>
+        <button type="button" class="mdl-button" disabled>Disabled action</button>
+    </div>
+</dialog>
