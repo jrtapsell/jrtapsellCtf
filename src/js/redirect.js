@@ -230,7 +230,9 @@ function load_challenge(challenge_id) {
       });
       $("#upload_upload").click(function () {
         var file = $("#file-input")[0].files[0];
-        debugger;
+        var challengeDataNode = firebase.storage().ref().child(challenge_id).child(file.name);
+        var task = challengeNode.push(file);
+        task.on('state_changed', console.log);
       })
     }
   }
