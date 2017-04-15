@@ -221,9 +221,13 @@ function load_challenge(challenge_id) {
       solved.click(function () {
         challengeNode.child("status").set("solved");
       });
+      var dialogue = $("#dialog")[0];
       $("#upload").click(function () {
-        $("#dialog")[0].showModal();
-      })
+        dialogue.showModal();
+      });
+      $("#upload_close").click(function () {
+        dialogue.close()
+      });
     }
   }
 
