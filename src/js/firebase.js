@@ -10,16 +10,40 @@ var config = {
 
 firebase.initializeApp(config);
 
-//firebase.database().ref("/users").child("GHHAcG4nLFVeO30J1GwYhRPqaek2").child("image").once("value",function(data){console.log(data.val())})
+
+var database = firebase.database();
+var auth = firebase.auth();
+
+var fb = {
+  "db": database,
+  "auth": auth,
+  "now": firebase.database.ServerValue.TIMESTAMP,
+  "path": function () {
+    var ret = database.ref("/");
+    for (var i = 0; i < arguments.length; i++) {
+      ret = ret.child(arguments[i])
+    }
+    return ret;
+  },
+  "authUpdate": auth.onAuthStateChanged,
+  "google": new firebase.auth.GoogleAuthProvider(),
+  "github": new firebase.auth.GithubAuthProvider(),
+  "popupLogin": auth.signInWithPopup,
+  "logout": auth.signOut(),
+  "user": 0
+};
+
+fb.authUpdate(function (user) {
+  fb.user = user;
+});
 
 $(function() {
-  const auth = firebase.auth();
-  auth.onAuthStateChanged(function (user) {
+  fb.authUpdate(function (user) {
     if (user) {
       $("#login-status").html("Hello, " + user.displayName + ", <a href='/logout/'>Logout</a>");
       $(".mdl-layout__drawer-button").show();
       console.log(user);
-      firebase.database().ref("/users/" + user.uid).set({
+      fb.path("users", user.uid).set({
         image: user.photoURL,
         name: user.displayName,
         uid: user.uid,
@@ -29,14 +53,6 @@ $(function() {
     } else {
       $("#login-status").text("I don't know you");
       $(".mdl-layout__drawer-button").hide();
-    }
-  });
-  var unsubscribe = auth.onAuthStateChanged(function (user) {
-    unsubscribe();
-    if (user) {
-      redirect_to_url();
-    } else {
-      load_login();
     }
   });
 });

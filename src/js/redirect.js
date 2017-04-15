@@ -10,13 +10,13 @@ function hideProgress() {
 
 function render_icons() {
   $(".user-icon").each(function(_, item) {
-    firebase.database().ref("/users").child(item.dataset["id"]).child("image").once("value", function (data) {
+    fb.path("users", item.dataset["id"], "image").once("value", function (data) {
       $(item).css("background-image", "url(" + data.val() + ")");
     });
   })
 }
-function load_failure(_, message) {
-  $("#page-content").html("<h1>Page not found</h1>");
+function load_error(_, message) {
+  $("#page-content").html("<h1>" + message + "</h1>");
 }
 
 function redirect(page, contents, id) {
@@ -40,18 +40,18 @@ function load_login() {
   console.log("Login navigation started");
   showProgress();
   redirect("login");
-  var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+  var unsubscribe = fb.authUpdate(function (user) {
     if (user) {
       unsubscribe();
       load_index();
     }
   });
   $("#google-login").click(function () {
-    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    fb.popupLogin(fb.google);
   });
 
   $("#github-login").click(function () {
-    firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
+    fb.popupLogin(fb.github);
   });
 }
 
@@ -68,7 +68,7 @@ function load_index() {
 function load_users() {
   console.log("Users navigation started");
   showProgress();
-  var usersNode = firebase.database().ref('/users');
+  var usersNode = fb.path('users');
   var listener = function(snapshot) {
     const value = snapshot.val();
     if (value) {
@@ -93,8 +93,6 @@ function load_challenges() {
   console.log("Challenges navigation started");
   showProgress();
 
-  const database = firebase.database();
-
   function renderUI() {
     if (all_defined(challengesData, usersData)) {
       var temp = {};
@@ -115,13 +113,13 @@ function load_challenges() {
   var challengesData = undefined;
   var usersData = undefined;
 
-  var challengesNode = database.ref('/challenges');
+  var challengesNode = fb.path('challenges');
   var challengesListener = function (snapshot) {
     challengesData = snapshot.val();
     renderUI();
   };
 
-  var usersNode = database.ref("/memberships");
+  var usersNode = fb.path("memberships");
   var usersListener = function (snapshot) {
     usersData = snapshot.val();
     renderUI();
@@ -139,24 +137,23 @@ function load_challenges() {
 function load_logout() {
   console.log("Logout navigation started");
   showProgress();
-  var temp = firebase.auth().onAuthStateChanged(function (user) {
+  var temp = fb.authUpdate(function (user) {
     if (!user) {
       temp();
       load_login();
     }
   });
-  firebase.auth().signOut();
+  fb.logout();
 }
 
 function load_challenge(challenge_id) {
   console.log("Loading challenge");
   showProgress();
 
-  const db = firebase.database();
-  var challengeNode = db.ref('/challenges').child(challenge_id);
-  var membersNode = db.ref('/memberships').child(challenge_id);
-  var filesNode = db.ref('/files').child(challenge_id);
-  var messagesNode = db.ref('/messages').child(challenge_id);
+  var challengeNode = fb.path('challenges', challenge_id);
+  var membersNode = fb.path('memberships', challenge_id);
+  var filesNode = fb.path('files', challenge_id);
+  var messagesNode = fb.path('messages', challenge_id);
 
   var challengeData = undefined;
   var membersData = undefined;
@@ -164,24 +161,24 @@ function load_challenge(challenge_id) {
   var messagesData = undefined;
 
   function renderUI() {
-    const currentUserId = firebase.auth().currentUser.uid;
+    const currentUserId = fb.user.uid;
     if (all_defined(challengeData, membersData, filesData, messagesData)) {
       redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData, "messages": messagesData}, challenge_id);
       render_icons();
       var mi = $("#messageInput");
       $("#send").click(function () {
         var text = mi.val();
-        messagesNode.push({"user": firebase.auth().currentUser.uid, "message": text, "created": firebase.database.ServerValue.TIMESTAMP});
+        messagesNode.push({"user": currentUserId, "message": text, "created": fb.now});
         mi.val("");
       });
-      const join = $("#join");
-      const solved = $("#solve");
+      var join = $("#join");
       join.click(function () {
         membersNode.child(currentUserId).set(true);
       });
       if (currentUserId in membersData) {
         join.attr("disabled", true);
       }
+      var solved = $("#solve");
       if (challengeData["status"] === "solved") {
         solved.attr("disabled", true);
       }
@@ -255,9 +252,18 @@ function redirect_to_url(pathname) {
         return;
     }
   }
-  load_failure(undefined, "404, Page not found");
+  load_error(undefined, "Page not found");
 }
 
 window.onpopstate = function (event) {
   redirect_to_url(event.currentTarget.location.pathname);
 };
+
+var unsubscribe = fb.authUpdate(function (user) {
+  unsubscribe();
+  if (user) {
+    redirect_to_url();
+  } else {
+    load_login();
+  }
+});
