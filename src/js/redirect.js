@@ -169,23 +169,25 @@ function load_challenge(challenge_id) {
       redirect("challenge", {"challenge": challengeData, "users": membersData, "files": filesData, "messages": messagesData}, challenge_id);
       render_icons();
       var mi = $("#messageInput");
-      mi.keypress(function (event) {
-        if (event.which != 13) {
-          return;
-        }
+      $("#send").click(function () {
         var text = mi.val();
         messagesNode.push({"user": firebase.auth().currentUser.uid, "message": text, "created": firebase.database.ServerValue.TIMESTAMP});
         mi.val("");
       });
-      $("#join").click(function () {
+      const join = $("#join");
+      const solved = $("#solve");
+      join.click(function () {
         membersNode.child(currentUserId).set(true);
-      })
+      });
       if (currentUserId in membersData) {
-        $("#join").attr("disabled", true);
+        join.attr("disabled", true);
       }
       if (challengeData["status"] === "solved") {
-        $("#solve").attr("disabled", true);
+        solved.attr("disabled", true);
       }
+      solved.click(function () {
+        challengeData.child("status").set("solved");
+      })
     }
   }
 
