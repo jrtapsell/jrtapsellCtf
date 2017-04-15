@@ -19,7 +19,7 @@ var fb;
     "now": firebase.database.ServerValue.TIMESTAMP,
     /* Gets a node with a path made of the arguments to this method. */
     "path": function () {
-      console.colourLog("#F00", "#000", "Request for " + arguments);
+      console.colourLog("#F00", "#000", "Request for " + "/" + arguments.join("/") + "/");
       var ret = firebase.database().ref("/");
       for (var i = 0; i < arguments.length; i++) {
         ret = ret.child(arguments[i])
