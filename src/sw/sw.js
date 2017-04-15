@@ -42,7 +42,7 @@ function shouldCache(url) {
 
 self.addEventListener('activate', function (event) {
   log("#0F0", "Service worker active", event);
-};
+}
 
 this.addEventListener('install', function (event) {
   log("#0F0", "Service worker installed", event);
