@@ -34,8 +34,33 @@ var fb;
         text += "/";
         ret = ret.child(name)
       }
-      fbLog("Request for " + text);
-      return ret;
+      fbLog("Created node " + text);
+      return {
+        "on": function (type, callback) {
+          fbLog("Requested callback on " + text);
+          ret.on(type, callback);
+        },
+        "off": function (type, callback) {
+          fbLog("Disconnecting callback on " + text);
+          ret.off(type, callback);
+        },
+        "once": function (type, callback) {
+          fbLog("Single use callback on " + text);
+          ret.once(type, callback);
+        },
+        "push": function (data) {
+          fbLog("Pushing data on " + text);
+          console.log("Data", data);
+          fbLog("DATA END");
+          ret.push(data);
+        },
+        "set": function (data) {
+          fbLog("Setting data on " + text);
+          console.log("Data", data);
+          fbLog("DATA END");
+          ret.set(data);
+        }
+      };
     },
     /** Calls the callback when the auth state changes. */
     "authUpdate": function (callback) {
