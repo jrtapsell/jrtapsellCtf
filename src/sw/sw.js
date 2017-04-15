@@ -40,12 +40,21 @@ function shouldCache(url) {
   return false;
 }
 
+self.addEventListener('activate', function (event) {
+  log("#0F0", "Service worker active", event);
+};
+
 this.addEventListener('install', function (event) {
+  log("#0F0", "Service worker installed", event);
   event.waitUntil(
-    caches.open('CACHE').then(function (cache) {
-      return cache.addAll([
-        '/'
-      ]);
+    caches.delete('CACHE').then(function (_) {
+      log("#0F0", "Deleted old cache");
+      return caches.open('CACHE').then(function (cache) {
+        log("#0F0", "Armed cache");
+        return cache.addAll([
+          '/'
+        ]);
+      })
     })
   );
 });
