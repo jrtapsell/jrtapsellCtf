@@ -16,7 +16,7 @@ function shouldCache(url) {
   if (url.endsWith(".js")) {
     return true;
   }
-  if (url.indexOF(".googleusercontent.com") != -1) {
+  if (url.indexOf(".googleusercontent.com") != -1) {
     return true;
   }
   if (url.indexOf(".githubusercontent.com") != -1) {
