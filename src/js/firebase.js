@@ -38,27 +38,27 @@ var fb;
       return {
         "on": function (type, callback) {
           fbLog("Requested callback on " + text);
-          ret.on(type, callback);
+          return ret.on(type, callback);
         },
         "off": function (type, callback) {
           fbLog("Disconnecting callback on " + text);
-          ret.off(type, callback);
+          return ret.off(type, callback);
         },
         "once": function (type, callback) {
           fbLog("Single use callback on " + text);
-          ret.once(type, callback);
+          return ret.once(type, callback);
         },
         "push": function (data) {
           fbLog("Pushing data on " + text);
           console.log("Data", data);
           fbLog("DATA END");
-          ret.push(data);
+          return ret.push(data);
         },
         "set": function (data) {
           fbLog("Setting data on " + text);
           console.log("Data", data);
           fbLog("DATA END");
-          ret.set(data);
+          return ret.set(data);
         }
       };
     },
