@@ -22,6 +22,9 @@ function shouldCache(url) {
   if (url.endsWith(".woff2")) {
     return true;
   }
+  if (url.indexOf("cdn.rawgit.com") != -1) {
+    return true;
+  }
   if (url.indexOf("fonts.gstatic.com") != -1) {
     return true;
   }
