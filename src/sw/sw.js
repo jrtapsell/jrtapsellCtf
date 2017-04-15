@@ -10,6 +10,9 @@ function log(color, messageContents, data) {
 }
 
 function shouldCache(url) {
+  if (url.startsWith("https://ctf.jrtapsell.co.uk/")) {
+    return true;
+  }
   if (url.endsWith(".js")) {
     return true;
   }
