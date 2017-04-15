@@ -46,13 +46,8 @@ function load_login() {
       load_index();
     }
   });
-  $("#google-login").click(function () {
-    fb.popupLogin(fb.google);
-  });
-
-  $("#github-login").click(function () {
-    fb.popupLogin(fb.github);
-  });
+  $("#google-login").click(fb.googleLogin());
+  $("#github-login").click(fb.githubLogin());
 }
 
 function close_draw() {

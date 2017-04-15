@@ -30,12 +30,10 @@ var fb;
     "authUpdate": function (callback) {
       return firebase.auth().onAuthStateChanged(callback);
     },
-    /** Google auth provider. */
-    "google": new firebase.auth.GoogleAuthProvider(),
-    /** GitHub auth provider. */
-    "github": new firebase.auth.GithubAuthProvider(),
-    /** Login with a given provider. */
-    "popupLogin": firebase.auth().signInWithPopup,
+    /** Google popup login. */
+    "googleLogin": function() {firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())},
+    /** GitHub popup login. */
+    "githubLogin": function() {firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())},
     /** Logout the current user. */
     "logout": firebase.auth().signOut(),
     /** The current user. */
