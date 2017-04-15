@@ -1,10 +1,15 @@
 'use strict';
-var previousUpdater = undefined;
 
+var deregister = undefined;
 function showProgress() {
+  if (deregister) {
+    deregister();
+    deregister = null;
+  }
   $("#statusBar").show();
 }
-function hideProgress() {
+function hideProgress(on_move) {
+  deregister = on_move;
   $("#statusBar").hide();
 }
 
@@ -26,13 +31,6 @@ function load_error(_, message) {
 }
 
 function redirect(page, contents, id) {
-  if (previousUpdater) {
-    console.log("Removing old register");
-    previousUpdater();
-    previousUpdater = undefined;
-  } else {
-    console.log("No old register");
-  }
   console.log("Render started", page, contents);
   $("#page-content").html(CTF.pages[page](contents));
   console.log("Render completed ");
@@ -77,9 +75,6 @@ function load_users() {
       var users = Object.values(value);
       console.log("USERS", users);
       redirect("users", {"users": users});
-      previousUpdater = function () {
-        usersNode.off("value", listener);
-      };
       $(".card-title").each(function (_, item) {
         var current = $(item);
         current.css("background", "url(" + current.attr("data-background") + ") center / cover")
@@ -89,7 +84,9 @@ function load_users() {
     }
   };
   var after = usersNode.on('value', listener);
-  hideProgress();
+  hideProgress(function () {
+    usersNode.off("value", listener);
+  });
 }
 
 function load_challenges() {
@@ -128,13 +125,12 @@ function load_challenges() {
     renderUI();
   };
 
-  previousUpdater = function () {
-    challengesNode.off("value", challengesListener);
-    usersNode.off("value", usersListener);
-  };
   challengesNode.on('value', challengesListener);
   usersNode.on('value', usersListener);
-  hideProgress();
+  hideProgress(function () {
+    challengesNode.off("value", challengesListener);
+    usersNode.off("value", usersListener);
+  });
 }
 
 
@@ -219,14 +215,12 @@ function load_challenge(challenge_id) {
   filesNode.on('value', filesListener);
   messagesNode.on('value', messagesListener);
 
-  previousUpdater = function () {
+  hideProgress(function () {
     challengeNode.off('value', challengeListener);
     membersNode.off('value', membersListener);
     filesNode.off('value', filesListener);
     messagesNode.off('value', messagesListener);
-  };
-
-  hideProgress();
+  });
 }
 
 function redirect_to_url(pathname) {
