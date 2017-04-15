@@ -232,7 +232,13 @@ function load_challenge(challenge_id) {
         var file = $("#file-input")[0].files[0];
         var challengeDataNode = firebase.storage().ref().child(challenge_id).child(file.name);
         var task = challengeDataNode.put(file);
-        task.on('state_changed', console.log);
+        task.on('state_changed', function(snapshot) {
+          console.log(snapshot);
+        }, function (error) {
+          console.log(error);
+        }, function () {
+          console.log("Done", task.snapshot.downloadURL);
+        });
       })
     }
   }
