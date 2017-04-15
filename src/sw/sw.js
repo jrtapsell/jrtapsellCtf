@@ -58,11 +58,13 @@ function cacheable(event) {
     if (isPage(event.request.url)) {
       return page(event, cache);
     } else {
-      if (cache.match(event.request.url)) {
-        return cached(event, cache );
-      } else {
-        return uncached(event, cache );
-      }
+      return cache.match(event.request.url).then(function (response) {
+        if (response) {
+          return cached(event, cache );
+        } else {
+          return uncached(event, cache );
+        }
+      });
     }
   })
 }
