@@ -9,5 +9,5 @@ function all_defined() {
 }
 
 console.colourLog = function (colour, background, text) {
-  console.trace("%c" + text, "color:" + colour + ";background:" + background);
+  console.error("%c" + text, "color:" + colour + ";background:" + background);
 };
