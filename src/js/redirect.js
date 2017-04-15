@@ -231,7 +231,7 @@ function load_challenge(challenge_id) {
       $("#upload_upload").click(function () {
         var file = $("#file-input")[0].files[0];
         var challengeDataNode = firebase.storage().ref().child(challenge_id).child(file.name);
-        var task = challengeDataNode.push(file);
+        var task = challengeDataNode.put(file);
         task.on('state_changed', console.log);
       })
     }
