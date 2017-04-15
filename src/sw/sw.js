@@ -35,49 +35,42 @@ function isPage(url) {
 
 function uncacheable(event) {
   log('#F0F', "Uncacheable request for: " + event.request.url, event);
-  event.respondWith(fetch(event.request));
+  return fetch(event.request);
 }
 function page(event, cache) {
   log('#0FF', "Cached page request for: " + event.request.url, event);
-  event.respondWith(cache.match('/'));
+  return cache.match('/');
 }
 function cached(event, cache) {
   log('#FF0', "Cached request for: " + event.request.url, event);
-  event.respondWith(cache.match(event.request.url));
+  return cache.match(event.request.url);
 }
 
 function uncached(event, cache ) {
   log('#00F', "Caching request for: " + event.request.url, event);
   return fetch(event.request).then(function (response) {
     cache.put(event.request, response.clone());
-    event.respondWith(response);
+    return response;
   })
 }
 function cacheable(event) {
-  caches.open("CACHE").then(function (cache) {
+  return caches.open("CACHE").then(function (cache) {
     if (isPage(event.request.url)) {
-      page(event, cache);
+      return page(event, cache);
     } else {
       if (cache.match(event.request.url)) {
-        cached(event, cache );
+        return cached(event, cache );
       } else {
-        uncached(event, cache );
+        return uncached(event, cache );
       }
     }
   })
 }
-function generalRespond(event) {
-  if (shouldCache(event.request.url)) {
-    cacheable(event);
-  } else {
-    uncacheable(event);
-  }
-}
 
 this.addEventListener('fetch', function (event) {
   if (shouldCache(event.request.url)) {
-    cacheable(event);
+    event.respondWith(cacheable(event));
   } else {
-    uncacheable(event);
+    event.respondWith(uncacheable(event));
   }
 });
