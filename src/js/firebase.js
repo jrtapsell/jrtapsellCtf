@@ -2,6 +2,11 @@
 var fb;
 
 (function (firebase) {
+
+  function fbLog(messageContents) {
+    console.colourLog("#F00", "#000", messageContents);
+  }
+
   var config = {
     apiKey: "AIzaSyD-b_XD6-Eoe-hQnSsIyHt_s2P2bexLu_E",
     authDomain: "jrtapsell-ctf.firebaseapp.com",
@@ -11,7 +16,9 @@ var fb;
     messagingSenderId: "706159874560"
   };
 
+  fbLog("Initialising firebase");
   firebase.initializeApp(config);
+  fbLog("Initialised firebase");
 
 
   fb = {
@@ -27,7 +34,7 @@ var fb;
         text += "/";
         ret = ret.child(name)
       }
-      console.colourLog("#F00", "#000", "Request for " + text);
+      fbLog("Request for " + text);
       return ret;
     },
     /** Calls the callback when the auth state changes. */
@@ -39,7 +46,10 @@ var fb;
     /** GitHub popup login. */
     "githubLogin": function() {firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())},
     /** Logout the current user. */
-    "logout": firebase.auth().signOut,
+    "logout": function() {
+      fbLog("Logging out");
+      firebase.auth().signOut()
+    },
     /** The current user. */
     "user": undefined
   };
