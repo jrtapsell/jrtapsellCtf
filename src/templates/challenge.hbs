@@ -64,8 +64,11 @@
     <h3 class="mdl-dialog__title">MDL Dialog</h3>
     <div class="mdl-dialog__content">
         <p>
-            <input id="file-name""/>
-            <input id="file-input"/>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="file-name">
+                <label class="mdl-textfield__label" for="sample1">File name</label>
+            </div>
+            <input id="file-input" type="file"/>
         </p>
     </div>
     <div class="mdl-dialog__actions">

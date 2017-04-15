@@ -229,15 +229,16 @@ function load_challenge(challenge_id) {
         dialogue.close()
       });
       $("#upload_upload").click(function () {
+        var node = filesNode.push();
         var file = $("#file-input")[0].files[0];
-        var challengeDataNode = firebase.storage().ref().child(challenge_id).child(file.name);
+        var challengeDataNode = firebase.storage().ref().child(challenge_id).child(node.key);
         var task = challengeDataNode.put(file);
         task.on('state_changed', function(snapshot) {
           console.log(snapshot);
         }, function (error) {
           console.log(error);
         }, function () {
-          console.log("Done", task.snapshot.downloadURL);
+          node.set({"name": $("#file-name").val(), "url": task.snapshot.downloadURL});
         });
       })
     }
