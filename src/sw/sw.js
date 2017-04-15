@@ -19,6 +19,12 @@ function shouldCache(url) {
   if (url.endsWith(".css")) {
     return true;
   }
+  if (url.endsWith(".woff2")) {
+    return true;
+  }
+  if (url.indexOf("fonts.gstatic.com") != -1) {
+    return true;
+  }
   if (url.indexOf(".googleusercontent.com") != -1) {
     return true;
   }
