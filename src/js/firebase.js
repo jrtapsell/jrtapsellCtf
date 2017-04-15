@@ -19,11 +19,15 @@ var fb;
     "now": firebase.database.ServerValue.TIMESTAMP,
     /* Gets a node with a path made of the arguments to this method. */
     "path": function () {
-      console.colourLog("#F00", "#000", "Request for " + "/" + arguments.join("/") + "/");
       var ret = firebase.database().ref("/");
+      var text = "/";
       for (var i = 0; i < arguments.length; i++) {
-        ret = ret.child(arguments[i])
+        var name = arguments[i];
+        text += name;
+        text += "/";
+        ret = ret.child(name)
       }
+      console.colourLog("#F00", "#000", "Request for " + text);
       return ret;
     },
     /** Calls the callback when the auth state changes. */
