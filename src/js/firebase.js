@@ -28,7 +28,7 @@ var fb;
     },
     /** Calls the callback when the auth state changes. */
     "authUpdate": function (callback) {
-      firebase.auth().onAuthStateChanged(callback);
+      return firebase.auth().onAuthStateChanged(callback);
     },
     /** Google auth provider. */
     "google": new firebase.auth.GoogleAuthProvider(),
