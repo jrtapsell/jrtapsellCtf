@@ -8,6 +8,9 @@ function all_defined() {
   return true;
 }
 
-console.colourLog = function (colour, background, text) {
-  console.error("%c" + text, "color:" + colour + ";background:" + background);
+console.colourLog = function (colour, background, text, data) {
+  console.groupCollapsed("%c" + text, "color:" + colour + ";background:" + background);
+  console.log("DATA", data);
+  console.trace();
+  console.groupEnd();
 };
