@@ -225,6 +225,7 @@ function load_challenge(challenge_id) {
     filesNode.off('value', filesListener);
     messagesNode.off('value', messagesListener);
   }
+  
   hideProgress();
 }
 

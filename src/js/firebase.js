@@ -3,8 +3,8 @@ var fb;
 
 (function (firebase) {
 
-  function fbLog(messageContents) {
-    console.colourLog("#F00", "#000", messageContents);
+  function log(color, messageContents) {
+    console.colourLog("#000", color, messageContents);
   }
 
   var config = {
@@ -16,11 +16,9 @@ var fb;
     messagingSenderId: "706159874560"
   };
 
-  fbLog("Initialising firebase");
+  log("#F00", "Initialising firebase");
   firebase.initializeApp(config);
-  fbLog("Initialised firebase");
-
-
+  log("#F00", "Initialised firebase");
   fb = {
     /* The current time. */
     "now": firebase.database.ServerValue.TIMESTAMP,
@@ -34,30 +32,30 @@ var fb;
         text += "/";
         ret = ret.child(name)
       }
-      fbLog("Created node " + text);
+      log("#0F0", "Created node " + text);
       return {
         "on": function (type, callback) {
-          fbLog("Requested callback on " + text);
+          log("#FF0", "Requested callback on " + text);
           return ret.on(type, callback);
         },
         "off": function (type, callback) {
-          fbLog("Disconnecting callback on " + text);
+          log("#0FF", "Disconnecting callback on " + text);
           return ret.off(type, callback);
         },
         "once": function (type, callback) {
-          fbLog("Single use callback on " + text);
+          log("#F0F", "Single use callback on " + text);
           return ret.once(type, callback);
         },
         "push": function (data) {
-          fbLog("Pushing data on " + text);
+          log("#FFF", "Pushing data on " + text);
           console.log("Data", data);
-          fbLog("DATA END");
+          log("#F00", "DATA END");
           return ret.push(data);
         },
         "set": function (data) {
-          fbLog("Setting data on " + text);
+          log("#00F", "Setting data on " + text);
           console.log("Data", data);
-          fbLog("DATA END");
+          log("#0F", "DATA END");
           return ret.set(data);
         }
       };
@@ -72,7 +70,7 @@ var fb;
     "githubLogin": function() {firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())},
     /** Logout the current user. */
     "logout": function() {
-      fbLog("Logging out");
+      log("#F00", "Logging out");
       firebase.auth().signOut()
     },
     /** The current user. */
