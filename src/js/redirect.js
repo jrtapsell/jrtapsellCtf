@@ -89,6 +89,33 @@ function load_users() {
       $("#page-content").html("<h2>No users</h2>");
     }
   };
+  $(".user-card").each(function(_, item) {
+    var id = item.dataset["id"];
+    const jq_item = $(item);
+    jq_item.click(function () {
+      load_user(id);
+    })
+  });
+  var after = usersNode.on('value', listener);
+  hideProgress(function () {
+    usersNode.off("value", listener);
+  });
+}
+
+function load_user(user_id) {
+  console.log("User navigation started");
+  showProgress();
+  var usersNode = fb.path('users', user_id);
+  var listener = function(snapshot) {
+    const value = snapshot.val();
+    if (value) {
+      var users = Object.values(value);
+      console.log("USERS", users);
+      redirect("user", {"user": users});
+    } else {
+      $("#page-content").html("<h2>No such user</h2>");
+    }
+  };
   var after = usersNode.on('value', listener);
   hideProgress(function () {
     usersNode.off("value", listener);
@@ -256,6 +283,9 @@ function redirect_to_url(pathname) {
     switch (pageName) {
       case "challenge":
         load_challenge(id);
+        return;
+      case "user":
+        load_user(id);
         return;
     }
   }
