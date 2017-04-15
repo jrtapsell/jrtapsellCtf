@@ -1,4 +1,5 @@
 'use strict';
+(function (firebase) {
 var config = {
   apiKey: "AIzaSyD-b_XD6-Eoe-hQnSsIyHt_s2P2bexLu_E",
   authDomain: "jrtapsell-ctf.firebaseapp.com",
@@ -58,3 +59,5 @@ $(function() {
     }
   });
 });
+})(firebase);
+firebase = undefined;
