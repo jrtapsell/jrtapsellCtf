@@ -10,7 +10,7 @@ function log(color, messageContents, data) {
 }
 
 this.addEventListener('fetch', function(event) {
-  log('#0F0', "SERVICE WORKER:", event);
+  log('#0F0', "Request for: " + event.request.url, event);
   event.respondWith(
     fetch(event.request)
   );
