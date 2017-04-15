@@ -1,5 +1,5 @@
 console.colourLog = function (background, colour, text, data) {
-  console.groupCollapsed("%c" + text, "color:" + colour + ";background:" + background);
+  console.groupCollapsed("%c %c " + text, "background:" + background + ";color:" + colour);
   console.log("DATA", data);
   console.trace();
   console.groupEnd();
@@ -14,4 +14,11 @@ this.addEventListener('fetch', function(event) {
   event.respondWith(
     fetch(event.request)
   );
+});
+
+self.addEventListener('install', function(event) {
+  event.waitUntil(self.skipWaiting());
+});
+self.addEventListener('activate', function(event) {
+  event.waitUntil(self.clients.claim());
 });
