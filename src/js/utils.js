@@ -7,3 +7,7 @@ function all_defined() {
   }
   return true;
 }
+
+console.colourLog = function (colour, background, text) {
+  console.log("%c" + text, "color:" + colour + ";background:" + background);
+};

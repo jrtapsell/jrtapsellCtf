@@ -17,6 +17,7 @@ var fb;
   fb = {
     "now": firebase.database.ServerValue.TIMESTAMP,
     "path": function () {
+      console.colourLog("#F00", "#000", "Request for " + arguments);
       var ret = firebase.database().ref("/");
       for (var i = 0; i < arguments.length; i++) {
         ret = ret.child(arguments[i])
