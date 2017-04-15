@@ -22,6 +22,7 @@ function render_icons() {
 }
 function load_error(_, message) {
   $("#page-content").html("<h1>" + message + "</h1>");
+  hideProgress();
 }
 
 function redirect(page, contents, id) {
@@ -35,7 +36,6 @@ function redirect(page, contents, id) {
   console.log("Render started", page, contents);
   $("#page-content").html(CTF.pages[page](contents));
   console.log("Render completed ");
-  hideProgress();
   var tail = !!id ? page + "/" + id : page;
   history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + tail + "/");
   componentHandler.upgradeDom();
@@ -53,6 +53,7 @@ function load_login() {
   });
   $("#google-login").click(fb.googleLogin);
   $("#github-login").click(fb.githubLogin);
+  hideProgress();
 }
 
 function close_draw() {
@@ -63,6 +64,7 @@ function load_index() {
   console.log("Index navigation started");
   showProgress();
   redirect("index", null);
+  hideProgress();
 }
 
 function load_users() {
@@ -87,6 +89,7 @@ function load_users() {
     }
   };
   var after = usersNode.on('value', listener);
+  hideProgress();
 }
 
 function load_challenges() {
@@ -131,6 +134,7 @@ function load_challenges() {
   };
   challengesNode.on('value', challengesListener);
   usersNode.on('value', usersListener);
+  hideProgress();
 }
 
 
@@ -144,6 +148,7 @@ function load_logout() {
     }
   });
   fb.logout();
+  hideProgress();
 }
 
 function load_challenge(challenge_id) {
@@ -220,6 +225,7 @@ function load_challenge(challenge_id) {
     filesNode.off('value', filesListener);
     messagesNode.off('value', messagesListener);
   }
+  hideProgress();
 }
 
 function redirect_to_url(pathname) {
