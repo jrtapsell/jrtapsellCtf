@@ -33,7 +33,7 @@ function isPage(url) {
 this.addEventListener('fetch', function (event) {
   var url = event.request.url;
   if (shouldCache(url)) {
-    caches.open("CACHE", function (cache) {
+    caches.open("CACHE").then(function (cache) {
       if (isPage(url)) {
         log('#0FF', "Cached page request for: " + url, event);
         return event.respondWith(cache.match('/'));
