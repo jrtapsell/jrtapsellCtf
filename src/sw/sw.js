@@ -34,8 +34,8 @@ function isPage(url) {
 }
 
 function uncacheable(event) {
-  log('#F0F', "Uncacheable request for: " + request.url, request);
-  event.respondWith(fetch(request));
+  log('#F0F', "Uncacheable request for: " + event.request.url, event);
+  event.respondWith(fetch(event.request));
 }
 function page(event, cache) {
   log('#0FF', "Cached page request for: " + event.request.url, event);
@@ -58,7 +58,7 @@ function cacheable(event) {
     if (isPage(event.request.url)) {
       page(event, cache);
     } else {
-      if (cache.match(request.url)) {
+      if (cache.match(event.request.url)) {
         cached(event, cache );
       } else {
         uncached(event, cache );
