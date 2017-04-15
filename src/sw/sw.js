@@ -10,7 +10,10 @@ function log(color, messageContents, data) {
 }
 
 function shouldCache(url) {
-
+  if (url.endsWith(".js")) {
+    return true;
+  }
+  return false;
 }
 
 this.addEventListener('install', function (event) {
