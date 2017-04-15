@@ -45,15 +45,20 @@
         <label class="mdl-textfield__label" for="sample1">Message</label>
     </div>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-cell mdl-cell--2-col" id="send">Send</button>
+    <ul class="demo-list-three mdl-list">
     {{#reverseEach messages}}
-        <div class="mdl-cell mdl-cell--12-col mdl-cell--top mdl-grid message-back">
-            <div class="mdl-cell mdl-cell--3-col">
-                {{userIcon user}}<br>
-                {{timeOf created}}
-            </div>
-            <div class="mdl-cell mdl-cell--9-col">
-                {{message}}
-            </div>
-        </div>
+        <li class="mdl-list__item mdl-list__item--three-line">
+    <span class="mdl-list__item-primary-content">
+      <div class="mdl-list__item-avatar user-icon" data-id="{{user}}"></div>
+      <span>{{timeOf created}}</span>
+      <span class="mdl-list__item-text-body">
+          {{message}}
+      </span>
+    </span>
+    <span class="mdl-list__item-secondary-content">
+      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+    </span>
+        </li>
     {{/reverseEach}}
+    </ul>
 </div>
