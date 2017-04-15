@@ -25,7 +25,9 @@ var fb = {
     }
     return ret;
   },
-  "authUpdate": auth.onAuthStateChanged,
+  "authUpdate": function() {
+    firebase.auth().onAuthStateChanged(arguments);
+  },
   "google": new firebase.auth.GoogleAuthProvider(),
   "github": new firebase.auth.GithubAuthProvider(),
   "popupLogin": auth.signInWithPopup,
