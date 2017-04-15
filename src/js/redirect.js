@@ -13,7 +13,10 @@ function render_icons() {
     var users = data.val();
     $(".user-icon").each(function(_, item) {
       var id = item.dataset["id"];
-      $(item).css("background-image", "url(" + users[id]["image"] + ")");
+      const jq_item = $(item);
+      const user_data = users[id];
+      jq_item.css("background-image", "url(" + user_data["image"] + ")");
+      jq_item.attr("title", user_data["name"])
     });
   });
 }
