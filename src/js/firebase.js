@@ -15,8 +15,6 @@ var fb;
 
 
   fb = {
-    "db": firebase.database(),
-    "auth": firebase.auth(),
     "now": firebase.database.ServerValue.TIMESTAMP,
     "path": function () {
       var ret = firebase.database().ref("/");
@@ -25,8 +23,8 @@ var fb;
       }
       return ret;
     },
-    "authUpdate": function () {
-      firebase.auth().onAuthStateChanged(arguments);
+    "authUpdate": function (callback) {
+      firebase.auth().onAuthStateChanged(callback);
     },
     "google": new firebase.auth.GoogleAuthProvider(),
     "github": new firebase.auth.GithubAuthProvider(),
