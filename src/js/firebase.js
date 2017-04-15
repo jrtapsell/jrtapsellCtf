@@ -15,7 +15,9 @@ var fb;
 
 
   fb = {
+    /* The current time. */
     "now": firebase.database.ServerValue.TIMESTAMP,
+    /* Gets a node with a path made of the arguments to this method. */
     "path": function () {
       console.colourLog("#F00", "#000", "Request for " + arguments);
       var ret = firebase.database().ref("/");
@@ -24,13 +26,19 @@ var fb;
       }
       return ret;
     },
+    /** Calls the callback when the auth state changes. */
     "authUpdate": function (callback) {
       firebase.auth().onAuthStateChanged(callback);
     },
+    /** Google auth provider. */
     "google": new firebase.auth.GoogleAuthProvider(),
+    /** GitHub auth provider. */
     "github": new firebase.auth.GithubAuthProvider(),
+    /** Login with a given provider. */
     "popupLogin": firebase.auth().signInWithPopup,
+    /** Logout the current user. */
     "logout": firebase.auth().signOut(),
+    /** The current user. */
     "user": undefined
   };
 
