@@ -42,4 +42,5 @@
 .message-back {
     background: rgba(0,0,0,0.2);
     border-radius: 1em;
+    box-shadow: 0.2em 0.2em 0.2em rgba(0,0,0,0.1);
 }
