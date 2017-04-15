@@ -33,46 +33,51 @@ function isPage(url) {
   return url.startsWith("https://ctf.jrtapsell.co.uk") && url.indexOf("static") == -1;
 }
 
-function uncacheable(request, respond) {
+function uncacheable(event) {
   log('#F0F', "Uncacheable request for: " + request.url, request);
-  respond(fetch(request));
+  event.respondWith(fetch(request));
 }
-function page(request, respond, cache) {
-  log('#0FF', "Cached page request for: " + request.url, request);
-  respond(cache.match('/'));
+function page(event, cache) {
+  log('#0FF', "Cached page request for: " + event.request.url, event);
+  event.respondWith(cache.match('/'));
 }
-function cached(request, respond, cache) {
-  log('#FF0', "Cached request for: " + request.url, request);
-  respond(cache.match(request.url));
+function cached(event, cache) {
+  log('#FF0', "Cached request for: " + event.request.url, event);
+  event.respondWith(cache.match(event.request.url));
 }
-function uncached(request, respond, cache ) {
-  log('#00F', "Caching request for: " + request.url, request);
-  return fetch(request).then(function (response) {
-    cache.put(request, response.clone());
-    respond(response);
+
+function uncached(event, cache ) {
+  log('#00F', "Caching request for: " + event.request.url, event);
+  return fetch(event.request).then(function (response) {
+    cache.put(event.request, response.clone());
+    event.respondWith(response);
   })
 }
-function cacheable(request, respond) {
+function cacheable(event) {
   caches.open("CACHE").then(function (cache) {
-    if (isPage(request.url)) {
-      respond(page(request, respond, cache));
+    if (isPage(event.request.url)) {
+      page(event, cache);
     } else {
       if (cache.match(request.url)) {
-        cached(request, respond, cache );
+        cached(event, cache );
       } else {
-        uncached(request, respond, cache );
+        uncached(event, cache );
       }
     }
   })
 }
-function generalRespond(request, respond) {
-  if (shouldCache(request.url)) {
-    cacheable(request, respond);
+function generalRespond(event) {
+  if (shouldCache(event.request.url)) {
+    cacheable(event);
   } else {
-    uncacheable(request, respond);
+    uncacheable(event);
   }
 }
 
 this.addEventListener('fetch', function (event) {
-  generalRespond(event.request, event.respondWith);
+  if (shouldCache(event.request.url)) {
+    cacheable(event);
+  } else {
+    uncacheable(event);
+  }
 });
