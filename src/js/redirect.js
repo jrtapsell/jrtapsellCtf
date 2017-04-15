@@ -224,8 +224,8 @@ function load_challenge(challenge_id) {
     membersNode.off('value', membersListener);
     filesNode.off('value', filesListener);
     messagesNode.off('value', messagesListener);
-  }
-  
+  };
+
   hideProgress();
 }
 
