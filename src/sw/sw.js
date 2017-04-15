@@ -33,28 +33,32 @@ function isPage(url) {
   return url.startsWith("https://ctf.jrtapsell.co.uk") && url.indexOf("static") == -1;
 }
 
-this.addEventListener('fetch', function (event) {
-  var url = event.request.url;
+function getResponse(request) {
+  var url = request.url;
   if (shouldCache(url)) {
-    caches.open("CACHE").then(function (cache) {
+    return caches.open("CACHE").then(function (cache) {
       if (isPage(url)) {
         log('#0FF', "Cached page request for: " + url, event);
-        return event.respondWith(cache.match('/'));
+        return cache.match('/');
       } else {
         if (cache.match(url)) {
           log('#FF0', "Cached request for: " + url, event);
-          return event.respondWith(cache.match(url))
+          return cache.match(url);
         } else {
           log('#00F', "Caching request for: " + url, event);
-          fetch(event.request).then(function (response) {
+          return fetch(event.request).then(function (response) {
             cache.put(event.request, response.clone());
-            return event.respondWith(response);
+            return response;
           })
         }
       }
     })
   } else {
     log('#F0F', "Uncacheable request for: " + url, event);
-    return event.respondWith(fetch(event.request));
+    return fetch(event.request);
   }
+}
+
+this.addEventListener('fetch', function (event) {
+  event.respondWith(getResponse(event.request));
 });
