@@ -9,9 +9,46 @@ function log(color, messageContents, data) {
   console.colourLog("#0F0", color, messageContents, data);
 }
 
-this.addEventListener('fetch', function(event) {
-  log('#0F0', "Request for: " + event.request.url, event);
-  event.respondWith(
-    fetch(event.request)
+function shouldCache(url) {
+
+}
+
+this.addEventListener('install', function (event) {
+  event.waitUntil(
+    caches.open('CACHE').then(function (cache) {
+      return cache.addAll([
+        '/'
+      ]);
+    })
   );
+});
+
+function isPage(url) {
+  return url.startsWith("https://ctf.jrtapsell.co.uk") && url.indexOf("static") == -1;
+}
+
+this.addEventListener('fetch', function (event) {
+  var url = event.request.url;
+  if (shouldCache(url)) {
+    caches.open("CACHE", function (cache) {
+      if (isPage(url)) {
+        log('#0FF', "Cached page request for: " + url, event);
+        return event.respondWith(cache.match('/'));
+      } else {
+        if (cache.match(url)) {
+          log('#FF0', "Cached request for: " + url, event);
+          return event.respondWith(cache.match(url))
+        } else {
+          log('#00F', "Caching request for: " + url, event);
+          fetch(event.request).then(function (response) {
+            cache.put(event.request, response.clone());
+            return event.respondWith(response);
+          })
+        }
+      }
+    })
+  } else {
+    log('#F0F', "Uncacheable request for: " + url, event);
+    return event.respondWith(fetch(event.request));
+  }
 });
