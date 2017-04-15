@@ -38,6 +38,10 @@ li.mdl-list__item.mdl-list__item--three-line {
     height: auto;
 }
 
+.mdl-list__item--three-line .mdl-list__item-text-body {
+    height: auto;
+}
+
 .square-icon {
     height: 2em;
     width: 2em;
