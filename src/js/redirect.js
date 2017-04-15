@@ -46,8 +46,8 @@ function load_login() {
       load_index();
     }
   });
-  $("#google-login").click(fb.googleLogin());
-  $("#github-login").click(fb.githubLogin());
+  $("#google-login").click(fb.googleLogin);
+  $("#github-login").click(fb.githubLogin);
 }
 
 function close_draw() {
