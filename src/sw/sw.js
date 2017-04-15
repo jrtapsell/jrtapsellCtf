@@ -41,11 +41,11 @@ function page(request, respond, cache) {
   log('#0FF', "Cached page request for: " + request.url, request);
   respond(cache.match('/'));
 }
-function cached(request, cache, respond) {
+function cached(request, respond, cache) {
   log('#FF0', "Cached request for: " + request.url, request);
   respond(cache.match(request.url));
 }
-function uncached(request, cache, respond) {
+function uncached(request, respond, cache ) {
   log('#00F', "Caching request for: " + request.url, request);
   return fetch(request).then(function (response) {
     cache.put(request, response.clone());
@@ -58,9 +58,9 @@ function cacheable(request, respond) {
       respond(page(request, respond, cache));
     } else {
       if (cache.match(request.url)) {
-        cached(request, cache, respond);
+        cached(request, respond, cache );
       } else {
-        uncached(request, cache, respond);
+        uncached(request, respond, cache );
       }
     }
   })
