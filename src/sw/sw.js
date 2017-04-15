@@ -16,10 +16,16 @@ function shouldCache(url) {
   if (url.endsWith(".js")) {
     return true;
   }
+  if (url.endsWith(".css")) {
+    return true;
+  }
   if (url.indexOf(".googleusercontent.com") != -1) {
     return true;
   }
   if (url.indexOf(".githubusercontent.com") != -1) {
+    return true;
+  }
+  if (url.indexOf("fonts.googleapis.com") != -1) {
     return true;
   }
   return false;
