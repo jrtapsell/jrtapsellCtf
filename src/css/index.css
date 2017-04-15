@@ -30,6 +30,14 @@
     background: url('https://cdn.rawgit.com/google/material-design-icons/master/file/svg/production/ic_cloud_upload_48px.svg') center / cover;
 }
 
+.mdl-list__item--three-line .mdl-list__item-primary-content {
+    height: auto;
+}
+
+li.mdl-list__item.mdl-list__item--three-line {
+    height: auto;
+}
+
 .square-icon {
     height: 2em;
     width: 2em;
