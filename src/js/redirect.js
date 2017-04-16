@@ -1,6 +1,4 @@
 'use strict';
-
-
 function redirect_log(color, messageContents, data) {
   console.colourLog("#00F", color, messageContents, data);
 }
@@ -114,7 +112,7 @@ function load_user(user_id) {
   var listener = function(snapshot) {
     const value = snapshot.val();
     if (value) {
-      redirect("user", value);
+      redirect("user", value, user_id);
     } else {
       $("#page-content").html("<h2>No such user</h2>");
     }
