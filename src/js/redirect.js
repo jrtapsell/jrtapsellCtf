@@ -8,8 +8,13 @@ var main_progress = {};
 $(function () {
   var deregister = undefined;
   var jq = $("#statusBar");
+  var active = false;
 
   main_progress.show = function() {
+    if (active) {
+      console.error("Tried to activate an already active status bar");
+    }
+    active = true;
     if (deregister) {
       deregister();
       deregister = null;
@@ -18,6 +23,10 @@ $(function () {
   };
 
   main_progress.hide = function(on_move) {
+    if (!active) {
+      console.error("Tried to de-activate an in-active status bar");
+    }
+    active = false;
     deregister = on_move;
     jq.hide();
   };
