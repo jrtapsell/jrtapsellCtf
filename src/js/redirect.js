@@ -11,26 +11,24 @@ $(function () {
   var active = false;
 
   main_progress.show = function() {
-    if (active) {
-      console.error("Tried to activate an already active status bar");
+    if (!active) {
+      active = true;
+      if (deregister) {
+        deregister();
+        deregister = null;
+      }
+      console.time("main progress shown");
+      jq.show();
     }
-    active = true;
-    if (deregister) {
-      deregister();
-      deregister = null;
-    }
-    console.time("main progress shown");
-    jq.show();
   };
 
   main_progress.hide = function(on_move) {
-    if (!active) {
-      console.error("Tried to de-activate an in-active status bar");
+    if (active) {
+      active = false;
+      deregister = on_move;
+      console.timeEnd("main progress shown");
+      jq.hide();
     }
-    active = false;
-    deregister = on_move;
-    console.timeEnd("main progress shown");
-    jq.hide();
   };
 });
 
@@ -108,18 +106,18 @@ function load_users() {
     } else {
       $("#page-content").html("<h2>No users</h2>");
     }
+    $(".user-card").each(function(_, item) {
+      var id = item.dataset["id"];
+      const jq_item = $(item);
+      jq_item.click(function () {
+        load_user(id);
+      })
+    });
+    main_progress.hide(function () {
+      usersNode.off("value", listener);
+    });
   };
-  $(".user-card").each(function(_, item) {
-    var id = item.dataset["id"];
-    const jq_item = $(item);
-    jq_item.click(function () {
-      load_user(id);
-    })
-  });
-  var after = usersNode.on('value', listener);
-  main_progress.hide(function () {
-    usersNode.off("value", listener);
-  });
+  usersNode.on('value', listener);
 }
 
 function load_user(user_id) {
@@ -133,11 +131,11 @@ function load_user(user_id) {
     } else {
       $("#page-content").html("<h2>No such user</h2>");
     }
+    main_progress.hide(function () {
+      usersNode.off("value", listener);
+    });
   };
-  var after = usersNode.on('value', listener);
-  main_progress.hide(function () {
-    usersNode.off("value", listener);
-  });
+  usersNode.on('value', listener);
 }
 
 function load_challenges() {
@@ -159,6 +157,11 @@ function load_challenges() {
     } else {
       $("#page-content").html("<h2>No challenges</h2>");
     }
+
+    main_progress.hide(function () {
+      challengesNode.off("value", challengesListener);
+      usersNode.off("value", usersListener);
+    });
   }
 
   var challengesData = undefined;
@@ -178,10 +181,6 @@ function load_challenges() {
 
   challengesNode.on('value', challengesListener);
   usersNode.on('value', usersListener);
-  main_progress.hide(function () {
-    challengesNode.off("value", challengesListener);
-    usersNode.off("value", usersListener);
-  });
 }
 
 
@@ -258,6 +257,14 @@ function load_challenge(challenge_id) {
         });
       })
     }
+
+
+    main_progress.hide(function () {
+      challengeNode.off('value', challengeListener);
+      membersNode.off('value', membersListener);
+      filesNode.off('value', filesListener);
+      messagesNode.off('value', messagesListener);
+    });
   }
 
   var challengeListener = function (snapshot) {
@@ -285,13 +292,6 @@ function load_challenge(challenge_id) {
   membersNode.on('value', membersListener);
   filesNode.on('value', filesListener);
   messagesNode.on('value', messagesListener);
-
-  main_progress.hide(function () {
-    challengeNode.off('value', challengeListener);
-    membersNode.off('value', membersListener);
-    filesNode.off('value', filesListener);
-    messagesNode.off('value', messagesListener);
-  });
 }
 
 function redirect_to_url(pathname) {
