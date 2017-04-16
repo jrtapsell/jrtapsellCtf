@@ -114,7 +114,7 @@ function load_user(user_id) {
   var listener = function(snapshot) {
     const value = snapshot.val();
     if (value) {
-      redirect("user", {"user": value});
+      redirect("user", value);
     } else {
       $("#page-content").html("<h2>No such user</h2>");
     }
