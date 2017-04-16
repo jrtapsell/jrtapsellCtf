@@ -3,19 +3,26 @@ function redirect_log(color, messageContents, data) {
   console.colourLog("#00F", color, messageContents, data);
 }
 
-var deregister = undefined;
+var main_progress;
 
-function showProgress() {
-  if (deregister) {
-    deregister();
-    deregister = null;
-  }
-  $("#statusBar").show();
-}
-function hideProgress(on_move) {
-  deregister = on_move;
-  $("#statusBar").hide();
-}
+(function () {
+  var deregister = undefined;
+  var jq = $("#statusBar");
+
+  main_progress.show = function() {
+    if (deregister) {
+      deregister();
+      deregister = null;
+    }
+    jq.show();
+  };
+
+  main_progress.hide = function(on_move) {
+    deregister = on_move;
+    jq.hide();
+  };
+})();
+
 
 function render_icons() {
   fb.path("users").once("value", function (data) {
@@ -37,7 +44,7 @@ function render_icons() {
 }
 function load_error(_, message) {
   $("#page-content").html("<h1>" + message + "</h1>");
-  hideProgress();
+  main_progress.hide();
 }
 
 function redirect(page, contents, id) {
@@ -51,7 +58,7 @@ function redirect(page, contents, id) {
 
 function load_login() {
   redirect_log("#0F0","Login navigation started");
-  showProgress();
+  main_progress.show();
   redirect("login");
   var unsubscribe = fb.authUpdate(function (user) {
     if (user) {
@@ -61,7 +68,7 @@ function load_login() {
   });
   $("#google-login").click(fb.googleLogin);
   $("#github-login").click(fb.githubLogin);
-  hideProgress();
+  main_progress.hide();
 }
 
 function close_draw() {
@@ -70,14 +77,14 @@ function close_draw() {
 
 function load_index() {
   redirect_log("#0F0","Index navigation started");
-  showProgress();
+  main_progress.show();
   redirect("index", null);
-  hideProgress();
+  main_progress.hide();
 }
 
 function load_users() {
   redirect_log("#0F0","Users navigation started");
-  showProgress();
+  main_progress.show();
   var usersNode = fb.path('users');
   var listener = function(snapshot) {
     const value = snapshot.val();
@@ -100,14 +107,14 @@ function load_users() {
     })
   });
   var after = usersNode.on('value', listener);
-  hideProgress(function () {
+  main_progress.hide(function () {
     usersNode.off("value", listener);
   });
 }
 
 function load_user(user_id) {
   redirect_log("#0F0","User navigation started");
-  showProgress();
+  main_progress.show();
   var usersNode = fb.path('users', user_id);
   var listener = function(snapshot) {
     const value = snapshot.val();
@@ -118,14 +125,14 @@ function load_user(user_id) {
     }
   };
   var after = usersNode.on('value', listener);
-  hideProgress(function () {
+  main_progress.hide(function () {
     usersNode.off("value", listener);
   });
 }
 
 function load_challenges() {
   redirect_log("#0F0","Challenges navigation started");
-  showProgress();
+  main_progress.show();
 
   function renderUI() {
     if (all_defined(challengesData, usersData)) {
@@ -161,7 +168,7 @@ function load_challenges() {
 
   challengesNode.on('value', challengesListener);
   usersNode.on('value', usersListener);
-  hideProgress(function () {
+  main_progress.hide(function () {
     challengesNode.off("value", challengesListener);
     usersNode.off("value", usersListener);
   });
@@ -170,7 +177,7 @@ function load_challenges() {
 
 function load_logout() {
   redirect_log("#0F0","Logout navigation started");
-  showProgress();
+  main_progress.show();
   var temp = fb.authUpdate(function (user) {
     if (!user) {
       temp();
@@ -178,12 +185,12 @@ function load_logout() {
     }
   });
   fb.logout();
-  hideProgress();
+  main_progress.hide();
 }
 
 function load_challenge(challenge_id) {
   redirect_log("#0F0","Loading challenge");
-  showProgress();
+  main_progress.show();
 
   var challengeNode = fb.path('challenges', challenge_id);
   var membersNode = fb.path('memberships', challenge_id);
@@ -269,7 +276,7 @@ function load_challenge(challenge_id) {
   filesNode.on('value', filesListener);
   messagesNode.on('value', messagesListener);
 
-  hideProgress(function () {
+  main_progress.hide(function () {
     challengeNode.off('value', challengeListener);
     membersNode.off('value', membersListener);
     filesNode.off('value', filesListener);
