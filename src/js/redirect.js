@@ -330,14 +330,16 @@ function redirect_to_url(pathname) {
   load_error(undefined, "Page not found");
 }
 
-window.onpopstate = function (event) {
-  redirect_to_url(event.currentTarget.location.pathname);
-};
+$(function () {
+  window.onpopstate = function (event) {
+    redirect_to_url(event.currentTarget.location.pathname);
+  };
 
-fb.authOnce(function (user) {
-  if (user) {
-    redirect_to_url();
-  } else {
-    load_login();
-  }
+  fb.authOnce(function (user) {
+    if (user) {
+      redirect_to_url();
+    } else {
+      load_login();
+    }
+  });
 });
