@@ -19,6 +19,7 @@ $(function () {
       deregister();
       deregister = null;
     }
+    console.time("main progress shown");
     jq.show();
   };
 
@@ -28,6 +29,7 @@ $(function () {
     }
     active = false;
     deregister = on_move;
+    console.timeEnd("main progress shown");
     jq.hide();
   };
 });
