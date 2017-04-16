@@ -6,6 +6,7 @@ function redirect_log(color, messageContents, data) {
 }
 
 var deregister = undefined;
+
 function showProgress() {
   if (deregister) {
     deregister();
@@ -318,13 +319,10 @@ window.onpopstate = function (event) {
   redirect_to_url(event.currentTarget.location.pathname);
 };
 
-$(function () {
-  var unsubscribe = fb.authUpdate(function (user) {
-    unsubscribe();
-    if (user) {
-      redirect_to_url();
-    } else {
-      load_login();
-    }
-  });
+fb.authOnce(function (user) {
+  if (user) {
+    redirect_to_url();
+  } else {
+    load_login();
+  }
 });

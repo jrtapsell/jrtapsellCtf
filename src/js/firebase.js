@@ -60,6 +60,13 @@ var fb;
     "authUpdate": function (callback) {
       return firebase.auth().onAuthStateChanged(callback);
     },
+    /** Called on the next auth change. */
+    "authOnce": function (callback) {
+      var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+          unsubscribe();
+          callback(user);
+      })
+    },
     /** Google popup login. */
     "googleLogin": function() {firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())},
     /** GitHub popup login. */
