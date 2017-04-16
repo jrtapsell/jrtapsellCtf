@@ -3,7 +3,7 @@ function redirect_log(color, messageContents, data) {
   console.colourLog("#00F", color, messageContents, data);
 }
 
-var main_progress;
+var main_progress = {};
 
 $(function () {
   var deregister = undefined;
