@@ -1,14 +1,16 @@
 $(function () {
+  var drawer = $('.mdl-layout')[0].MaterialLayout;
+  
   $("#nav-challenges").click(function () {
-    load_challenges();
-    close_draw();
+    router.challenges();
+    drawer.toggleDrawer();
   });
   $("#nav-users").click(function () {
-    load_users();
-    close_draw()
+    router.users();
+    drawer.toggleDrawer();
   });
   $("#nav-logout").click(function () {
-    load_logout();
-    close_draw();
+    router.logout();
+    drawer.toggleDrawer();
   });
 });
