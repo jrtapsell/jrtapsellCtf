@@ -32,7 +32,7 @@ $(function () {
   };
 });
 
-var router;
+var router = {};
 
 $(function () {
   function render_icons() {
@@ -335,17 +335,15 @@ $(function () {
     load_error(undefined, "Page not found");
   }
 
-  $(function () {
-    window.onpopstate = function (event) {
-      redirect_to_url(event.currentTarget.location.pathname);
-    };
+  window.onpopstate = function (event) {
+    redirect_to_url(event.currentTarget.location.pathname);
+  };
 
-    fb.authOnce(function (user) {
-      if (user) {
-        redirect_to_url();
-      } else {
-        router.login();
-      }
-    });
+  fb.authOnce(function (user) {
+    if (user) {
+      redirect_to_url();
+    } else {
+      router.login();
+    }
   });
-})();
+});
