@@ -5,7 +5,7 @@ function redirect_log(color, messageContents, data) {
 
 var main_progress;
 
-(function () {
+$(function () {
   var deregister = undefined;
   var jq = $("#statusBar");
 
@@ -21,8 +21,7 @@ var main_progress;
     deregister = on_move;
     jq.hide();
   };
-})();
-
+});
 
 function render_icons() {
   fb.path("users").once("value", function (data) {
