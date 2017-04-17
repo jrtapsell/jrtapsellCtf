@@ -3,6 +3,7 @@ var gulp_handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
 
 var handlebars = require('./src/js/handlebars.js');
 
@@ -27,6 +28,7 @@ gulp.task('html', function(){
 
 gulp.task('js', function(){
   return gulp.src('src/js/*.js')
+    .pipe(uglify())
     .pipe(gulp.dest(deploy + 'js'))
 });
 
@@ -37,6 +39,7 @@ gulp.task('css', function(){
 
 gulp.task('sw', function(){
   return gulp.src('src/sw/*.js')
+    .pipe(uglify())
     .pipe(gulp.dest("deploy"))
 });
 
