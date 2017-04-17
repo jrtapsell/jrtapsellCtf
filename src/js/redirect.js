@@ -83,6 +83,11 @@ $(function () {
     main_progress.hide();
   }
 
+  /**
+   * Routes to the index page
+   *
+   * @return {void}
+   */
   router.index = function() {
     redirect_log("#0F0", "Index navigation started");
     main_progress.show();

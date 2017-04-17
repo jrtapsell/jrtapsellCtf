@@ -1,7 +1,7 @@
-'use strict';
 var fb;
 
 (function (firebase) {
+  'use strict';
 
   function log(color, messageContents, data) {
     console.colourLog("#F00", color, messageContents, data);
@@ -30,7 +30,7 @@ var fb;
         var name = arguments[i];
         text += name;
         text += "/";
-        ret = ret.child(name)
+        ret = ret.child(name);
       }
       log("#0F0", "Created node " + text);
       return {
@@ -63,18 +63,22 @@ var fb;
     /** Called on the next auth change. */
     "authOnce": function (callback) {
       var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
-          unsubscribe();
-          callback(user);
-      })
+        unsubscribe();
+        callback(user);
+      });
     },
     /** Google popup login. */
-    "googleLogin": function() {firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())},
+    "googleLogin": function () {
+      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    },
     /** GitHub popup login. */
-    "githubLogin": function() {firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())},
+    "githubLogin": function () {
+      firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
+    },
     /** Logout the current user. */
-    "logout": function() {
+    "logout": function () {
       log("#F00", "Logging out");
-      firebase.auth().signOut()
+      firebase.auth().signOut();
     },
     /** The current user. */
     "user": undefined
