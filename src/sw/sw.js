@@ -54,7 +54,7 @@ this.addEventListener('install', function (event) {
         return cache.addAll([
           '/'
         ]);
-      })
+      });
     })
   );
 });
@@ -81,7 +81,7 @@ function uncached(event, cache ) {
   return fetch(event.request).then(function (response) {
     cache.put(event.request, response.clone());
     return response;
-  })
+  });
 }
 function cacheable(event) {
   return caches.open("CACHE").then(function (cache) {
@@ -96,7 +96,7 @@ function cacheable(event) {
         }
       });
     }
-  })
+  });
 }
 
 this.addEventListener('fetch', function (event) {

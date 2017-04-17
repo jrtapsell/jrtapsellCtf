@@ -1,4 +1,9 @@
 {
   "devel": true,
-  "browser": true
+  "browser": true,
+  "globals": {
+    "$": false,
+    "router": true,
+    "fb": true
+  }
 }

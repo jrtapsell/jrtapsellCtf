@@ -1,12 +1,7 @@
-'use strict';
-function redirect_log(color, messageContents, data) {
-  console.colourLog("#00F", color, messageContents, data);
-}
-
 var main_progress = {};
 
 $(function () {
-  var deregister = undefined;
+  var deregister;
   var jq = $("#statusBar");
   var active = false;
 
@@ -35,22 +30,28 @@ $(function () {
 var router = {};
 
 $(function () {
+  'use strict';
+
+  function redirect_log(color, messageContents, data) {
+    console.colourLog("#00F", color, messageContents, data);
+  }
+
   function render_icons() {
     fb.path("users").once("value", function (data) {
       var users = data.val();
       $(".user-icon").each(function (_, item) {
-        var id = item.dataset["id"];
-        const jq_item = $(item);
-        const user_data = users[id];
-        jq_item.css("background-image", "url(" + user_data["image"] + ")");
-        jq_item.attr("title", user_data["name"])
+        var id = item.dataset.id;
+        var jq_item = $(item);
+        var user_data = users[id];
+        jq_item.css("background-image", "url(" + user_data.image + ")");
+        jq_item.attr("title", user_data.name);
       });
       $(".username-auto").each(function (_, item) {
-        var id = item.dataset["id"];
-        const jq_item = $(item);
-        const user_data = users[id];
-        jq_item.text(user_data["name"]);
-      })
+        var id = item.dataset.id;
+        var jq_item = $(item);
+        var user_data = users[id];
+        jq_item.text(user_data.name);
+      });
     });
   }
 
@@ -81,7 +82,7 @@ $(function () {
     $("#google-login").click(fb.googleLogin);
     $("#github-login").click(fb.githubLogin);
     main_progress.hide();
-  }
+  };
 
   /**
    * Routes to the index page
@@ -100,23 +101,23 @@ $(function () {
     main_progress.show();
     var usersNode = fb.path('users');
     var listener = function (snapshot) {
-      const value = snapshot.val();
+      var value = snapshot.val();
       if (value) {
         var users = Object.values(value);
         redirect("users", {"users": users});
         $(".card-title").each(function (_, item) {
           var current = $(item);
-          current.css("background", "url(" + current.attr("data-background") + ") center / cover")
-        })
+          current.css("background", "url(" + current.attr("data-background") + ") center / cover");
+        });
       } else {
         $("#page-content").html("<h2>No users</h2>");
       }
       $(".user-card").each(function (_, item) {
-        var id = item.dataset["id"];
-        const jq_item = $(item);
+        var id = item.dataset.id;
+        var jq_item = $(item);
         jq_item.click(function () {
           router.user(id);
-        })
+        });
       });
       main_progress.hide(function () {
         usersNode.off("value", listener);
@@ -130,7 +131,7 @@ $(function () {
     main_progress.show();
     var usersNode = fb.path('users', user_id);
     var listener = function (snapshot) {
-      const value = snapshot.val();
+      var value = snapshot.val();
       if (value) {
         redirect("user", value, user_id);
       } else {
@@ -141,7 +142,7 @@ $(function () {
       });
     };
     usersNode.on('value', listener);
-  }
+  };
 
   router.challenges = function() {
     redirect_log("#0F0", "Challenges navigation started");
@@ -152,11 +153,11 @@ $(function () {
         var temp = {};
         $.each(challengesData, function (key, value) {
           temp[key] = value;
-          temp[key]["users"] = usersData[key];
+          temp[key].users = usersData[key];
         });
         redirect("challenges", {"challenges": temp});
         $(".challenge-row").click(function (event) {
-          router.challenge(event.currentTarget.dataset["id"]);
+          router.challenge(event.currentTarget.dataset.id);
         });
         render_icons();
       } else {
@@ -169,8 +170,8 @@ $(function () {
       });
     }
 
-    var challengesData = undefined;
-    var usersData = undefined;
+    var challengesData;
+    var usersData;
 
     var challengesNode = fb.path('challenges');
     var challengesListener = function (snapshot) {
@@ -200,7 +201,7 @@ $(function () {
     });
     fb.logout();
     main_progress.hide();
-  }
+  };
 
   router.challenge = function(challenge_id) {
     redirect_log("#0F0", "Loading challenge");
@@ -211,13 +212,13 @@ $(function () {
     var filesNode = fb.path('files', challenge_id);
     var messagesNode = fb.path('messages', challenge_id);
 
-    var challengeData = undefined;
-    var membersData = undefined;
-    var filesData = undefined;
-    var messagesData = undefined;
+    var challengeData;
+    var membersData;
+    var filesData;
+    var messagesData;
 
     function renderUI() {
-      const currentUserId = fb.user.uid;
+      var currentUserId = fb.user.uid;
       if (all_defined(challengeData, membersData, filesData, messagesData)) {
         redirect("challenge", {
           "challenge": challengeData,
@@ -240,7 +241,7 @@ $(function () {
           join.attr("disabled", true);
         }
         var solved = $("#solve");
-        if (challengeData["status"] === "solved") {
+        if (challengeData.status === "solved") {
           solved.attr("disabled", true);
         }
         solved.click(function () {
@@ -251,7 +252,7 @@ $(function () {
           dialogue.showModal();
         });
         $("#upload_close").click(function () {
-          dialogue.close()
+          dialogue.close();
         });
         $("#upload_upload").click(function () {
           var node = filesNode.push();
@@ -265,7 +266,7 @@ $(function () {
           }, function () {
             node.set({"name": $("#file-name").val(), "url": task.snapshot.downloadURL});
           });
-        })
+        });
       }
 
 
@@ -302,7 +303,7 @@ $(function () {
     membersNode.on('value', membersListener);
     filesNode.on('value', filesListener);
     messagesNode.on('value', messagesListener);
-  }
+  };
 
   function redirect_to_url(pathname) {
     pathname = !!pathname ? pathname : window.location.pathname;
@@ -324,7 +325,7 @@ $(function () {
         router.logout();
         return;
     }
-    const match = pathname.match("\/([^/]*)\/([^/]+)/?");
+    var match = pathname.match("\/([^/]*)\/([^/]+)/?");
     if (match) {
       var pageName = match[1];
       var id = match[2];
