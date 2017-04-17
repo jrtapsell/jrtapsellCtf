@@ -4,11 +4,13 @@ var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
 
+var handlebars = require('./src/js/handlebars.js');
+
 const deploy = "deploy/static/";
 
 gulp.task('template', function(){
   gulp.src('src/templates/*.hbs')
-    .pipe(gulp_handlebars()) // override library here
+    .pipe(gulp_handlebars({handlebars: handlebars})) // override library here
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(declare({
       namespace: 'CTF.pages',
