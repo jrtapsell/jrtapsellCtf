@@ -4,6 +4,7 @@ var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var cleanCSS = require('gulp-clean-css');
 
 var handlebars = require('./src/js/handlebars.js');
 
@@ -34,6 +35,7 @@ gulp.task('js', function(){
 
 gulp.task('css', function(){
   return gulp.src('src/css/*.css')
+    .pipe(cleanCSS())
     .pipe(gulp.dest(deploy + 'css'))
 });
 
