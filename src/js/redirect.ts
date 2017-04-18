@@ -155,7 +155,7 @@ class Router {
     Router.redirect_log("#0F0", "Challenges navigation started");
     main_progress.show();
 
-    function renderUI() {
+    var renderUI = () => {
       if (all_defined(challengesData, usersData)) {
         var temp = {};
         $.each(challengesData, function (key, value) {

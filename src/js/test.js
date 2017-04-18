@@ -2,11 +2,9 @@ var C = (function () {
     function C() {
     }
     C.prototype.example = function () {
-        var _this = this;
-        var f = function () {
-            console.log(_this);
-        };
-        f();
+        function d() {
+            console.log(this);
+        }
     };
     return C;
 }());

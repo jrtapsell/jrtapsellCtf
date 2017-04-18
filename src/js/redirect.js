@@ -147,20 +147,21 @@ var Router = (function () {
     };
     ;
     Router.prototype.challenges = function () {
+        var _this = this;
         Router.redirect_log("#0F0", "Challenges navigation started");
         main_progress.show();
-        function renderUI() {
+        var renderUI = function () {
             if (all_defined(challengesData, usersData)) {
                 var temp = {};
                 $.each(challengesData, function (key, value) {
                     temp[key] = value;
                     temp[key].users = usersData[key];
                 });
-                this.redirect("challenges", { "challenges": temp });
+                _this.redirect("challenges", { "challenges": temp });
                 $(".challenge-row").click(function (event) {
                     router.challenge(event.currentTarget.dataset.id);
                 });
-                this.render_icons();
+                _this.render_icons();
             }
             else {
                 $("#page-content").html("<h2>No challenges</h2>");
@@ -169,7 +170,7 @@ var Router = (function () {
                 challengesNode.off("value", challengesListener);
                 usersNode.off("value", usersListener);
             });
-        }
+        };
         var challengesData;
         var usersData;
         var challengesNode = fb.path('challenges');
