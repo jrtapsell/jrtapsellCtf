@@ -9,33 +9,19 @@ function log(color, messageContents, data) {
   console.colourLog("#0F0", color, messageContents, data);
 }
 
+const EXTENSION_WHITELIST = [".js", ".css", ".woff2"];
+const DOMAIN_WHITELIST = ["ctf.jrtapsell.co.uk", "cdn.rawgit.com", "fonts.gstatic.com", "googleusercontent.com", "githubusercontent.com", "fonts.googleapis.com"];
+
 function shouldCache(url) {
-  if (url.startsWith("https://ctf.jrtapsell.co.uk/")) {
-    return true;
+  for (extension of EXTENSION_WHITELIST) {
+    if (url.endsWith(extension)) {
+      return true;
+    }
   }
-  if (url.endsWith(".js")) {
-    return true;
-  }
-  if (url.endsWith(".css")) {
-    return true;
-  }
-  if (url.endsWith(".woff2")) {
-    return true;
-  }
-  if (url.indexOf("cdn.rawgit.com") != -1) {
-    return true;
-  }
-  if (url.indexOf("fonts.gstatic.com") != -1) {
-    return true;
-  }
-  if (url.indexOf(".googleusercontent.com") != -1) {
-    return true;
-  }
-  if (url.indexOf(".githubusercontent.com") != -1) {
-    return true;
-  }
-  if (url.indexOf("fonts.googleapis.com") != -1) {
-    return true;
+  for (domain of DOMAIN_WHITELIST) {
+    if (url.indexOf(domain) != -1) {
+      return true;
+    }
   }
   return false;
 }
@@ -57,10 +43,6 @@ this.addEventListener('install', function (event) {
         ]);
       });
     }).then(function() {
-      // `skipWaiting()` forces the waiting ServiceWorker to become the
-      // active ServiceWorker, triggering the `onactivate` event.
-      // Together with `Clients.claim()` this allows a worker to take effect
-      // immediately in the client(s).
       return self.skipWaiting();
     })
   );
