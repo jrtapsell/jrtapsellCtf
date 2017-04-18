@@ -1,3 +1,30 @@
+class ProgressManager {
+  private deregister;
+  constructor(selector) {
+    this.deregister = undefined;
+    this.selector = $(selector);
+    show() {
+      if (!active) {
+        active = true;
+        if (deregister) {
+          deregister();
+          deregister = null;
+        }
+        console.time("main progress shown");
+        jq.show();
+      }
+    };
+
+    hide(on_move) {
+      if (active) {
+        active = false;
+        deregister = on_move;
+        console.timeEnd("main progress shown");
+        jq.hide();
+      }
+    };
+  }
+}
 var main_progress = {};
 
 $(function () {
