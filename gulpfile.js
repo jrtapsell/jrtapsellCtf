@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var gulp_handlebars = require('gulp-handlebars');
+var header = require('gulp-header');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
@@ -51,6 +52,7 @@ gulp.task('css', function(){
 
 gulp.task('sw', function(){
   return gulp.src('src/sw/*.js')
+    .pipe(header("/* Compiled on " + (new Date()).toString() + ". */"))
     .pipe(uglify())
     .pipe(gulp.dest("deploy"))
 });
