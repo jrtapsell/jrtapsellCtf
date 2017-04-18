@@ -52,8 +52,8 @@ gulp.task('css', function(){
 
 gulp.task('sw', function(){
   return gulp.src('src/sw/*.js')
-    .pipe(header("/* Compiled on " + (new Date()).toString() + ". */"))
     .pipe(uglify())
+    .pipe(header("/* Compiled on " + (new Date()).toString() + ". */"))
     .pipe(gulp.dest("deploy"))
 });
 
