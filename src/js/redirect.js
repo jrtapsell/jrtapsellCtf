@@ -127,13 +127,14 @@ var Router = (function () {
     };
     ;
     Router.prototype.user = function (user_id) {
+        var _this = this;
         Router.redirect_log("#0F0", "User navigation started");
         main_progress.show();
         var usersNode = fb.path('users', user_id);
         var listener = function (snapshot) {
             var value = snapshot.val();
             if (value) {
-                this.redirect("user", value, user_id);
+                _this.redirect("user", value, user_id);
             }
             else {
                 $("#page-content").html("<h2>No such user</h2>");

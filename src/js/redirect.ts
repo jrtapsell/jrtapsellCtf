@@ -137,7 +137,7 @@ class Router {
     Router.redirect_log("#0F0", "User navigation started");
     main_progress.show();
     var usersNode = fb.path('users', user_id);
-    var listener = function (snapshot) {
+    var listener = (snapshot) => {
       var value = snapshot.val();
       if (value) {
         this.redirect("user", value, user_id);
