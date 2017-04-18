@@ -122,7 +122,7 @@ class Router {
       $(".user-card").each((_, item) => {
         var id = item.dataset.id;
         var jq_item = $(item);
-        jq_item.click(function () {
+        jq_item.click(() => {
           this.user(id);
         });
       });
