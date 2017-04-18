@@ -254,7 +254,7 @@ class Router {
         solved.click(function () {
           challengeNode.child("status").set("solved");
         });
-        var dialogue = $("#dialog")[0];
+        var dialogue = <Dialogue> $("#dialog")[0];
         $("#upload").click(function () {
           dialogue.showModal();
         });
@@ -263,7 +263,8 @@ class Router {
         });
         $("#upload_upload").click(function () {
           var node = filesNode.push();
-          var file = $("#file-input")[0].files[0];
+          var file_input: HTMLInputElement = <HTMLInputElement> $("#file-input")[0];
+          var file = file_input.files[0];
           var challengeDataNode = firebase.storage().ref().child(challenge_id).child(node.key);
           var task = challengeDataNode.put(file);
           task.on('state_changed', function (snapshot) {
@@ -283,7 +284,7 @@ class Router {
         filesNode.off('value', filesListener);
         messagesNode.off('value', messagesListener);
       });
-    }
+    };
 
     var challengeListener = function (snapshot) {
       challengeData = snapshot.val();
@@ -363,4 +364,4 @@ $(function () {
       router.login();
     }
   });
-})
+});

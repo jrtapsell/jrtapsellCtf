@@ -1,7 +1,8 @@
 /// <reference path="myTypes.ts" />
 
 $(function () {
-  var drawer = $('.mdl-layout')[0].MaterialLayout;
+  var layout = <MaterialLayout>$('.mdl-layout')[0];
+  var drawer = layout.MaterialLayout;
   
   $("#nav-challenges").click(function () {
     router.challenges();

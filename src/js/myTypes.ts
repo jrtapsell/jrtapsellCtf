@@ -7,12 +7,16 @@ interface Element {
     dataset:{
         [key:string]:string
     };
-    MaterialLayout:any;
 }
 
-interface HTMLElement {
+interface MaterialLayout extends HTMLElement {
+    MaterialLayout: {
+        "toggleDrawer": () => void
+    };
+}
+
+interface Dialogue extends HTMLElement {
     showModal: () => void;
-    files: FileList;
     close: () => void;
 }
 
@@ -24,6 +28,16 @@ interface Object {
     values:(any) => any
 }
 
-declare var CTF: any;
-declare var fb: any;
+declare var CTF: {
+    pages: {
+        challenge: () => {},
+        challenges: () => {},
+        home: () => {},
+        index: () => {},
+        login: () => {},
+        user: () => {},
+        users: () => {}
+    }
+};
+
 declare var firebase: any;
