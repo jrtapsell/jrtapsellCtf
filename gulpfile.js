@@ -84,7 +84,9 @@ gulp.task('css_lint', function() {
 
 gulp.task('ts', function() {
   return tsResult = gulp.src('src/js/*.ts')
-    .pipe(ts({}))
+    .pipe(ts({
+      target:'ES6'
+    }))
     .pipe(gulp.dest(deploy + "js"));
 });
 

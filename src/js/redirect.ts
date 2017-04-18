@@ -175,7 +175,7 @@ class Router {
         challengesNode.off("value", challengesListener);
         usersNode.off("value", usersListener);
       });
-    }
+    };
 
     var challengesData;
     var usersData;
