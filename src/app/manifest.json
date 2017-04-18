@@ -3,17 +3,17 @@
   "name": "Jrtapsell CTF Manager",
   "icons": [
     {
-      "src": "/img/icon_96.jpeg",
+      "src": "/static/img/icon_96.jpeg",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "/img/icon_144.jpeg",
+      "src": "/static/img/icon_144.jpeg",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "/img/icon_192.jpeg",
+      "src": "/static/img/icon_192.jpeg",
       "sizes": "192x192",
       "type": "image/png"
     }
