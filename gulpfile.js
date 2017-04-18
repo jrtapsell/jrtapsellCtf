@@ -40,13 +40,13 @@ gulp.task('img', function(){
 
 gulp.task('js', function(){
   return gulp.src('src/js/*.js')
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest(deploy + 'js'))
 });
 
 gulp.task('css', function(){
   return gulp.src('src/css/*.css')
-    .pipe(cleanCSS())
+    //.pipe(cleanCSS())
     .pipe(gulp.dest(deploy + 'css'))
 });
 
