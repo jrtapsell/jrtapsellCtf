@@ -71,3 +71,7 @@ li.mdl-list__item.mdl-list__item--three-line {
 .right {
     float: right;
 }
+
+.inline-title {
+    display: inline-block;
+}
