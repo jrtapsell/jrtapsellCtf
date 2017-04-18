@@ -45,6 +45,9 @@ $(function () {
         var user_data = users[id];
         jq_item.css("background-image", "url(" + user_data.image + ")");
         jq_item.attr("title", user_data.name);
+        $(jq_item).click(function () {
+          router.user(id);
+        })
       });
       $(".username-auto").each(function (_, item) {
         var id = item.dataset.id;
