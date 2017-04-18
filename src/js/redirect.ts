@@ -170,7 +170,10 @@ class Router {
         $(".bottom-right-add").click(() => {
           var dialogue = <Dialogue> $("#dialog")[0];
           dialogue.showModal();
-        })
+        });
+        $("#upload_close").click(function () {
+          dialogue.close();
+        });
       } else {
         $("#page-content").html("<h2>No challenges</h2>");
       }
