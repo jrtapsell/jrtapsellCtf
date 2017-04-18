@@ -167,8 +167,8 @@ class Router {
           router.challenge(event.currentTarget.dataset.id);
         });
         this.render_icons();
+        var dialogue = <Dialogue> $("#dialog")[0];
         $(".bottom-right-add").click(() => {
-          var dialogue = <Dialogue> $("#dialog")[0];
           dialogue.showModal();
         });
         $("#upload_close").click(function () {
