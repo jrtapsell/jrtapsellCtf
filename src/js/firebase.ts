@@ -59,14 +59,16 @@ class FirebaseWrapper {
       this.user = user;
     });
     this.now = firebase.database.ServerValue.TIMESTAMP;
+    this.firebase = firebase;
   }
 
   now;
   user;
+  private firebase;
 
     /* Gets a node with a path made of the arguments to this method. */
     path(...data: string[]): WrappedNode {
-      var ret = firebase.database().ref("/");
+      var ret = this.firebase.database().ref("/");
       var text = "/";
       for (var name of data) {
         text += name;
@@ -79,12 +81,12 @@ class FirebaseWrapper {
 
     /** Calls the callback when the auth state changes. */
     authUpdate(callback: (Object) => void):() => void {
-      return firebase.auth().onAuthStateChanged(callback);
+      return this.firebase.auth().onAuthStateChanged(callback);
     }
 
     /** Called on the next auth change. */
     authOnce(callback) {
-      var unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      var unsubscribe = this.firebase.auth().onAuthStateChanged((user) => {
         unsubscribe();
         callback(user);
       });
@@ -92,21 +94,22 @@ class FirebaseWrapper {
 
     /** Google popup login. */
     googleLogin() {
-      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      this.firebase.auth().signInWithPopup(new this.firebase.auth.GoogleAuthProvider());
     }
 
     /** GitHub popup login. */
     githubLogin() {
-      firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
+      this.firebase.auth().signInWithPopup(new this.firebase.auth.GithubAuthProvider());
     }
     /** Logout the current user. */
     logout() {
       firebase_log("#F00", "Logging out");
-      firebase.auth().signOut();
+      this.firebase.auth().signOut();
     }
 }
 
 var fb = new FirebaseWrapper(firebase);
+firebase = undefined;
 
 $(() => {
   fb.authUpdate((user) => {
