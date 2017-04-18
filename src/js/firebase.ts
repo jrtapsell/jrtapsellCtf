@@ -43,7 +43,7 @@ class WrappedNode {
 }
 
 class FirebaseWrapper {
-  constructor(firebase) {
+  constructor() {
     firebase_log("#F00", "Initialising firebase");
     firebase.initializeApp({
       apiKey: "AIzaSyD-b_XD6-Eoe-hQnSsIyHt_s2P2bexLu_E",
@@ -56,7 +56,6 @@ class FirebaseWrapper {
     firebase_log("#F00", "Initialised firebase");
 
     this.now = firebase.database.ServerValue.TIMESTAMP;
-    this.firebase = firebase;
     this.authUpdate((user) => {
       this.user = user;
     });
@@ -64,11 +63,10 @@ class FirebaseWrapper {
 
   now;
   user;
-  private firebase;
 
     /* Gets a node with a path made of the arguments to this method. */
     path(...data: string[]): WrappedNode {
-      var ret = this.firebase.database().ref("/");
+      var ret = firebase.database().ref("/");
       var text = "/";
       for (var name of data) {
         text += name;
@@ -81,12 +79,12 @@ class FirebaseWrapper {
 
     /** Calls the callback when the auth state changes. */
     authUpdate(callback: (Object) => void):() => void {
-      return this.firebase.auth().onAuthStateChanged(callback);
+      return firebase.auth().onAuthStateChanged(callback);
     }
 
     /** Called on the next auth change. */
     authOnce(callback) {
-      var unsubscribe = this.firebase.auth().onAuthStateChanged((user) => {
+      var unsubscribe = firebase.auth().onAuthStateChanged((user) => {
         unsubscribe();
         callback(user);
       });
@@ -94,21 +92,21 @@ class FirebaseWrapper {
 
     /** Google popup login. */
     googleLogin() {
-      this.firebase.auth().signInWithPopup(new this.firebase.auth.GoogleAuthProvider());
+      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
     }
 
     /** GitHub popup login. */
     githubLogin() {
-      this.firebase.auth().signInWithPopup(new this.firebase.auth.GithubAuthProvider());
+      firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
     }
     /** Logout the current user. */
     logout() {
       firebase_log("#F00", "Logging out");
-      this.firebase.auth().signOut();
+      firebase.auth().signOut();
     }
 }
 
-var fb = new FirebaseWrapper(firebase);
+var fb = new FirebaseWrapper();
 
 $(() => {
   fb.authUpdate((user) => {
