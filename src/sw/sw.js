@@ -42,6 +42,7 @@ function shouldCache(url) {
 
 self.addEventListener('activate', function (event) {
   log("#0F0", "Service worker active", event);
+  return self.clients.claim();
 });
 
 this.addEventListener('install', function (event) {
@@ -55,6 +56,12 @@ this.addEventListener('install', function (event) {
           '/'
         ]);
       });
+    }).then(function() {
+      // `skipWaiting()` forces the waiting ServiceWorker to become the
+      // active ServiceWorker, triggering the `onactivate` event.
+      // Together with `Clients.claim()` this allows a worker to take effect
+      // immediately in the client(s).
+      return self.skipWaiting();
     })
   );
 });
