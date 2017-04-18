@@ -1,6 +1,6 @@
 var fb;
 
-(function (firebase) {
+((firebase) => {
   'use strict';
 
   function log(color, messageContents, data) {
@@ -23,7 +23,7 @@ var fb;
     /* The current time. */
     "now": firebase.database.ServerValue.TIMESTAMP,
     /* Gets a node with a path made of the arguments to this method. */
-    "path": function () {
+    "path": () => {
       var ret = firebase.database().ref("/");
       var text = "/";
       for (var i = 0; i < arguments.length; i++) {
@@ -34,49 +34,49 @@ var fb;
       }
       log("#0F0", "Created node " + text);
       return {
-        "on": function (type, callback) {
+        "on": (type, callback) => {
           log("#FF0", "Requested callback on " + text);
           return ret.on(type, callback);
         },
-        "off": function (type, callback) {
+        "off": (type, callback) => {
           log("#0FF", "Disconnecting callback on " + text);
           return ret.off(type, callback);
         },
-        "once": function (type, callback) {
+        "once": (type, callback) => {
           log("#F0F", "Single use callback on " + text);
           return ret.once(type, callback);
         },
-        "push": function (data) {
+        "push": (data) => {
           log("#FFF", "Pushing data on " + text, data);
           return ret.push(data);
         },
-        "set": function (data) {
+        "set": (data) => {
           log("#00F", "Setting data on " + text, data);
           return ret.set(data);
         }
       };
     },
     /** Calls the callback when the auth state changes. */
-    "authUpdate": function (callback) {
+    "authUpdate": (callback) => {
       return firebase.auth().onAuthStateChanged(callback);
     },
     /** Called on the next auth change. */
-    "authOnce": function (callback) {
-      var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+    "authOnce": (callback) => {
+      var unsubscribe = firebase.auth().onAuthStateChanged((user) => {
         unsubscribe();
         callback(user);
       });
     },
     /** Google popup login. */
-    "googleLogin": function () {
+    "googleLogin": () => {
       firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
     },
     /** GitHub popup login. */
-    "githubLogin": function () {
+    "githubLogin": () => {
       firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
     },
     /** Logout the current user. */
-    "logout": function () {
+    "logout": () => {
       log("#F00", "Logging out");
       firebase.auth().signOut();
     },
@@ -84,12 +84,12 @@ var fb;
     "user": undefined
   };
 
-  fb.authUpdate(function (user) {
+  fb.authUpdate((user) => {
     fb.user = user;
   });
 
-  $(function () {
-    fb.authUpdate(function (user) {
+  $(() => {
+    fb.authUpdate((user) => {
       if (user) {
         $("#login-status").html("Hello, " + user.displayName + ", <a href='/logout/'>Logout</a>");
         $(".mdl-layout__drawer-button").show();
