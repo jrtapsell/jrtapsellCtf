@@ -23,7 +23,7 @@ var fb;
     /* The current time. */
     "now": firebase.database.ServerValue.TIMESTAMP,
     /* Gets a node with a path made of the arguments to this method. */
-    "path": () => {
+    "path": function() {
       var ret = firebase.database().ref("/");
       var text = "/";
       for (var i = 0; i < arguments.length; i++) {
