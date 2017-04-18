@@ -39,7 +39,7 @@ class Router {
     console.colourLog("#00F", color, messageContents, data);
   }
 
-  private render_icons = () => {
+  private render_icons() {
     fb.path("users").once("value", function (data) {
       var users = data.val();
       $(".user-icon").each(function (_, item) {
@@ -62,7 +62,7 @@ class Router {
     });
   }
 
-  load_error = (message) => {
+  load_error(message) {
     $("#page-content").html("<h1>" + message + "</h1>");
     main_progress.hide();
   }
@@ -76,7 +76,7 @@ class Router {
     componentHandler.upgradeDom();
   }
 
-  login = () => {
+  login() {
     Router.redirect_log("#0F0", "Login navigation started");
     main_progress.show();
     this.redirect("login");
@@ -96,14 +96,14 @@ class Router {
    *
    * @return {void}
    */
-  index = () => {
+  index() {
     Router.redirect_log("#0F0", "Index navigation started");
     main_progress.show();
     this.redirect("index");
     main_progress.hide();
   };
 
-  users = () => {
+  users() {
     Router.redirect_log("#0F0", "Users navigation started");
     main_progress.show();
     var usersNode = fb.path('users');
@@ -133,7 +133,7 @@ class Router {
     usersNode.on('value', listener);
   };
 
-  user = (user_id) => {
+  user(user_id) {
     Router.redirect_log("#0F0", "User navigation started");
     main_progress.show();
     var usersNode = fb.path('users', user_id);
@@ -151,7 +151,7 @@ class Router {
     usersNode.on('value', listener);
   };
 
-  challenges = () => {
+  challenges() {
     Router.redirect_log("#0F0", "Challenges navigation started");
     main_progress.show();
 
@@ -197,7 +197,7 @@ class Router {
   };
 
 
-  logout = () => {
+  logout() {
     Router.redirect_log("#0F0", "Logout navigation started");
     main_progress.show();
     var temp = fb.authUpdate(function (user) {
@@ -210,7 +210,7 @@ class Router {
     main_progress.hide();
   };
 
-  challenge = (challenge_id) => {
+  challenge(challenge_id) {
     Router.redirect_log("#0F0", "Loading challenge");
     main_progress.show();
 
@@ -312,7 +312,7 @@ class Router {
     messagesNode.on('value', messagesListener);
   };
 
-  redirect_to_url = (pathname?: string) => {
+  redirect_to_url(pathname?: string) {
     pathname = !!pathname ? pathname : window.location.pathname;
     switch (pathname) {
       case "":
