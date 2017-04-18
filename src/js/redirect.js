@@ -201,6 +201,7 @@ var Router = (function () {
     };
     ;
     Router.prototype.challenge = function (challenge_id) {
+        var _this = this;
         Router.redirect_log("#0F0", "Loading challenge");
         main_progress.show();
         var challengeNode = fb.path('challenges', challenge_id);
@@ -211,16 +212,16 @@ var Router = (function () {
         var membersData;
         var filesData;
         var messagesData;
-        function renderUI() {
+        renderUI = function () {
             var currentUserId = fb.user.uid;
             if (all_defined(challengeData, membersData, filesData, messagesData)) {
-                this.redirect("challenge", {
+                _this.redirect("challenge", {
                     "challenge": challengeData,
                     "users": membersData,
                     "files": filesData,
                     "messages": messagesData
                 }, challenge_id);
-                this.render_icons();
+                _this.render_icons();
                 var mi = $("#messageInput");
                 $("#send").click(function () {
                     var text = mi.val();
@@ -268,7 +269,7 @@ var Router = (function () {
                 filesNode.off('value', filesListener);
                 messagesNode.off('value', messagesListener);
             });
-        }
+        };
         var challengeListener = function (snapshot) {
             challengeData = snapshot.val();
             renderUI();

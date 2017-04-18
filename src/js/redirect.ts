@@ -224,7 +224,7 @@ class Router {
     var filesData;
     var messagesData;
 
-    function renderUI() {
+    renderUI = () => {
       var currentUserId = fb.user.uid;
       if (all_defined(challengeData, membersData, filesData, messagesData)) {
         this.redirect("challenge", {
