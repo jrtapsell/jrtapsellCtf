@@ -91,4 +91,4 @@ gulp.task('ts', function() {
 });
 
 gulp.task('default', [ 'html', 'ts', 'template', 'settings', 'sw', 'css', 'app', 'img']);
-gulp.task('lint', [ 'js_lint', 'js_lint_sw', 'css_lint']);
+gulp.task('lint', ['js_lint_sw', 'css_lint']);

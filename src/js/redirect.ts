@@ -167,6 +167,10 @@ class Router {
           router.challenge(event.currentTarget.dataset.id);
         });
         this.render_icons();
+        $(".bottom-right-add").click(() => {
+          var dialogue = <Dialogue> $("#dialog")[0];
+          dialogue.showModal();
+        })
       } else {
         $("#page-content").html("<h2>No challenges</h2>");
       }
