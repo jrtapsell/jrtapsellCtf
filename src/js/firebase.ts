@@ -109,7 +109,6 @@ class FirebaseWrapper {
 }
 
 var fb = new FirebaseWrapper(firebase);
-firebase = undefined;
 
 $(() => {
   fb.authUpdate((user) => {
