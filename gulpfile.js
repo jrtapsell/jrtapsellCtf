@@ -10,8 +10,7 @@ const jshint = require('gulp-jshint');
 var csslint = require('gulp-csslint');
 var htmlhint = require("gulp-htmlhint");
 var ts = require('gulp-typescript');
-
-var handlebars = require('./src/js/handlebars.js');
+var handlebars = require('handlebars');
 
 const deploy = "deploy/static/";
 

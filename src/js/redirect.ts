@@ -123,7 +123,7 @@ class Router {
         var id = item.dataset.id;
         var jq_item = $(item);
         jq_item.click(function () {
-          router.user(id);
+          this.user(id);
         });
       });
       main_progress.hide(function () {
@@ -144,7 +144,7 @@ class Router {
       } else {
         $("#page-content").html("<h2>No such user</h2>");
       }
-      main_progress.hide(function () {
+      main_progress.hide(() => {
         usersNode.off("value", listener);
       });
     };

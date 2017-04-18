@@ -116,7 +116,7 @@ var Router = (function () {
                 var id = item.dataset.id;
                 var jq_item = $(item);
                 jq_item.click(function () {
-                    router.user(id);
+                    this.user(id);
                 });
             });
             main_progress.hide(function () {
