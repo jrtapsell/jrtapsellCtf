@@ -47,6 +47,7 @@ $(function () {
         jq_item.attr("title", user_data.name);
         $(jq_item).click(function () {
           router.user(id);
+          return false;
         })
       });
       $(".username-auto").each(function (_, item) {
