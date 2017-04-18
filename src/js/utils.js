@@ -1,12 +1,12 @@
 /// <reference path="myTypes.ts" />
 function all_defined() {
-    'use strict';
     var date = [];
     for (var _i = 0; _i < arguments.length; _i++) {
         date[_i - 0] = arguments[_i];
     }
-    for (var index = 0; index < arguments.length; index++) {
-        if (arguments[index] === undefined) {
+    for (var _a = 0, date_1 = date; _a < date_1.length; _a++) {
+        var item = date_1[_a];
+        if (item === undefined) {
             return false;
         }
     }
