@@ -9,6 +9,7 @@ var cleanCSS = require('gulp-clean-css');
 const jshint = require('gulp-jshint');
 var csslint = require('gulp-csslint');
 var htmlhint = require("gulp-htmlhint");
+var ts = require('gulp-typescript');
 
 var handlebars = require('./src/js/handlebars.js');
 
@@ -82,5 +83,11 @@ gulp.task('css_lint', function() {
     .pipe(csslint.formatter());
 });
 
-gulp.task('default', [ 'html', 'js', 'template', 'settings', 'sw', 'css', 'app', 'img']);
+gulp.task('ts', function() {
+  return tsResult = gulp.src('src/js/*.ts')
+    .pipe(ts({}))
+    .pipe(gulp.dest(deploy + "js"));
+});
+
+gulp.task('default', [ 'html', 'ts', 'template', 'settings', 'sw', 'css', 'app', 'img']);
 gulp.task('lint', [ 'js_lint', 'js_lint_sw', 'css_lint']);
