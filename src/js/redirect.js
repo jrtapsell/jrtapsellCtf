@@ -28,7 +28,6 @@ var ProgressManager = (function () {
     return ProgressManager;
 }());
 var main_progress = new ProgressManager("#statusBar");
-var router = new Router();
 var Router = (function () {
     function Router() {
     }
@@ -295,19 +294,19 @@ var Router = (function () {
         switch (pathname) {
             case "":
             case "/":
-                router.index();
+                this.index();
                 return;
             case "/users":
             case "/users/":
-                router.users();
+                this.users();
                 return;
             case "/challenges":
             case "/challenges/":
-                router.challenges();
+                this.challenges();
                 return;
             case "/logout":
             case "/logout/":
-                router.logout();
+                this.logout();
                 return;
         }
         var match = pathname.match("\/([^/]*)\/([^/]+)/?");
@@ -316,10 +315,10 @@ var Router = (function () {
             var id = match[2];
             switch (pageName) {
                 case "challenge":
-                    router.challenge(id);
+                    this.challenge(id);
                     return;
                 case "user":
-                    router.user(id);
+                    this.user(id);
                     return;
             }
         }
@@ -327,6 +326,7 @@ var Router = (function () {
     };
     return Router;
 }());
+var router = new Router();
 $(function () {
     window.onpopstate = function (event) {
         router.redirect_to_url(event.currentTarget.location.pathname);

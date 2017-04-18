@@ -34,8 +34,6 @@ class ProgressManager {
 
 var main_progress = new ProgressManager("#statusBar");
 
-var router = new Router();
-
 class Router {
   static redirect_log(color, messageContents, data?) {
     console.colourLog("#00F", color, messageContents, data);
@@ -319,19 +317,19 @@ class Router {
     switch (pathname) {
       case "":
       case "/":
-        router.index();
+        this.index();
         return;
       case "/users":
       case "/users/":
-        router.users();
+        this.users();
         return;
       case "/challenges":
       case "/challenges/":
-        router.challenges();
+        this.challenges();
         return;
       case "/logout":
       case "/logout/":
-        router.logout();
+        this.logout();
         return;
     }
     var match = pathname.match("\/([^/]*)\/([^/]+)/?");
@@ -340,16 +338,18 @@ class Router {
       var id = match[2];
       switch (pageName) {
         case "challenge":
-          router.challenge(id);
+          this.challenge(id);
           return;
         case "user":
-          router.user(id);
+          this.user(id);
           return;
       }
     }
     this.load_error("Page not found");
   }
 }
+
+var router = new Router();
 
 $(function () {
   window.onpopstate = function (event) {
