@@ -62,7 +62,7 @@ var fb;
         ret = ret.child(name);
       }
       log("#0F0", "Created node " + text);
-      return new WrappedNode(text, ret);
+      return new WrappedNode(ret, text);
     },
     /** Calls the callback when the auth state changes. */
     "authUpdate": (callback) => {
