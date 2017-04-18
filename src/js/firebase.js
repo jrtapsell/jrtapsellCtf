@@ -23,26 +23,29 @@ var fb;
     }
 
     on(type, callback) {
-    log("#FF0", "Requested callback on " + this.text);
-    return this.node.on(type, callback);
+      log("#FF0", "Requested callback on " + this.text);
+      return this.node.on(type, callback);
     }
 
     off(type, callback) {
-    log("#0FF", "Disconnecting callback on " + this.text);
-    return this.node.off(type, callback);
+      log("#0FF", "Disconnecting callback on " + this.text);
+      return this.node.off(type, callback);
     }
-    once (type, callback) {
-    log("#F0F", "Single use callback on " + this.text);
-    return this.node.once(type, callback);
-  }
-   push (data) {
-    log("#FFF", "Pushing data on " + this.text, data);
-    return this.node.push(data);
-  }
-    set (data) {
-    log("#00F", "Setting data on " + this.text, data);
-    return this.node.set(data);
-  }
+
+    once(type, callback) {
+      log("#F0F", "Single use callback on " + this.text);
+      return this.node.once(type, callback);
+    }
+
+    push(data) {
+      log("#FFF", "Pushing data on " + this.text, data);
+      return this.node.push(data);
+    }
+
+    set(data) {
+      log("#00F", "Setting data on " + this.text, data);
+      return this.node.set(data);
+    }
   }
   log("#F00", "Initialising firebase");
   firebase.initializeApp(config);
@@ -52,7 +55,7 @@ var fb;
     /* The current time. */
     "now": firebase.database.ServerValue.TIMESTAMP,
     /* Gets a node with a path made of the arguments to this method. */
-    "path": function() {
+    "path": function () {
       var ret = firebase.database().ref("/");
       var text = "/";
       for (var i = 0; i < arguments.length; i++) {

@@ -48,7 +48,7 @@ $(function () {
         $(jq_item).click(function () {
           router.user(id);
           return false;
-        })
+        });
       });
       $(".username-auto").each(function (_, item) {
         var id = item.dataset.id;

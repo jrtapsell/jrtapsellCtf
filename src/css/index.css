@@ -1,19 +1,22 @@
 #statusBar {
+    display: none;
     width: 100%;
-    display: none
 }
 
 .back-unstarted {
     background-color: lightblue;
 }
+
 .back-unsolved {
     background-color: indianred;
 }
+
 .back-solved {
     background-color: lightgreen;
 }
+
 .tall-button {
-    height:3em;
+    height: 3em;
 }
 
 .card-title {
@@ -21,20 +24,20 @@
 }
 
 .plain-card-title {
+    background-color: #CCC !important;
     color: #fff;
     height: 176px;
-    background-color: #CCC !important;
 }
 
 .upload-card {
-    background: url('https://cdn.rawgit.com/google/material-design-icons/master/file/svg/production/ic_cloud_upload_48px.svg') center / cover;
+    background: url('https://cdn.rawgit.com/google/material-design-icons/master/file/svg/production/ic_cloud_upload_48px.svg') center / cover #CCC;
 }
 
 .mdl-list__item--three-line .mdl-list__item-primary-content {
     height: auto;
 }
 
-li.mdl-list__item.mdl-list__item--three-line {
+.mdl-list__item {
     height: auto;
 }
 
@@ -43,29 +46,23 @@ li.mdl-list__item.mdl-list__item--three-line {
 }
 
 .square-icon {
-    height: 2em;
-    width: 2em;
     background-size: 100%;
     border-radius: 0.5em;
+    box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.1);
     display: inline-block;
-    box-shadow: 0.2em 0.2em 0.2em rgba(0,0,0,0.1);
+    height: 2em;
+    width: 2em;
 }
 
 .message-icon {
-    border-radius: 0.3em;
     background-size: 100%;
-}
-
-.message-back {
-    background: rgba(0,0,0,0.2);
-    border-radius: 1em;
-    box-shadow: 0.2em 0.2em 0.2em rgba(0,0,0,0.1);
+    border-radius: 0.3em;
 }
 
 .message-pre {
     display: inline-block;
-    padding-top: 0;
     margin-top: 0;
+    padding-top: 0;
 }
 
 .right {
@@ -78,6 +75,6 @@ li.mdl-list__item.mdl-list__item--three-line {
 
 .centered-big-icon {
     height: 20em;
-    width: 20em;
     margin: auto;
+    width: 20em;
 }

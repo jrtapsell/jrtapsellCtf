@@ -6,6 +6,8 @@ var declare = require('gulp-declare');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
+const jshint = require('gulp-jshint');
+var csslint = require('gulp-csslint');
 
 var handlebars = require('./src/js/handlebars.js');
 
@@ -61,4 +63,17 @@ gulp.task('settings', function(){
     .pipe(gulp.dest('deploy/'))
 });
 
+gulp.task('js_lint', function() {
+  return gulp.src('src/js/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
+gulp.task('css_lint', function() {
+  gulp.src('src/css/*.css')
+    .pipe(csslint())
+    .pipe(csslint.formatter());
+});
+
 gulp.task('default', [ 'html', 'js', 'template', 'settings', 'sw', 'css', 'app', 'img']);
+gulp.task('lint', [ 'js_lint', 'css_lint']);
