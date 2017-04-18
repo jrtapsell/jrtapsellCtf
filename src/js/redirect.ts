@@ -119,7 +119,7 @@ class Router {
       } else {
         $("#page-content").html("<h2>No users</h2>");
       }
-      $(".user-card").each(function (_, item) {
+      $(".user-card").each((_, item) => {
         var id = item.dataset.id;
         var jq_item = $(item);
         jq_item.click(function () {
