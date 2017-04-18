@@ -16,9 +16,38 @@ var fb;
     messagingSenderId: "706159874560"
   };
 
+  class WrappedNode {
+    constructor(node, text) {
+      this.node = node;
+      this.text = text;
+    }
+
+    on(type, callback) {
+    log("#FF0", "Requested callback on " + this.text);
+    return ret.on(type, callback);
+    }
+
+    off(type, callback) {
+    log("#0FF", "Disconnecting callback on " + this.text);
+    return ret.off(type, callback);
+    }
+    once (type, callback) {
+    log("#F0F", "Single use callback on " + this.text);
+    return ret.once(type, callback);
+  }
+   push (data) {
+    log("#FFF", "Pushing data on " + this.text, data);
+    return ret.push(data);
+  }
+    set (data) {
+    log("#00F", "Setting data on " + this.text, data);
+    return ret.set(data);
+  }
+  }
   log("#F00", "Initialising firebase");
   firebase.initializeApp(config);
   log("#F00", "Initialised firebase");
+
   fb = {
     /* The current time. */
     "now": firebase.database.ServerValue.TIMESTAMP,
@@ -33,28 +62,7 @@ var fb;
         ret = ret.child(name);
       }
       log("#0F0", "Created node " + text);
-      return {
-        "on": (type, callback) => {
-          log("#FF0", "Requested callback on " + text);
-          return ret.on(type, callback);
-        },
-        "off": (type, callback) => {
-          log("#0FF", "Disconnecting callback on " + text);
-          return ret.off(type, callback);
-        },
-        "once": (type, callback) => {
-          log("#F0F", "Single use callback on " + text);
-          return ret.once(type, callback);
-        },
-        "push": (data) => {
-          log("#FFF", "Pushing data on " + text, data);
-          return ret.push(data);
-        },
-        "set": (data) => {
-          log("#00F", "Setting data on " + text, data);
-          return ret.set(data);
-        }
-      };
+      return new WrappedNode(text, ret);
     },
     /** Calls the callback when the auth state changes. */
     "authUpdate": (callback) => {
