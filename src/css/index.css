@@ -78,3 +78,9 @@
     margin: auto;
     width: 20em;
 }
+
+.bottom-right-add {
+    position: absolute;
+    bottom: 2em;
+    right: 2em;
+}
