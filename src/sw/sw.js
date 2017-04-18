@@ -13,12 +13,14 @@ const EXTENSION_WHITELIST = [".js", ".css", ".woff2"];
 const DOMAIN_WHITELIST = ["ctf.jrtapsell.co.uk", "cdn.rawgit.com", "fonts.gstatic.com", "googleusercontent.com", "githubusercontent.com", "fonts.googleapis.com"];
 
 function shouldCache(url) {
-  for (extension of EXTENSION_WHITELIST) {
+  
+  for (let extension of EXTENSION_WHITELIST) {
     if (url.endsWith(extension)) {
       return true;
     }
   }
-  for (domain of DOMAIN_WHITELIST) {
+
+  for (let domain of DOMAIN_WHITELIST) {
     if (url.indexOf(domain) != -1) {
       return true;
     }

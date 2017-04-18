@@ -69,6 +69,12 @@ gulp.task('js_lint', function() {
     .pipe(jshint.reporter('default'));
 });
 
+gulp.task('js_lint_sw', function() {
+  return gulp.src('src/sw/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
 gulp.task('css_lint', function() {
   gulp.src('src/css/*.css')
     .pipe(csslint())
@@ -76,4 +82,4 @@ gulp.task('css_lint', function() {
 });
 
 gulp.task('default', [ 'html', 'js', 'template', 'settings', 'sw', 'css', 'app', 'img']);
-gulp.task('lint', [ 'js_lint', 'css_lint']);
+gulp.task('lint', [ 'js_lint', 'js_lint_sw', 'css_lint']);

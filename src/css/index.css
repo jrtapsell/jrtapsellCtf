@@ -24,7 +24,7 @@
 }
 
 .plain-card-title {
-    background-color: #CCC !important;
+    background-color: #CCC;
     color: #fff;
     height: 176px;
 }
