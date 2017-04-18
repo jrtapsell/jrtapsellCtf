@@ -55,11 +55,11 @@ class FirebaseWrapper {
     });
     firebase_log("#F00", "Initialised firebase");
 
+    this.now = firebase.database.ServerValue.TIMESTAMP;
+    this.firebase = firebase;
     this.authUpdate((user) => {
       this.user = user;
     });
-    this.now = firebase.database.ServerValue.TIMESTAMP;
-    this.firebase = firebase;
   }
 
   now;
@@ -109,6 +109,7 @@ class FirebaseWrapper {
 }
 
 var fb = new FirebaseWrapper(firebase);
+firebase = undefined;
 
 $(() => {
   fb.authUpdate((user) => {
