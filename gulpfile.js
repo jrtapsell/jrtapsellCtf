@@ -8,6 +8,7 @@ var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
 const jshint = require('gulp-jshint');
 var csslint = require('gulp-csslint');
+var htmlhint = require("gulp-htmlhint");
 
 var handlebars = require('./src/js/handlebars.js');
 
@@ -76,7 +77,7 @@ gulp.task('js_lint_sw', function() {
 });
 
 gulp.task('css_lint', function() {
-  gulp.src('src/css/*.css')
+  return gulp.src('src/css/*.css')
     .pipe(csslint())
     .pipe(csslint.formatter());
 });
