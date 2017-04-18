@@ -1,19 +1,12 @@
 {{setTitle name}}
-<table>
-    <tr>
-        <th>
-            Attribute
-        </th>
-        <th>
-            Value
-        </th>
-    </tr>
-    <tr>
-        <td>
-            Name
-        </td>
-        <td>
-            {{name}}
-        </td>
-    </tr>
-</table>
+<div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell mdl-grid mdl-cell--8-col">
+        <div class="mdl-layout-spacer"></div>
+        <img class="mdl-cell mdl-grid mdl-cell--4-col" src="{{image}}">
+        <div class="mdl-layout-spacer"></div>
+    </div>
+    <h2>Name</h2><span>{{name}}</span>
+    <h2>Provider</h2><span>{{provider}}</span>
+    <h2>Email</h2><span>{{email}}</span>
+    <h2>UID</h2><span>{{uid}}</span>
+<div class="mdl-layout-spacer"></div>
