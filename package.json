@@ -9,6 +9,10 @@
     "gulp-html-lint": "0.0.1"
   },
   "devDependencies": {
+    "@types/firebase": "^2.4.31",
+    "@types/handlebars": "^4.0.32",
+    "@types/jquery": "^2.0.41",
+    "@types/material-design-lite": "^1.1.14",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.0.4",
     "gulp-concat": "^2.6.1",

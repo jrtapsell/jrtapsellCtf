@@ -1,3 +1,5 @@
+/// <reference path="myTypes.ts" />
+
 $(function () {
   var drawer = $('.mdl-layout')[0].MaterialLayout;
   

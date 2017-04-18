@@ -1,69 +1,47 @@
+/// <reference path="myTypes.ts" />
+
 class ProgressManager {
   private deregister;
-  constructor(selector) {
+  private selector;
+  private active = false;
+
+  constructor(selector: string) {
     this.deregister = undefined;
     this.selector = $(selector);
-    show() {
-      if (!active) {
-        active = true;
-        if (deregister) {
-          deregister();
-          deregister = null;
-        }
-        console.time("main progress shown");
-        jq.show();
-      }
-    };
-
-    hide(on_move) {
-      if (active) {
-        active = false;
-        deregister = on_move;
-        console.timeEnd("main progress shown");
-        jq.hide();
-      }
-    };
   }
-}
-var main_progress = {};
 
-$(function () {
-  var deregister;
-  var jq = $("#statusBar");
-  var active = false;
-
-  main_progress.show = function () {
-    if (!active) {
-      active = true;
-      if (deregister) {
-        deregister();
-        deregister = null;
+  show(): void {
+    if (!this.active) {
+      this.active = true;
+      if (this.deregister) {
+        this.deregister();
+        this.deregister = null;
       }
       console.time("main progress shown");
-      jq.show();
+      this.selector.show();
     }
-  };
+  }
 
-  main_progress.hide = function (on_move) {
-    if (active) {
-      active = false;
-      deregister = on_move;
+  hide(on_move?: () => void) {
+    if (this.active) {
+      this.active = false;
+      this.deregister = on_move;
       console.timeEnd("main progress shown");
-      jq.hide();
+      this.selector.hide();
     }
   };
-});
+}
 
-var router = {};
+var main_progress = new ProgressManager("#statusBar");
 
-$(function () {
-  'use strict';
+var router = new Router();
 
-  function redirect_log(color, messageContents, data) {
+class Router {
+  static redirect_log(color, messageContents, data?) {
     console.colourLog("#00F", color, messageContents, data);
   }
 
-  function render_icons() {
+  private render_icons() {
     fb.path("users").once("value", function (data) {
       var users = data.val();
       $(".user-icon").each(function (_, item) {
@@ -86,24 +64,24 @@ $(function () {
     });
   }
 
-  function load_error(_, message) {
+  load_error(message) {
     $("#page-content").html("<h1>" + message + "</h1>");
     main_progress.hide();
   }
 
-  function redirect(page, contents, id) {
-    redirect_log("#F00", "Render started", [page, contents]);
+  private redirect(page, contents?, id?) {
+    Router.redirect_log("#F00", "Render started", [page, contents]);
     $("#page-content").html(CTF.pages[page](contents));
-    redirect_log("#F00", "Render completed ");
+    Router.redirect_log("#F00", "Render completed ");
     var tail = !!id ? page + "/" + id : page;
     history.pushState(null, "", "https://ctf.jrtapsell.co.uk/" + tail + "/");
     componentHandler.upgradeDom();
   }
 
-  router.login = function() {
-    redirect_log("#0F0", "Login navigation started");
+  login() {
+    Router.redirect_log("#0F0", "Login navigation started");
     main_progress.show();
-    redirect("login");
+    this.redirect("login");
     var unsubscribe = fb.authUpdate(function (user) {
       if (user) {
         unsubscribe();
@@ -120,22 +98,22 @@ $(function () {
    *
    * @return {void}
    */
-  router.index = function() {
-    redirect_log("#0F0", "Index navigation started");
+  index() {
+    Router.redirect_log("#0F0", "Index navigation started");
     main_progress.show();
-    redirect("index", null);
+    this.redirect("index");
     main_progress.hide();
   };
 
-  router.users = function() {
-    redirect_log("#0F0", "Users navigation started");
+  users() {
+    Router.redirect_log("#0F0", "Users navigation started");
     main_progress.show();
     var usersNode = fb.path('users');
     var listener = function (snapshot) {
       var value = snapshot.val();
       if (value) {
         var users = Object.values(value);
-        redirect("users", {"users": users});
+        this.redirect("users", {"users": users});
         $(".card-title").each(function (_, item) {
           var current = $(item);
           current.css("background", "url(" + current.attr("data-background") + ") center / cover");
@@ -157,14 +135,14 @@ $(function () {
     usersNode.on('value', listener);
   };
 
-  router.user = function(user_id) {
-    redirect_log("#0F0", "User navigation started");
+  user(user_id) {
+    Router.redirect_log("#0F0", "User navigation started");
     main_progress.show();
     var usersNode = fb.path('users', user_id);
     var listener = function (snapshot) {
       var value = snapshot.val();
       if (value) {
-        redirect("user", value, user_id);
+        this.redirect("user", value, user_id);
       } else {
         $("#page-content").html("<h2>No such user</h2>");
       }
@@ -175,8 +153,8 @@ $(function () {
     usersNode.on('value', listener);
   };
 
-  router.challenges = function() {
-    redirect_log("#0F0", "Challenges navigation started");
+  challenges() {
+    Router.redirect_log("#0F0", "Challenges navigation started");
     main_progress.show();
 
     function renderUI() {
@@ -186,11 +164,11 @@ $(function () {
           temp[key] = value;
           temp[key].users = usersData[key];
         });
-        redirect("challenges", {"challenges": temp});
+        this.redirect("challenges", {"challenges": temp});
         $(".challenge-row").click(function (event) {
           router.challenge(event.currentTarget.dataset.id);
         });
-        render_icons();
+        this.render_icons();
       } else {
         $("#page-content").html("<h2>No challenges</h2>");
       }
@@ -221,8 +199,8 @@ $(function () {
   };
 
 
-  router.logout = function() {
-    redirect_log("#0F0", "Logout navigation started");
+  logout() {
+    Router.redirect_log("#0F0", "Logout navigation started");
     main_progress.show();
     var temp = fb.authUpdate(function (user) {
       if (!user) {
@@ -234,8 +212,8 @@ $(function () {
     main_progress.hide();
   };
 
-  router.challenge = function(challenge_id) {
-    redirect_log("#0F0", "Loading challenge");
+  challenge(challenge_id) {
+    Router.redirect_log("#0F0", "Loading challenge");
     main_progress.show();
 
     var challengeNode = fb.path('challenges', challenge_id);
@@ -251,13 +229,13 @@ $(function () {
     function renderUI() {
       var currentUserId = fb.user.uid;
       if (all_defined(challengeData, membersData, filesData, messagesData)) {
-        redirect("challenge", {
+        this.redirect("challenge", {
           "challenge": challengeData,
           "users": membersData,
           "files": filesData,
           "messages": messagesData
         }, challenge_id);
-        render_icons();
+        this.render_icons();
         var mi = $("#messageInput");
         $("#send").click(function () {
           var text = mi.val();
@@ -269,11 +247,11 @@ $(function () {
           membersNode.child(currentUserId).set(true);
         });
         if (currentUserId in membersData) {
-          join.attr("disabled", true);
+          join.attr("disabled", "true");
         }
         var solved = $("#solve");
         if (challengeData.status === "solved") {
-          solved.attr("disabled", true);
+          solved.attr("disabled", "true");
         }
         solved.click(function () {
           challengeNode.child("status").set("solved");
@@ -336,7 +314,7 @@ $(function () {
     messagesNode.on('value', messagesListener);
   };
 
-  function redirect_to_url(pathname) {
+  redirect_to_url(pathname?: string) {
     pathname = !!pathname ? pathname : window.location.pathname;
     switch (pathname) {
       case "":
@@ -369,18 +347,20 @@ $(function () {
           return;
       }
     }
-    load_error(undefined, "Page not found");
+    this.load_error("Page not found");
   }
+}
 
+$(function () {
   window.onpopstate = function (event) {
-    redirect_to_url(event.currentTarget.location.pathname);
+    router.redirect_to_url(event.currentTarget.location.pathname);
   };
 
   fb.authOnce(function (user) {
     if (user) {
-      redirect_to_url();
+      router.redirect_to_url();
     } else {
       router.login();
     }
   });
-});
+})

@@ -1,3 +1,5 @@
+/// <reference path="myTypes.ts" />
+
 (function () {
   'use strict';
   Handlebars.registerHelper("setTitle", function (title) {

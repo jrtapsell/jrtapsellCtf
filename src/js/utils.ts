@@ -1,4 +1,6 @@
-function all_defined() {
+/// <reference path="myTypes.ts" />
+
+function all_defined(...date: Object[]) {
   'use strict';
   for (var index = 0; index < arguments.length; index++) {
     if (arguments[index] === undefined) {

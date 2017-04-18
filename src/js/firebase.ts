@@ -1,9 +1,11 @@
+/// <reference path="myTypes.ts" />
+
 var fb;
 
 ((firebase) => {
   'use strict';
 
-  function log(color, messageContents, data) {
+  function log(color, messageContents, data?) {
     console.colourLog("#F00", color, messageContents, data);
   }
 
@@ -17,6 +19,8 @@ var fb;
   };
 
   class WrappedNode {
+    private node;
+    private text;
     constructor(node, text) {
       this.node = node;
       this.text = text;
@@ -47,6 +51,7 @@ var fb;
       return this.node.set(data);
     }
   }
+  
   log("#F00", "Initialising firebase");
   firebase.initializeApp(config);
   log("#F00", "Initialised firebase");
