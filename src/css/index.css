@@ -75,3 +75,9 @@ li.mdl-list__item.mdl-list__item--three-line {
 .inline-title {
     display: inline-block;
 }
+
+.centered-big-icon {
+    height: 20em;
+    width: 20em;
+    margin: auto;
+}
