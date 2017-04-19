@@ -171,6 +171,17 @@ class Router {
         $(".bottom-right-add").click(() => {
           dialogue.showModal();
         });
+        $("#upload_upload").click(() => {
+          var newNode = challengesNode.push();
+          newNode.set({
+            description: $("#challenge-description").val(),
+            name: $("#challenge-name").val(),
+            status: "unstarted",
+            type: $("#challenge-type").val(),
+            uid: newNode.key
+          });
+          dialogue.close();
+        });
         $("#upload_close").click(function () {
           dialogue.close();
         });
