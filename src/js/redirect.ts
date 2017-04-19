@@ -270,10 +270,12 @@ class Router {
         });
         if (currentUserId in membersData) {
           join.attr("disabled", "true");
+          solved.text("Already joined");
         }
         var solved = $("#solve");
         if (challengeData.status === "solved") {
           solved.attr("disabled", "true");
+          solved.text("Already solved");
         }
         solved.click(function () {
           challengeNode.child("status").set("solved");
