@@ -301,6 +301,7 @@ class Router {
             node.set({"name": $("#file-name").val(), "url": task.snapshot.downloadURL});
           });
         });
+        $("main").addClass("back-" + challengeData.status);
       }
 
 

@@ -5,6 +5,10 @@ $unstarted: hsla(0, $status_saturation, $status_brightness, 0.5);
 $unsolved: hsla(30, $status_saturation, $status_brightness, 0.5);
 $solved: hsla(124, $status_saturation, $status_brightness, 0.5);
 
+#page-content {
+    background: white;
+}
+
 #statusBar {
     display: none;
     width: 100%;
