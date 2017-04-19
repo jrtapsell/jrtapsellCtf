@@ -1,18 +1,25 @@
+$status_saturation: 100%;
+$status_brightness: 100%;
+
+$unstarted: hsla(0, $status_saturation, $status_brightness, 0.5);
+$unsolved: hsla(30, $status_saturation, $status_brightness, 0.5);
+$solved: hsla(124, $status_saturation, $status_brightness, 0.5);
+
 #statusBar {
     display: none;
     width: 100%;
 }
 
 .back-unstarted {
-    background-color: lightblue;
+    background-color: $unstarted;
 }
 
 .back-unsolved {
-    background-color: indianred;
+    background-color: $unsolved;
 }
 
 .back-solved {
-    background-color: lightgreen;
+    background-color: $solved;
 }
 
 .tall-button {
