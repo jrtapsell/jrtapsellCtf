@@ -40,7 +40,11 @@ class WrappedNode {
     set(data: any) {
         firebase_log("#00F", "Setting data on " + this.text, data);
         return this.node.set(data).catch((error) => {
-            console.error("Set failed for node", this.text, data, error);
+            console.error("Set failed for node", this.text, {
+                "nodeName":this.text,
+                "data":data,
+                "user":fb.user,
+                "error": error});
         });
     }
 }
