@@ -88,6 +88,7 @@ class Router {
     });
     $("#google-login").click(fb.googleLogin);
     $("#github-login").click(fb.githubLogin);
+    $("#facebook-login").click(fb.facebookLogin);
     main_progress.hide();
   };
 
