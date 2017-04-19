@@ -22,7 +22,7 @@ class ProgressManager {
     }
   }
 
-  hide(on_move?: () => void) {
+  hide(on_move?: () => void): void {
     if (this.active) {
       this.active = false;
       this.deregister = on_move;
@@ -35,7 +35,7 @@ class ProgressManager {
 var main_progress = new ProgressManager("#statusBar");
 
 class Router {
-  static redirect_log(color, messageContents, data?) {
+  static redirect_log(color: string, messageContents: string, data?: any) {
     console.colourLog("#00F", color, messageContents, data);
   }
 
@@ -62,12 +62,12 @@ class Router {
     });
   }
 
-  load_error(message) {
+  load_error(message: string) {
     $("#page-content").html("<h1>" + message + "</h1>");
     main_progress.hide();
   }
 
-  private redirect(page, contents?, id?) {
+  private redirect(page: string, contents?: any, id?: string|number): void {
     Router.redirect_log("#F00", "Render started", [page, contents]);
     $("#page-content").html(CTF.pages[page](contents));
     Router.redirect_log("#F00", "Render completed ");
@@ -76,7 +76,7 @@ class Router {
     componentHandler.upgradeDom();
   }
 
-  login() {
+  login(): void {
     Router.redirect_log("#0F0", "Login navigation started");
     main_progress.show();
     this.redirect("login");
@@ -96,14 +96,14 @@ class Router {
    *
    * @return {void}
    */
-  index() {
+  index(): void {
     Router.redirect_log("#0F0", "Index navigation started");
     main_progress.show();
     this.redirect("index");
     main_progress.hide();
   };
 
-  users() {
+  users(): void {
     Router.redirect_log("#0F0", "Users navigation started");
     main_progress.show();
     var usersNode = fb.path('users');
@@ -133,7 +133,7 @@ class Router {
     usersNode.on('value', listener);
   };
 
-  user(user_id) {
+  user(user_id: string): void {
     Router.redirect_log("#0F0", "User navigation started");
     main_progress.show();
     var usersNode = fb.path('users', user_id);
@@ -151,7 +151,7 @@ class Router {
     usersNode.on('value', listener);
   };
 
-  challenges() {
+  challenges(): void {
     Router.redirect_log("#0F0", "Challenges navigation started");
     main_progress.show();
 
@@ -215,7 +215,7 @@ class Router {
   };
 
 
-  logout() {
+  logout(): void {
     Router.redirect_log("#0F0", "Logout navigation started");
     main_progress.show();
     var temp = fb.authUpdate(function (user) {
@@ -228,7 +228,7 @@ class Router {
     main_progress.hide();
   };
 
-  challenge(challenge_id) {
+  challenge(challenge_id: string): void {
     Router.redirect_log("#0F0", "Loading challenge");
     main_progress.show();
 
@@ -337,7 +337,7 @@ class Router {
     messagesNode.on('value', messagesListener);
   };
 
-  redirect_to_url(pathname?: string) {
+  redirect_to_url(pathname?: string): void {
     pathname = !!pathname ? pathname : window.location.pathname;
     switch (pathname) {
       case "":
@@ -381,7 +381,7 @@ $(function () {
     router.redirect_to_url(event.currentTarget.location.pathname);
   };
 
-  fb.authOnce(function (user) {
+  fb.authOnce(function (user: FirebaseUser) {
     if (user) {
       router.redirect_to_url();
     } else {

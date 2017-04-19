@@ -9,10 +9,25 @@ interface Element {
     };
 }
 
+type callbackTypes = "value";
+
+
 interface MaterialLayout extends HTMLElement {
     MaterialLayout: {
         "toggleDrawer": () => void
     };
+}
+
+interface ProviderId {
+    providerId: string
+}
+
+interface FirebaseUser {
+    photoURL: string
+    displayName: string
+    uid: string
+    email: string
+    providerData: ProviderId[]
 }
 
 interface Dialogue extends HTMLElement {

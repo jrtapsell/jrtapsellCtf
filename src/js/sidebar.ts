@@ -1,9 +1,9 @@
 /// <reference path="myTypes.ts" />
 
 $(function () {
-  function toggleDraw(){
-      (<MaterialLayout>$('.mdl-layout')[0]).MaterialLayout.toggleDrawer();
-      }
+  function toggleDraw(){(
+    <MaterialLayout>$('.mdl-layout')[0]).MaterialLayout.toggleDrawer();
+  }
 
   $("#nav-challenges").click(function () {
     router.challenges();
