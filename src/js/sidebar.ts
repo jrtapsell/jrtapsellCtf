@@ -1,19 +1,20 @@
 /// <reference path="myTypes.ts" />
 
 $(function () {
-  var layout = <MaterialLayout>$('.mdl-layout')[0];
-  var drawer = layout.MaterialLayout;
-  
+  function toggleDraw(){
+      (<MaterialLayout>$('.mdl-layout')[0]).MaterialLayout.toggleDrawer();
+      }
+
   $("#nav-challenges").click(function () {
     router.challenges();
-    drawer.toggleDrawer();
+    toggleDraw();
   });
   $("#nav-users").click(function () {
     router.users();
-    drawer.toggleDrawer();
+    toggleDraw();
   });
   $("#nav-logout").click(function () {
     router.logout();
-    drawer.toggleDrawer();
+    toggleDraw();
   });
 });
