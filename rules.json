@@ -85,7 +85,7 @@
           "$other": {
             ".validate": "false"
           },
-          ".write": "auth != null && newData.parent().parent().parent().child('users').child(auth.uid).val() != null && auth.uid == newData.child('user').val()"
+          ".write": "data.val() == null && (auth != null && newData.parent().parent().parent().child('users').child(auth.uid).val() != null && auth.uid == newData.child('user').val())"
         }
       }
     },
@@ -94,7 +94,7 @@
       "$chall_id": {
         "$member_id": {
           ".validate": "newData.isBoolean()",
-          ".write": "auth != null && newData.parent().parent().parent().child('users').child(auth.uid).val() != null && auth.uid == $member_id"
+          ".write": "data.val() == null && (auth != null && newData.parent().parent().parent().child('users').child(auth.uid).val() != null && auth.uid == $member_id)"
         }
       }
     }
