@@ -21,7 +21,7 @@ path /messages/{chall_id} {
     read() { isUser() }
 }
 path /messages/{chall_id}/{message_id} is Message {
-    write() { isThisUser(this.user) }
+    create() { isThisUser(this.user) }
 }
 
 path /files {
@@ -33,7 +33,7 @@ path /memberships {
 }
 
 path /memberships/{chall_id}/{member_id} is Boolean {
-  write() { isThisUser(member_id) }
+  create() { isThisUser(member_id) }
 }
 
 type User {
