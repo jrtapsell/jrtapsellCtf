@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var gulp_handlebars = require('gulp-handlebars');
 var header = require('gulp-header');
@@ -6,13 +8,13 @@ var declare = require('gulp-declare');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
-const jshint = require('gulp-jshint');
+var jshint = require('gulp-jshint');
 var csslint = require('gulp-csslint');
 var htmlhint = require("gulp-htmlhint");
 var ts = require('gulp-typescript');
 var handlebars = require('handlebars');
-
-const deploy = "deploy/static/";
+var sass = require('gulp-sass');
+var deploy = "deploy/static/";
 
 gulp.task('template', function(){
   gulp.src('src/templates/*.hbs')
@@ -82,13 +84,20 @@ gulp.task('css_lint', function() {
     .pipe(csslint.formatter());
 });
 
+
+gulp.task('scss', function () {
+  return gulp.src('src/css/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(deploy + 'css'));
+});
+
 gulp.task('ts', function() {
-  return tsResult = gulp.src('src/js/*.ts')
+  return gulp.src('src/js/*.ts')
     .pipe(ts({
       target:'ES6'
     }))
     .pipe(gulp.dest(deploy + "js"));
 });
 
-gulp.task('default', [ 'html', 'ts', 'template', 'settings', 'sw', 'css', 'app', 'img']);
+gulp.task('default', [ 'html', 'ts', 'template', 'settings', 'sw', 'scss', 'app', 'img']);
 gulp.task('lint', ['js_lint_sw', 'css_lint']);
