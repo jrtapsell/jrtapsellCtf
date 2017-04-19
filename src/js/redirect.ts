@@ -306,6 +306,11 @@ class Router {
 
 
       main_progress.hide(function () {
+        for (var current of $("main").attr("class").split(" ")) {
+          if (current.startsWith("back-")) {
+            $("main").removeClass(current);
+          }
+        }
         challengeNode.off('value', challengeListener);
         membersNode.off('value', membersListener);
         filesNode.off('value', filesListener);
