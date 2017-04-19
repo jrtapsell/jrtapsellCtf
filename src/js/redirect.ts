@@ -268,7 +268,7 @@ class Router {
             }
           })
         });
-        if (currentUserId in membersData) {
+        if (membersData && currentUserId in membersData) {
           join.attr("disabled", "true");
           join.text("Already joined");
         }
