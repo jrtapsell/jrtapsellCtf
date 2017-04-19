@@ -264,7 +264,7 @@ class Router {
           const statusNode = challengeNode.child("status");
           statusNode.once('value', (snapshot) => {
             if (snapshot.val() === 'unstarted') {
-              statusNode.set("started");
+              statusNode.set("unsolved");
             }
           })
         });
