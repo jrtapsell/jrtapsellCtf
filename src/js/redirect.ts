@@ -261,6 +261,12 @@ class Router {
         var join = $("#join");
         join.click(function () {
           membersNode.child(currentUserId).set(true);
+          const statusNode = challengeNode.child("status");
+          statusNode.once('value', (snapshot) => {
+            if (snapshot.val() === 'unstarted') {
+              statusNode.set("started");
+            }
+          })
         });
         if (currentUserId in membersData) {
           join.attr("disabled", "true");
