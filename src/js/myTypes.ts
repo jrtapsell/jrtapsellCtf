@@ -5,7 +5,7 @@ interface Console {
 
 interface Element {
     dataset:{
-        [key:string]:string
+        [key:string]:string | undefined
     };
 }
 
@@ -45,14 +45,13 @@ interface Object {
 
 declare var CTF: {
     pages: {
-        challenge: () => {},
-        challenges: () => {},
-        home: () => {},
-        index: () => {},
-        login: () => {},
-        user: () => {},
-        users: () => {}
+        [key:string]: (data? : Object) => string
     }
 };
 
-declare var firebase: any;
+declare var firebase: {
+    "auth": any,
+    "storage": any,
+    "database": any,
+    "initializeApp": any
+};
