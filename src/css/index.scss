@@ -9,6 +9,10 @@ $solved: hsla(124, $status_saturation, $status_brightness, 0.5);
     background: white;
 }
 
+main {
+    display: flex;
+}
+
 #statusBar {
     display: none;
     width: 100%;
