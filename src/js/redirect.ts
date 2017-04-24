@@ -171,7 +171,9 @@ class Router {
         var temp = {};
         $.each(challengesData, function (key, value) {
           temp[key] = value;
-          temp[key].users = usersData[key];
+          if (usersData) {
+            temp[key].users = usersData[key];
+          }
         });
         this.redirect("challenges", {"challenges": temp});
         $(".challenge-row").click(function (event) {
