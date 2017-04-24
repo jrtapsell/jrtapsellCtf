@@ -196,8 +196,6 @@ class Router {
         $("#upload_close").click(function () {
           dialogue.close();
         });
-      } else {
-        $("#page-content").html("<h2>No challenges</h2>");
       }
 
       main_progress.hide(function () {
