@@ -92,6 +92,16 @@ class Router {
     main_progress.hide();
   };
 
+  link(): void {
+    Router.redirect_log("#0F0", "Link navigation started");
+    main_progress.show();
+    this.redirect("link");
+    $("#google-login").click(fb.googleLink);
+    $("#github-login").click(fb.githubLink);
+    $("#facebook-login").click(fb.facebookLink);
+    main_progress.hide();
+  };
+
   /**
    * Routes to the index page
    *
@@ -364,6 +374,10 @@ class Router {
       case "/logout":
       case "/logout/":
         this.logout();
+        return;
+      case "/link/":
+      case "/link":
+        this.link();
         return;
     }
     var match = pathname.match("\/([^/]*)\/([^/]+)/?");

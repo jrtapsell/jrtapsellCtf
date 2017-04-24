@@ -112,6 +112,18 @@ class FirebaseWrapper {
         firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider());
     }
 
+    githubLink(): void {
+        this.user.linkWithPopup(new firebase.auth.GithubAuthProvider())
+    }
+
+    googleLink(): void {
+        this.user.linkWithPopup(new firebase.auth.GoogleAuthProvider())
+    }
+
+    facebookLink(): void {
+        this.user.linkWithPopup(new firebase.auth.FacebookAuthProvider())
+    }
+
     /** Logout the current user. */
     logout(): void {
         firebase_log("#F00", "Logging out");
