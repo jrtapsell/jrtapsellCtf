@@ -1,9 +1,14 @@
 $status_saturation: 79%;
 $status_brightness: 64%;
 
-$unstarted: hsla(0, $status_saturation, $status_brightness, 0.5);
-$unsolved: hsla(30, $status_saturation, $status_brightness, 0.5);
-$solved: hsla(124, $status_saturation, $status_brightness, 0.5);
+$unstarted_light: hsla(0, $status_saturation, $status_brightness, 0.5);
+$unsolved_light: hsla(30, $status_saturation, $status_brightness, 0.5);
+$solved_light: hsla(124, $status_saturation, $status_brightness, 0.5);
+
+
+$unstarted_dark: hsla(0, $status_saturation, $status_brightness, 0.7);
+$unsolved_dark: hsla(30, $status_saturation, $status_brightness, 0.7);
+$solved_dark: hsla(124, $status_saturation, $status_brightness, 0.7);
 
 #page-content {
     background: white;
@@ -19,15 +24,15 @@ main {
 }
 
 .back-unstarted {
-    background-color: $unstarted;
+    background: linear-gradient(45deg,$unstarted_light 0%, $unstarted_dark 50%, $unstarted_light 100%);
 }
 
 .back-unsolved {
-    background-color: $unsolved;
+    background: linear-gradient(45deg,$unsolved_light 0%, $unsolved_dark 50%, $unsolved_light 100%);
 }
 
 .back-solved {
-    background-color: $solved;
+    background: linear-gradient(45deg,$solved_light 0%, $solved_dark 50%, $solved_light 100%);
 }
 
 .tall-button {
