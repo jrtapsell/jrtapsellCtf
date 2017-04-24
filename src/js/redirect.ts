@@ -7,7 +7,7 @@ class ProgressManager {
 
   constructor(selector: string) {
     this.deregister = undefined;
-    this.selector = $(selector);
+    this.selector = selector;
   }
 
   show(): void {
@@ -18,7 +18,7 @@ class ProgressManager {
         this.deregister = null;
       }
       console.time("main progress shown");
-      this.selector.show();
+      $(this.selector).show();
     }
   }
 
@@ -27,7 +27,7 @@ class ProgressManager {
       this.active = false;
       this.deregister = on_move;
       console.timeEnd("main progress shown");
-      this.selector.hide();
+      $(this.selector).hide();
     }
   };
 }
