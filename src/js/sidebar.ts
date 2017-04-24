@@ -17,4 +17,8 @@ $(function () {
     router.logout();
     toggleDraw();
   });
+  $("#nav-link").click(function () {
+    router.link();
+    toggleDraw();
+  });
 });

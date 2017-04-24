@@ -96,9 +96,9 @@ class Router {
     Router.redirect_log("#0F0", "Link navigation started");
     main_progress.show();
     this.redirect("link");
-    $("#google-login").click(fb.googleLink);
-    $("#github-login").click(fb.githubLink);
-    $("#facebook-login").click(fb.facebookLink);
+    $("#google-link").click(fb.googleLink);
+    $("#github-link").click(fb.githubLink);
+    $("#facebook-link").click(fb.facebookLink);
     main_progress.hide();
   };
 
