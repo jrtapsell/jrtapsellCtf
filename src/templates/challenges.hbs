@@ -5,26 +5,22 @@
 <button class="mdl-cell mdl-cell--3-col back-solved tall-button">Solved</button>
 <button class="mdl-cell mdl-cell--3-col tall-button">All</button>
 -->
-<table class="mdl-cell mdl-data-table mdl-js-data-table mdl-cell--12-col">
-    <tr>
-        <th>Challenge</th>
-        <th>Type</th>
-        <th>Status</th>
-        <th>Users</th>
-    </tr>
-    {{#each challenges}}
-    <tr class="back-{{status}} challenge-row" data-id="{{uid}}">
-        <td>{{name}}</td>
-        <td>{{type}}</td>
-        <td>{{status}}</td>
-        <td>
+{{#each challenges}}
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col user-card" data-id="{{uid}}">
+        <div class="mdl-card__title card-title back-{{status}}"></div>
+        <div class="mdl-card__supporting-text">
+            {{name}}
+        </div>
+        <div class="mdl-card__supporting-text">
+            {{type}}
+        </div>
+        <div class="mdl-card__supporting-text">
             {{#each users}}
                 {{userIcon @key}}
             {{/each}}
-        </td>
-    </tr>
-    {{/each}}
-</table>
+        </div>
+    </div>
+{{/each}}
 
 
 
