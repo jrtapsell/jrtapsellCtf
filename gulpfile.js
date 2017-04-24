@@ -99,5 +99,14 @@ gulp.task('ts', function() {
     .pipe(gulp.dest(deploy + "js"));
 });
 
+// or requiring in ES5
+var tslint = require("gulp-tslint");
+
+gulp.task("tslint", function () {
+    return gulp.src("src/js/*.ts")
+      .pipe(tslint())
+      .pipe(tslint.report())
+});
+
 gulp.task('default', [ 'html', 'ts', 'template', 'settings', 'sw', 'scss', 'app', 'img']);
-gulp.task('lint', ['js_lint_sw', 'css_lint']);
+gulp.task('lint', ['js_lint_sw', 'css_lint', 'tslint']);
