@@ -7,9 +7,8 @@
 -->
 {{#each challenges}}
     <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col user-card challenge-row" data-id="{{uid}}">
-        <div class="mdl-card__title card-title back-{{status}}"></div>
-        <div class="mdl-card__supporting-text">
-            {{name}}
+        <div class="mdl-card__title card-title back-{{status}}">
+            <h2 class="mdl-card__title-text">{{name}}</h2>
         </div>
         <div class="mdl-card__supporting-text">
             {{type}}
