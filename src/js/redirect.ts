@@ -317,9 +317,10 @@ class Router {
 
 
       main_progress.hide(function () {
-        for (var current of $("main").attr("class").split(" ")) {
+        var main_element = $("main");
+          for (var current of main_element.attr("class").split(" ")) {
           if (current.startsWith("back-")) {
-            $("main").removeClass(current);
+            main_element.removeClass(current);
           }
         }
         challengeNode.off('value', challengeListener);
