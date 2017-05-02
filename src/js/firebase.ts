@@ -136,7 +136,7 @@ var fb = new FirebaseWrapper();
 $(() => {
     fb.authUpdate((user: FirebaseUser) => {
         if (user) {
-            $("#login-status").html("Hello, " + user.displayName + ", <a href='/logout/'>Logout</a>");
+            $("#login-status").html("Hello, " + user.displayName + " <a href='/logout/'>Logout</a>");
             $(".mdl-layout__drawer-button").show();
             fb.path("users", user.uid).set({
                 image: user.photoURL,
